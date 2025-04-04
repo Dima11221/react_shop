@@ -1,0 +1,26 @@
+@use "../../styles/globals";
+
+.cartItem {
+  //width: 60%;
+  margin: 20px;
+}
+
+.cartInfo {
+  width: 300px;
+}
+
+.iconCloseButton {
+  width: 18px;
+  height: 18px;
+  color: var(--blue-color);
+}
+
+.iconButton {
+  width: 20px;
+  height: 20px;
+}
+
+
+.plusMinusContent {
+  width: 100px;
+}

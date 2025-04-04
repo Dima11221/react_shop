@@ -1,0 +1,69 @@
+@use "../../styles/globals";
+
+.title {
+  transition: 0.3s;
+}
+
+.title:hover {
+  color: var(--blue-color);
+}
+
+.GoodItemCard {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 260px;
+  min-height: 480px;
+  border: 1px solid var(--light-grey);
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.12), 0 1px 5px 0 rgba(0, 0, 0, 0.2);;
+  border-radius: 10px;
+  margin: .5rem 0 1rem 0;
+}
+
+.poster {
+  width: 260px;
+  height: 380px;
+  border-radius: 10px;
+}
+
+.left {
+  padding: 0 12px;
+}
+
+.deal {
+  padding: 12px;
+}
+
+.cardContent {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+//.movieDetails {
+//  transition: opacity 0.5s ease, max-height 0.5s ease, transform 0.5s ease;
+//  opacity: 0;
+//  max-height: 0;
+//  overflow: hidden;
+//}
+//
+//.visible {
+//  opacity: 1;
+//  max-height: 500px;
+//  transform: translateY(0);
+//}
+//
+//.hidden {
+//  opacity: 0;
+//  max-height: 0;
+//  transform: translateY(-20px);
+//}
+//
+//.infoBtn {
+//  margin-top: 10px;
+//  margin-bottom: 10px;
+//}
+//
+//.detail {
+//  padding-bottom: 16px;
+//}

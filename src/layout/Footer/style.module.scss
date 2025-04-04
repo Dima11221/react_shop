@@ -1,0 +1,39 @@
+@use "./../../layout/Header/style.module.scss";
+
+.footer {
+  padding: 16px 0 0 0
+}
+
+.footerWrapper {
+  background-color: #C8E6C9;
+  height: 60px;
+}
+
+.footerItems {
+  justify-content: space-around;
+  height: 60px;
+}
+
+.GHLink {
+  position: relative;
+  transition: 0.3s;
+}
+
+.GHLink:hover {
+  color: var(--blue-color);
+}
+
+.GHIcon {
+  position: absolute;
+  top: -15px;
+  left: 100px;
+
+}
+
+svg path {
+  transition: 0.3s;
+}
+
+svg:hover path {
+  fill: var(--blue-color);
+}

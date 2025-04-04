@@ -1,0 +1,79 @@
+@use "../../styles/globals";
+
+.cartModalBack {
+  display: block;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 2;
+}
+
+.cartModal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  background-color: white;
+  width: 800px;
+  max-width: 95%;
+
+  animation: show 500ms ease-in-out;
+}
+
+@keyframes show {
+  from {
+    opacity: 0;
+    top: 70%
+  }
+  to {
+    opacity: 1;
+    top: 50%;
+  }
+}
+
+.cartWrapper {
+  background-color: var(--blue-color);
+  color: var(--white);
+  padding: 10px;
+}
+
+.cartWrapperStyle {
+  color: var(--white);
+}
+
+.cartWrapperStyle p {
+  font-weight: bold;
+  line-height: 36px;
+  font-size: 20px;
+}
+
+.closeModalIcon {
+  width: 30px;
+  height: 30px;
+}
+
+.bold {
+  font-weight: bold;
+  font-size: 24px;
+  line-height: 36px;
+}
+
+.listStyle {
+  margin: 20px;
+  gap: 0;
+}
+
+.clearBtn {
+  text-align: right;
+}
+
+.cartEmpty {
+
+}
