@@ -1,21 +1,22 @@
 import {CartItem} from "../CartItem/CartItem.tsx";
 import style from './style.module.scss'
-import {IDItemProp, IOrderItem} from "../Shop/Shop.tsx";
+// import {IDItemProp, IOrderItem} from "../Shop/Shop.tsx";
 // import {ICartItem} from "../../types/Types.ts";
 import closeModalIcon from '../../icons/closeModalIcon.svg'
+import { useContext } from "react";
+import { ShopContext } from "../../context.tsx";
 
+// interface IOrderList {
+//     order: IOrderItem[];
+//     handleCartShow: () => void;
+//     removeFromCart: (item: IDItemProp) => void;
+//     incQuantity: (item: IDItemProp) => void;
+//     decQuantity: (item: IDItemProp) => void;
+//     clearCart: () => void;
+// }
 
-interface IOrderList {
-    order: IOrderItem[];
-    handleCartShow: () => void;
-    removeFromCart: (item: IDItemProp) => void;
-    incQuantity: (item: IDItemProp) => void;
-    decQuantity: (item: IDItemProp) => void;
-    clearCart: () => void;
-}
-
-const CartList = (props: IOrderList) => {
-    const {order = [], handleCartShow, removeFromCart, incQuantity, decQuantity, clearCart} = props;
+const CartList = () => {
+    const {order = [], handleCartShow, clearCart} = useContext(ShopContext);
 
     const totalCost = order.reduce((acc, el) => (acc + (+el.finalPrice * el.quantity)), 0)
 
@@ -32,9 +33,7 @@ const CartList = (props: IOrderList) => {
                     {order.length > 0 && order.map((item) => (
                         <CartItem
                             key={item.id} {...item}
-                            removeFromCart={removeFromCart}
-                            incQuantity={incQuantity}
-                            decQuantity={decQuantity}
+
                         />
                     ))}
                     {!order.length && (<p className={`${style.cartEmpty} ${style.bold}`}>Корзина пуста</p>)}

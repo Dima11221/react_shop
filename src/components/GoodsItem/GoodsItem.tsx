@@ -1,30 +1,27 @@
-import {ICartItem, IGoodsItemProp} from "../../types/Types.ts";
+import {IGoodsItemProp} from "../../types/Types.ts";
 import style from './style.module.scss'
 
-interface GoodsItemProps extends IGoodsItemProp {
-    addToCart: (item: ICartItem) => void;
-}
+import { useContext } from "react";
+import { ShopContext } from "../../context.tsx";
 
 
-const GoodsItem = (props: GoodsItemProps) => {
 
-    // if (!props.price?.finalPrice || !Array.isArray(props.displayAssets) || props.displayAssets.length === 0) {
-    //     return null;
-    // }
+const GoodsItem = (props: IGoodsItemProp) => {
 
-    // console.log("price:", props.price);
-    // console.log("displayAssets:", props.displayAssets);
+
     const {
         mainId: id,
         displayName: name,
         displayDescription: description,
         price: {finalPrice},
         displayAssets,
-        addToCart
     } = props;
 
     const fullBackground = displayAssets.length > 0 ? displayAssets[0].full_background : "https://via.placeholder.com/300";
     // const finalPrice = price.finalPrice ?? "Не указано";
+
+
+    const {addToCart} = useContext(ShopContext);
 
     return (
         <div className={style.GoodItemCard} id={id}>

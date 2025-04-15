@@ -1,13 +1,15 @@
 import {useEffect} from "react";
 import style from './style.module.scss'
+import { useContext } from "react";
+import { ShopContext } from "../../context.tsx";
 
 interface IAlertProps {
     closeAlert: () => void;
     name: string
 }
 
-const Alert = (props: IAlertProps) => {
-    const {name = '', closeAlert} = props;
+const Alert = () => {
+    const {alertName: name = '', closeAlert} = useContext(ShopContext);
 
     useEffect(() => {
         const timerId = setTimeout(closeAlert, 3000);

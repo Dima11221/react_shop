@@ -1,20 +1,19 @@
 import {GoodsItem} from "../GoodsItem/GoodsItem.tsx";
-import {ICartItem, IGoodsItemProp} from "../../types/Types.ts";
 import style from './style.module.scss'
 
-interface IGoodsList {
-    goods: IGoodsItemProp[],
-    addToCart: (item: ICartItem) => void
-}
+import {useContext} from "react";
+import {ShopContext} from "../../context.tsx";
 
-const GoodsList = (props: IGoodsList) => {
-    const {goods = [], addToCart} = props;
+
+
+const GoodsList = () => {
+    const {goods = []} = useContext(ShopContext);
 
     return (
         <div className={style.goodsList}>
             {goods.length > 0 && (
                 goods.map((item) => (
-                    <GoodsItem key={item.mainId} {...item} addToCart={addToCart}/>
+                    <GoodsItem key={item.mainId} {...item}/>
                 ))
             )}
             {!goods.length && (
