@@ -1,0 +1,16 @@
+@use "../../styles/globals";
+
+.pagesList {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 50px;
+  margin: 30px 0;
+}
+
+.btnsWrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 10px;
+}

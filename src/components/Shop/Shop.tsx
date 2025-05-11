@@ -7,6 +7,7 @@ import {ICartItem, IGoodsItemProp} from "../../types/Types.ts";
 import {Cart} from "../Cart/Cart.tsx";
 import {CartList} from "../CartList/CartList.tsx";
 import {Alert} from "../Alert/Alert.tsx";
+import {Pages} from "../Pages/Pages.tsx";
 
 export interface IOrderItem extends ICartItem{
     quantity: number;
@@ -28,7 +29,17 @@ const Shop = () => {
     const [order, setOrder] = useState<IOrderItem[]>(get)
     const [isCartShow, setCartShow] = useState<boolean>(false)
     const [alertName, setAlertName] = useState<string>('')
+    const [currentPage, setCurrentPage] = useState<number>(1)
     // console.log(order)
+
+    const itemsPerPage = 10;
+    const startIndexInPage = (currentPage - 1) * itemsPerPage;
+    const endIndexInPage = currentPage * itemsPerPage;
+    // console.log(startIndexInPage, endIndexInPage);
+    const currentItemsInPage = goods.slice(startIndexInPage, endIndexInPage);
+    // console.log(currentItemsInPage);
+    const pagesCount = Math.ceil(goods.length / itemsPerPage);
+    // console.log(pagesCount);
 
     const addToCart = (item: ICartItem): void => {
         setOrder((prevOrder) => {
@@ -165,7 +176,9 @@ const Shop = () => {
 
             {!loading && (
                 <>
-                    <GoodsList goods={goods} addToCart={addToCart}/>
+                    <GoodsList goods={currentItemsInPage} addToCart={addToCart}/>
+
+                    <Pages pagesCount={pagesCount} currentPage={currentPage} setCurrentPage={setCurrentPage} />
                 </>
             )}
             {
