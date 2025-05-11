@@ -5,9 +5,9 @@ import {useContext} from "react";
 import {ShopContext} from "../../context.tsx";
 
 
-
 const GoodsList = () => {
-    const {goods = []} = useContext(ShopContext);
+    const {getCurrentPageGoods} = useContext(ShopContext);
+    const goods = getCurrentPageGoods();
 
     return (
         <div className={style.goodsList}>

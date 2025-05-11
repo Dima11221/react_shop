@@ -9,6 +9,7 @@ import {CartList} from "../CartList/CartList.tsx";
 import {Alert} from "../Alert/Alert.tsx";
 
 import {ShopContext} from "../../context.tsx";
+import {Pages} from "../Pages/Pages.tsx";
 
 export interface IOrderItem extends ICartItem{
     quantity: number;
@@ -24,7 +25,7 @@ const Shop = () => {
         isCartShow,
         alertName,
         handleCartShow,
-        setOrderLocalStorage
+        setOrderLocalStorage,
     } = useContext(ShopContext);
 
 
@@ -86,7 +87,8 @@ const Shop = () => {
 
             {!loading && (
                 <>
-                    <GoodsList/>
+                    <GoodsList />
+                    <Pages />
                 </>
             )}
             {

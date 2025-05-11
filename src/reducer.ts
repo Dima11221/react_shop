@@ -7,6 +7,9 @@ export interface IShopState {
     order: IOrderItem[];
     isCartShow: boolean;
     alertName: string;
+    pagesCount: number;
+    currentPage: number;
+    itemsPerPage: number;
 }
 
 type Action =
@@ -19,6 +22,8 @@ type Action =
   | {type: 'TOGGLE_CART_SHOW'}
   | {type: 'SET_GOODS'; payload: IGoodsItemProp[]}
   | {type: 'SET_ORDER_LOCAL_STORAGE'; payload: IOrderItem[]}
+  | {type: 'SET_PAGES_COUNT'}
+  | {type: 'SET_CURRENT_PAGE'; payload: number}
 
 export const reducer = (state: IShopState, action: Action) => {
     switch (action.type) {
@@ -30,6 +35,18 @@ export const reducer = (state: IShopState, action: Action) => {
                 loading: false,
             }
 
+        case 'SET_PAGES_COUNT':
+            return {
+                ...state,
+                pagesCount: Math.ceil(state.goods.length / state.itemsPerPage),
+            }
+
+        case 'SET_CURRENT_PAGE':
+            return {
+                ...state,
+                currentPage: action.payload,
+            }
+
         case 'CLEAR_CART':
             return {
                 ...state,
@@ -38,7 +55,7 @@ export const reducer = (state: IShopState, action: Action) => {
 
         case 'ADD_TO_CART':
             // console.log('ADD_TO_CART', action.payload);
-            const itemIndex = state.order.findIndex(orderItem => orderItem.id === action.payload.id)
+            { const itemIndex = state.order.findIndex(orderItem => orderItem.id === action.payload.id)
 
             let newOrder = null;
             if (itemIndex < 0) {
@@ -58,7 +75,7 @@ export const reducer = (state: IShopState, action: Action) => {
                 ...state,
                 order: newOrder,
                 alertName: action.payload.name,
-            };
+            }; }
 
         case 'INC_QUANTITY':
             return {
