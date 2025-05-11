@@ -108,31 +108,6 @@ export const ContextProvider = ({ children }: IContextProviderProp) => {
         },
     };
 
-    // value.closeAlert = () => {
-    //     dispatch({type: 'CLOSE_ALERT'})
-    // }
-    // value.addToCart = (item) => {
-    //     dispatch({type: 'ADD_TO_CART', payload: item})
-    // }
-    // value.removeFromCart = (itemID) => {
-    //     dispatch({type: 'REMOVE_FROM_CART', payload: {id: itemID}});
-    // }
-    // value.incQuantity = (itemID) => {
-    //     dispatch({type: 'INC_QUANTITY', payload: {id: itemID}})
-    // }
-    // value.decQuantity = (itemID) => {
-    //     dispatch({type: 'DEC_QUANTITY', payload: {id: itemID}})
-    // }
-    // value.clearCart = () => {
-    //     dispatch({type: 'CLEAR_CART'})
-    // }
-    // value.handleCartShow = () => {
-    //     dispatch({type: 'TOGGLE_CART_SHOW'})
-    // }
-    // value.setGoods = (data) => {
-    //     dispatch({type: 'SET_GOODS', payload: data})
-    // }
-
 
     return (
         <ShopContext.Provider value={contextValue}>
