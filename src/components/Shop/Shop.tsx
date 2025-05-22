@@ -150,7 +150,8 @@ const Shop = () => {
         }).then(response => response.json())
             .then((data) => {
                 // console.log(data)
-                data.shop && setGoods(data.shop);
+                // data.shop && setGoods(data.shop);
+                setGoods(data.shop);
                 setLoading(false);
             })
     }, []);
