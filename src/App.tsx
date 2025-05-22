@@ -20,11 +20,11 @@ function App() {
 
         <Router>
             <Header />
-            <main>
+            <div>
                 <Routes>
                     <Route path="/react_shop" element={<Shop />}/>
                 </Routes>
-            </main>
+            </div>
             <Footer />
         </Router>
     )
