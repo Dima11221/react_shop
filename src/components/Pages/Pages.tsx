@@ -1,10 +1,26 @@
 import style from "./style.module.scss"
-import {useContext} from "react";
-import {ShopContext} from "../../context.tsx";
+import {useDispatch, useSelector} from "react-redux";
+import {RootState} from "../../store/store.ts";
+import {setCurrentPage} from "../../store/reducers/shopSlice.ts";
 
 
 const Pages = () => {
-  const {currentPage, pagesCount, handlePrevPage, handleNextPage} = useContext(ShopContext)
+  const dispatch = useDispatch();
+
+  const currentPage = useSelector((state: RootState) => state.shop.currentPage);
+  const pagesCount = useSelector((state: RootState) => state.shop.pagesCount);
+  const handleNextPage = () => {
+    if (currentPage < pagesCount) {
+      dispatch(setCurrentPage(currentPage + 1));
+    }
+  };
+
+  const handlePrevPage = () => {
+    if (currentPage > 1) {
+      dispatch(setCurrentPage(currentPage - 1));
+    }
+  }
+
 
 
   return (

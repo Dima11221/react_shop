@@ -1,8 +1,7 @@
 import style from './style.module.scss'
 import backetIcon from "../../icons/backet_icon_2.svg"
-// import {ICartItem} from "../../types/Types.ts";
-import { useContext } from "react";
-import { ShopContext } from "../../context.tsx";
+import {useDispatch} from "react-redux";
+import {handleCartShow} from "../../store/reducers/shopSlice.ts";
 
 
 interface ICartProp {
@@ -11,15 +10,18 @@ interface ICartProp {
 
 const Cart= (prop: ICartProp) => {
     const {quantity = 0} = prop;
+    const dispatch = useDispatch();
 
-    const {handleCartShow} = useContext(ShopContext);
+    const handleClick = () => {
+        dispatch(handleCartShow())
+    }
 
     // const quantity = order.length;
 
     return (
         <div
             className={`${style.cartClick} ${style.flexRow}`}
-            onClick={handleCartShow}
+            onClick={handleClick}
         >
             <img src={backetIcon} className={style.cartImage} alt={backetIcon} ></img>
             {quantity && (<span className=''>{quantity}</span>)}

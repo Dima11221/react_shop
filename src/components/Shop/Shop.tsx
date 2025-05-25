@@ -1,5 +1,5 @@
 import style from './style.module.scss'
-import {useEffect, useContext} from "react";
+import {useEffect} from "react";
 import {API_KEY, API_URL} from '../../config.ts'
 import {Preloader} from "../Preloader/Preloader.tsx";
 import {GoodsList} from "../GoodsList/GoodsList.tsx";
@@ -8,26 +8,22 @@ import {Cart} from "../Cart/Cart.tsx";
 import {CartList} from "../CartList/CartList.tsx";
 import {Alert} from "../Alert/Alert.tsx";
 
-import {ShopContext} from "../../context.tsx";
 import {Pages} from "../Pages/Pages.tsx";
+import {useDispatch, useSelector} from "react-redux";
+import {RootState} from "../../store/store.ts";
+import {handleCartShow, setGoods, setOrderLocalStorage} from "../../store/reducers/shopSlice.ts";
 
 export interface IOrderItem extends ICartItem{
     quantity: number;
 }
 
 
-
 const Shop = () => {
-    const {
-        setGoods,
-        loading,
-        order,
-        isCartShow,
-        alertName,
-        handleCartShow,
-        setOrderLocalStorage,
-    } = useContext(ShopContext);
-
+    const dispatch = useDispatch();
+    const loading =  useSelector((state: RootState) => state.shop.loading);
+    const order =  useSelector((state: RootState) => state.shop.order);
+    const isCartShow = useSelector((state: RootState) => state.shop.isCartShow);
+    const alertName = useSelector((state: RootState) => state.shop.alertName);
 
 
     const CartOrder = order.reduce((acc, item) => acc + item.quantity, 0)
@@ -35,7 +31,7 @@ const Shop = () => {
 
     const handleCartClose = (e: KeyboardEvent): void => {
         if (e.key === 'Escape') {
-            handleCartShow()
+            dispatch(handleCartShow())
         }
     }
 
@@ -46,7 +42,7 @@ const Shop = () => {
         if (savedOrder) {
             try {
                 const storage = JSON.parse(savedOrder);
-                setOrderLocalStorage(storage);
+                dispatch(setOrderLocalStorage(storage));
             }
             catch (e) {
                 console.error("Error fetching cart", e);
@@ -60,9 +56,9 @@ const Shop = () => {
                 'Authorization': API_KEY
             },
         }).then(response => response.json())
-            .then((data) => {
-                setGoods(data.shop);
-            })
+          .then((data) => {
+              dispatch(setGoods(data.shop));
+          })
     }, []);
 
     useEffect(() => {
@@ -81,21 +77,21 @@ const Shop = () => {
     }, [isCartShow])
 
     return (
-        <main className={style.mainWrapper}>
-            <Cart quantity={CartOrder}/>
-            {loading && (<Preloader />)}
+      <main className={style.mainWrapper}>
+          <Cart quantity={CartOrder}/>
+          {loading && (<Preloader />)}
 
-            {!loading && (
-                <>
-                    <GoodsList />
-                    <Pages />
-                </>
-            )}
-            {
-                isCartShow && <CartList/>
-            }
-            {alertName && <Alert/>}
-        </main>
+          {!loading && (
+            <>
+                <GoodsList />
+                <Pages />
+            </>
+          )}
+          {
+            isCartShow && <CartList/>
+          }
+          {alertName && <Alert/>}
+      </main>
     )
 }
 

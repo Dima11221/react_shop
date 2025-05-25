@@ -1,31 +1,33 @@
 import {CartItem} from "../CartItem/CartItem.tsx";
 import style from './style.module.scss'
-// import {IDItemProp, IOrderItem} from "../Shop/Shop.tsx";
-// import {ICartItem} from "../../types/Types.ts";
 import closeModalIcon from '../../icons/closeModalIcon.svg'
-import { useContext } from "react";
-import { ShopContext } from "../../context.tsx";
+import {useDispatch, useSelector} from "react-redux";
+import {RootState} from "../../store/store.ts";
+import {clearCart, handleCartShow} from "../../store/reducers/shopSlice.ts";
 
-// interface IOrderList {
-//     order: IOrderItem[];
-//     handleCartShow: () => void;
-//     removeFromCart: (item: IDItemProp) => void;
-//     incQuantity: (item: IDItemProp) => void;
-//     decQuantity: (item: IDItemProp) => void;
-//     clearCart: () => void;
-// }
+
 
 const CartList = () => {
-    const {order = [], handleCartShow, clearCart} = useContext(ShopContext);
+    const dispatch = useDispatch();
+    const order =  useSelector((state: RootState) => state.shop.order);
+    // const quantity = useSelector((state: RootState) => state.shop.quantity);
 
-    const totalCost = order.reduce((acc, el) => (acc + (+el.finalPrice * el.quantity)), 0)
+    const totalCost = order.reduce((acc, el) => (acc + (+el.finalPrice * el.quantity)), 0);
+
+    const cartShow = () => {
+        dispatch(handleCartShow());
+    }
+
+    const handleClear = () => {
+        dispatch(clearCart())
+    }
 
     return (
-        <div className={style.cartModalBack} onClick={handleCartShow}>
+        <div className={style.cartModalBack} onClick={cartShow}>
             <ul className={`${style.cartModal} ${style.listReset}`} onClick={(e) => e.stopPropagation()}>
                 <li className={`${style.cartWrapper} ${style.cartWrapperStyle} ${style.flex}`}>
                     <p>Корзина</p>
-                    <button className={style.btnReset} onClick={handleCartShow}>
+                    <button className={style.btnReset} onClick={cartShow}>
                         <img src={closeModalIcon} className={style.closeModalIcon}></img>
                     </button>
                 </li>
@@ -38,7 +40,7 @@ const CartList = () => {
                     ))}
                     {!order.length && (<p className={`${style.cartEmpty} ${style.bold}`}>Корзина пуста</p>)}
                     <div className={style.clearBtn}>
-                        <button className={style.btn} onClick={clearCart}>Очистить корзину</button>
+                        <button className={style.btn} onClick={handleClear}>Очистить корзину</button>
                     </div>
                 </div>
                 <li className={`${style.cartWrapper} ${style.cartWrapperStyle} ${style.flex}`}>
