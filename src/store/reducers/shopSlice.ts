@@ -32,7 +32,7 @@ const shopSlice = createSlice({
       state.alertName = '';
     },
     addToCart(state, action: PayloadAction<ICartItem>) {
-      const itemIndex = state.order.findIndex(orderItem => orderItem.id === action.payload.id)
+      const itemIndex = state.order.findIndex(orderItem => orderItem.id === action.payload.id);
 
       // if (itemIndex < 0) {
       //   state.order.push({...state, quantity: 1})
