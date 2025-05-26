@@ -1,6 +1,7 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {ICartItem, IGoodsItemProp} from "../../types/Types.ts";
 import {IOrderItem} from "../../components/Shop/Shop.tsx";
+import {fetchGoods} from "./thunk.ts";
 
 export interface IShopState {
   goods: IGoodsItemProp[];
@@ -11,6 +12,7 @@ export interface IShopState {
   pagesCount: number;
   currentPage: number;
   itemsPerPage: number;
+  error: null | string;
 }
 
 const initialState : IShopState  = {
@@ -20,8 +22,9 @@ const initialState : IShopState  = {
   isCartShow: false,
   alertName: '',
   currentPage: 1,
-  pagesCount: 10,
+  pagesCount: 0,
   itemsPerPage: 10,
+  error: null
 }
 
 const shopSlice = createSlice({
@@ -138,6 +141,25 @@ const shopSlice = createSlice({
       // }
     }
   },
+  extraReducers: (builder) => {
+    builder
+      .addCase(fetchGoods.pending, (state) => {
+        state.loading = true;
+        state.error =  null;
+      })
+
+      .addCase(fetchGoods.fulfilled, (state, action) => {
+        state.loading =  false;
+        state.goods =  action.payload;
+        state.pagesCount = Math.ceil(action.payload.length / state.itemsPerPage);
+      })
+
+      .addCase(fetchGoods.rejected, (state, action) => {
+        state.loading =  false;
+        state.goods = [];
+        state.error = action.payload as string;
+      })
+  }
 });
 
 export const {
@@ -145,13 +167,13 @@ export const {
   addToCart,
   removeFromCart,
   handleCartShow,
-  setGoods,
+  // setGoods,
   incQuantity,
   decQuantity,
   clearCart,
   setOrderLocalStorage,
   setCurrentPage,
-  setPagesCount
+  // setPagesCount
 } =  shopSlice.actions;
 
 export default shopSlice.reducer;

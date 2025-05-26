@@ -1,6 +1,5 @@
 import style from './style.module.scss'
 import {useEffect} from "react";
-import {API_KEY, API_URL} from '../../config.ts'
 import {Preloader} from "../Preloader/Preloader.tsx";
 import {GoodsList} from "../GoodsList/GoodsList.tsx";
 import {ICartItem} from "../../types/Types.ts";
@@ -10,8 +9,10 @@ import {Alert} from "../Alert/Alert.tsx";
 
 import {Pages} from "../Pages/Pages.tsx";
 import {useDispatch, useSelector} from "react-redux";
-import {RootState} from "../../store/store.ts";
-import {handleCartShow, setGoods, setOrderLocalStorage} from "../../store/reducers/shopSlice.ts";
+import {AppDispatch, RootState} from "../../store/store.ts";
+import {handleCartShow, setOrderLocalStorage} from "../../store/reducers/shopSlice.ts";
+import {fetchGoods} from "../../store/reducers/thunk.ts";
+// import {AnyAction, ThunkDispatch} from "@reduxjs/toolkit";
 
 export interface IOrderItem extends ICartItem{
     quantity: number;
@@ -19,7 +20,7 @@ export interface IOrderItem extends ICartItem{
 
 
 const Shop = () => {
-    const dispatch = useDispatch();
+    const dispatch = useDispatch<AppDispatch>();
     const loading =  useSelector((state: RootState) => state.shop.loading);
     const order =  useSelector((state: RootState) => state.shop.order);
     const isCartShow = useSelector((state: RootState) => state.shop.isCartShow);
@@ -29,11 +30,11 @@ const Shop = () => {
     const CartOrder = order.reduce((acc, item) => acc + item.quantity, 0)
 
 
-    const handleCartClose = (e: KeyboardEvent): void => {
-        if (e.key === 'Escape') {
-            dispatch(handleCartShow())
-        }
-    }
+    // const handleCartClose = (e: KeyboardEvent): void => {
+    //     if (e.key === 'Escape') {
+    //         dispatch(handleCartShow())
+    //     }
+    // }
 
     useEffect(() => {
         const savedOrder = localStorage.getItem("cart");
@@ -48,18 +49,22 @@ const Shop = () => {
                 console.error("Error fetching cart", e);
             }
         }
-    }, []);
+    }, [dispatch]);
 
-    useEffect(function getGoods() {
-        fetch(API_URL, {
-            headers: {
-                'Authorization': API_KEY
-            },
-        }).then(response => response.json())
-          .then((data) => {
-              dispatch(setGoods(data.shop));
-          })
-    }, []);
+    // useEffect(function getGoods() {
+    //     fetch(API_URL, {
+    //         headers: {
+    //             'Authorization': API_KEY
+    //         },
+    //     }).then(response => response.json())
+    //       .then((data) => {
+    //           dispatch(setGoods(data.shop));
+    //       })
+    // }, []);
+
+    useEffect(() => {
+        dispatch(fetchGoods());
+    }, [dispatch]);
 
     useEffect(() => {
         localStorage.setItem("cart", JSON.stringify(order))
@@ -69,12 +74,17 @@ const Shop = () => {
     useEffect(()=> {
         if (!isCartShow) return;
 
+        const handleCartClose = (e: KeyboardEvent): void => {
+            if (e.key === 'Escape') {
+                dispatch(handleCartShow())
+            }
+        }
         window.addEventListener('keydown', handleCartClose)
 
         return () => {
             window.removeEventListener('keydown', handleCartClose)
         }
-    }, [isCartShow])
+    }, [isCartShow, dispatch])
 
     return (
       <main className={style.mainWrapper}>
