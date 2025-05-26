@@ -32,10 +32,8 @@ const shopSlice = createSlice({
       state.alertName = '';
     },
     addToCart(state, action: PayloadAction<ICartItem>) {
-      const itemIndex = state.order.findIndex(orderItem => orderItem.id === action.payload.id);
 
-      // if (itemIndex < 0) {
-      //   state.order.push({...state, quantity: 1})
+      const itemIndex = state.order.findIndex((item) => item.id === action.payload.id);
       let newOrder = null;
       if (itemIndex < 0) {
         const newItem = {
@@ -44,19 +42,13 @@ const shopSlice = createSlice({
         }
         newOrder = [...state.order, newItem];
       } else {
-        // state.order[itemIndex].quantity += 1;
-        newOrder = state.order.map(orderItem => (
-          orderItem.id === action.payload.id
-            ? {...orderItem, quantity: orderItem.quantity + 1}
-            : orderItem
-        ));
+        newOrder = state.order.map((item) => item.id === action.payload.id ? {...item, quantity: item.quantity + 1} : item);
       }
-      // state.alertName = action.payload.name;
       return {
         ...state,
         order: newOrder,
         alertName: action.payload.name,
-      };
+      }
     },
     removeFromCart(state, action: PayloadAction<{id: string}>) {
       state.order = state.order.filter(el => el.id !== action.payload.id);
