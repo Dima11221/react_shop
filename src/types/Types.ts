@@ -18,3 +18,11 @@ export interface ICartItem {
     name: string;
     finalPrice: number;
 }
+
+export interface ICheckoutFormItem {
+    name?: string;
+    email?: string;
+    phone?: string;
+    accName?: string;
+    paymentMethod?: string;
+}

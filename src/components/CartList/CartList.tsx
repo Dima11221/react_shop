@@ -3,7 +3,7 @@ import style from './style.module.scss'
 import closeModalIcon from '../../icons/closeModalIcon.svg'
 import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "../../store/store.ts";
-import {clearCart, handleCartShow} from "../../store/reducers/shopSlice.ts";
+import {clearCart, handleCartShow, openCheckout} from "../../store/reducers/shopSlice.ts";
 
 
 
@@ -22,13 +22,21 @@ const CartList = () => {
         dispatch(clearCart())
     }
 
+    const handleopenCheckout = () => {
+        if (order.length === 0) {
+            alert('Добавьте товары в корзину!');
+            return
+        }
+        dispatch(openCheckout());
+    }
+
     return (
         <div className={style.cartModalBack} onClick={cartShow}>
             <ul className={`${style.cartModal} ${style.listReset}`} onClick={(e) => e.stopPropagation()}>
                 <li className={`${style.cartWrapper} ${style.cartWrapperStyle} ${style.flex}`}>
-                    <p>Корзина</p>
+                    <h2>Корзина</h2>
                     <button className={style.btnReset} onClick={cartShow}>
-                        <img src={closeModalIcon} className={style.closeModalIcon}></img>
+                        <img src={closeModalIcon} className={style.closeModalIcon} alt='closeModalIcon'></img>
                     </button>
                 </li>
                 <div className={`${style.flexColumn} ${style.listStyle}`}>
@@ -48,7 +56,7 @@ const CartList = () => {
                         <p>Общая стоимость:</p>
                         <span className={style.bold}>{totalCost} руб.</span>
                     </div>
-                    <button><p>Оформить</p></button>
+                    <button onClick={handleopenCheckout}><p>Оформить</p></button>
                 </li>
             </ul>
         </div>

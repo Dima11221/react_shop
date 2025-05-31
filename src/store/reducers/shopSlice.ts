@@ -13,6 +13,15 @@ export interface IShopState {
   currentPage: number;
   itemsPerPage: number;
   error: null | string;
+
+  isCheckoutOpen: boolean;
+  customerData: {
+    name: string;
+    email: string;
+    phone: string;
+    accName: string;
+    paymentMethod: 'empty' | 'sbp' | 'card' | 'crypto';
+  }
 }
 
 const initialState : IShopState  = {
@@ -24,7 +33,16 @@ const initialState : IShopState  = {
   currentPage: 1,
   pagesCount: 0,
   itemsPerPage: 10,
-  error: null
+  error: null,
+
+  isCheckoutOpen: false,
+  customerData: {
+    name: '',
+    email: '',
+    phone: '',
+    accName: '',
+    paymentMethod: 'empty',
+  }
 }
 
 const shopSlice = createSlice({
@@ -139,6 +157,23 @@ const shopSlice = createSlice({
       //     pagesCount: Math.ceil(state.goods.length / state.itemsPerPage),
       //   }
       // }
+    },
+
+    openCheckout(state) {
+      state.isCheckoutOpen = true;
+    },
+
+    closeCheckout(state) {
+      state.isCheckoutOpen = false;
+    },
+
+    updateCustomersData(state, action: PayloadAction<IShopState['customerData']>) {
+      state.customerData = {...state.customerData, ...action.payload};
+    },
+
+    resetOrderState(state) {
+      state.order = [];
+      state.customerData = initialState.customerData;
     }
   },
   extraReducers: (builder) => {
@@ -174,6 +209,10 @@ export const {
   setOrderLocalStorage,
   setCurrentPage,
   // setPagesCount
+  openCheckout,
+  closeCheckout,
+  updateCustomersData,
+  resetOrderState,
 } =  shopSlice.actions;
 
 export default shopSlice.reducer;

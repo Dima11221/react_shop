@@ -10,8 +10,9 @@ import {Alert} from "../Alert/Alert.tsx";
 import {Pages} from "../Pages/Pages.tsx";
 import {useDispatch, useSelector} from "react-redux";
 import {AppDispatch, RootState} from "../../store/store.ts";
-import {handleCartShow, setOrderLocalStorage} from "../../store/reducers/shopSlice.ts";
+import {closeCheckout, handleCartShow, setOrderLocalStorage} from "../../store/reducers/shopSlice.ts";
 import {fetchGoods} from "../../store/reducers/thunk.ts";
+import {CheckoutForm} from "../CheckoutForm/CheckoutForm.tsx";
 // import {AnyAction, ThunkDispatch} from "@reduxjs/toolkit";
 
 export interface IOrderItem extends ICartItem{
@@ -30,11 +31,6 @@ const Shop = () => {
     const CartOrder = order.reduce((acc, item) => acc + item.quantity, 0)
 
 
-    // const handleCartClose = (e: KeyboardEvent): void => {
-    //     if (e.key === 'Escape') {
-    //         dispatch(handleCartShow())
-    //     }
-    // }
 
     useEffect(() => {
         const savedOrder = localStorage.getItem("cart");
@@ -51,16 +47,8 @@ const Shop = () => {
         }
     }, [dispatch]);
 
-    // useEffect(function getGoods() {
-    //     fetch(API_URL, {
-    //         headers: {
-    //             'Authorization': API_KEY
-    //         },
-    //     }).then(response => response.json())
-    //       .then((data) => {
-    //           dispatch(setGoods(data.shop));
-    //       })
-    // }, []);
+    const isCheckoutOpen = useSelector((state: RootState) => state.shop.isCheckoutOpen)
+
 
     useEffect(() => {
         dispatch(fetchGoods());
@@ -76,15 +64,22 @@ const Shop = () => {
 
         const handleCartClose = (e: KeyboardEvent): void => {
             if (e.key === 'Escape') {
-                dispatch(handleCartShow())
+                if (isCheckoutOpen) {
+                    dispatch(closeCheckout())
+                } else if (isCartShow) {
+                    dispatch(handleCartShow())
+                }
             }
         }
-        window.addEventListener('keydown', handleCartClose)
+
+        if (isCartShow || isCheckoutOpen) {
+            window.addEventListener('keydown', handleCartClose)
+        }
 
         return () => {
             window.removeEventListener('keydown', handleCartClose)
         }
-    }, [isCartShow, dispatch])
+    }, [isCheckoutOpen, isCartShow, dispatch])
 
     return (
       <main className={style.mainWrapper}>
@@ -101,6 +96,7 @@ const Shop = () => {
             isCartShow && <CartList/>
           }
           {alertName && <Alert/>}
+          {isCheckoutOpen && <CheckoutForm />}
       </main>
     )
 }

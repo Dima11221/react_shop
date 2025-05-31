@@ -1,0 +1,46 @@
+@use "../../styles/globals";
+@use "../../components/CartList/style.module";
+
+.checkoutModal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  background-color: white;
+  width: 800px;
+  max-width: 95%;
+
+  animation: show 500ms ease-in-out;
+  z-index: 3;
+}
+
+@keyframes show {
+  from {
+    opacity: 0;
+    top: 70%
+  }
+  to {
+    opacity: 1;
+    top: 50%;
+  }
+}
+
+.checkoutFormWrapper {
+  max-width: 100%;
+}
+
+.wrapperItems {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.isError {
+  border: 1px solid var(--red);
+}
+
+.errorText {
+  color: var(--red);
+}
