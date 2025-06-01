@@ -1,61 +1,75 @@
 import {useDispatch, useSelector} from "react-redux";
-import {RootState} from "../../store/store.ts";
+import {AppDispatch, RootState} from "../../store/store.ts";
 import {
 	closeCheckout,
 	resetOrderState,
-	setFormErrors,
+	// setFormErrors,
 	updateCustomersData
 } from "../../store/reducers/shopSlice.ts";
 
 import style from './style.module.scss'
 import closeModalIcon from "../../icons/closeModalIcon.svg";
 import * as React from "react";
+import {submitOrder} from "../../store/reducers/thunk.ts";
 
 const CheckoutForm = () => {
-	const dispatch = useDispatch();
+	const dispatch = useDispatch<AppDispatch>();
 	const { customerData, order, formErrors } =  useSelector((state: RootState) => state.shop);
-	const totalCost = order.reduce((acc, item) => acc + (item.finalPrice * item.quantity), 0);
+	const total = order.reduce((acc, item) => acc + (item.finalPrice * item.quantity), 0);
 
 	const handleSubmit = (event: React.FormEvent) => {
 		event.preventDefault();
 
-		let isValid = true;
-		const newError = {name: '', email: '', phone: '', accName: '', paymentMethod: ''};
-		const validNumber = /^(\+7|7|8)?\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/.test(customerData.phone);
+		dispatch(submitOrder())
+			.unwrap()
+			.then(({totalCost}) => {
+				// console.log(totalCost)
+				alert(`Заказ #${Date.now()} оформлен! Сумма: ${totalCost} руб.`)
+		})
+			.then(() => {
+			dispatch(resetOrderState());
+			dispatch(closeCheckout());
+		})
+			.catch(() => {})
 
-		if (!customerData.name.trim()) {
-			newError.name = 'Введите имя!'
-			isValid = false;
-		}
 
-		if (!customerData.email.includes('@')) {
-			newError.email = 'Некорректная почта!';
-			isValid = false;
-		}
-
-		if (!validNumber) {
-			newError.phone = 'Некорректный номер телефона!';
-			isValid = false;
-		}
-
-		if (!customerData.accName.trim()) {
-			newError.accName = 'Введите ваш логин!';
-			isValid = false;
-		}
-		if (customerData.paymentMethod === 'empty') {
-			newError.paymentMethod = 'Не выбран способ оплаты!';
-			isValid = false;
-		}
-
-		dispatch(setFormErrors(newError))
-		if (!isValid) {
-			return;
-		}
-
-		alert(`Заказ оформлен! Сумма: ${totalCost} руб.`);
-		dispatch(resetOrderState());
-		dispatch(closeCheckout());
-	}
+		// let isValid = true;
+		// const newError = {name: '', email: '', phone: '', accName: '', paymentMethod: ''};
+		// const validNumber = /^(\+7|7|8)?\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/.test(customerData.phone);
+		//
+		// if (!customerData.name.trim()) {
+		// 	newError.name = 'Введите имя!'
+		// 	isValid = false;
+		// }
+		//
+		// if (!customerData.email.includes('@')) {
+		// 	newError.email = 'Некорректная почта!';
+		// 	isValid = false;
+		// }
+		//
+		// if (!validNumber) {
+		// 	newError.phone = 'Некорректный номер телефона!';
+		// 	isValid = false;
+		// }
+		//
+		// if (!customerData.accName.trim()) {
+		// 	newError.accName = 'Введите ваш логин!';
+		// 	isValid = false;
+		// }
+		// if (customerData.paymentMethod === 'empty') {
+		// 	newError.paymentMethod = 'Не выбран способ оплаты!';
+		// 	isValid = false;
+		// }
+		//
+		// dispatch(setFormErrors(newError))
+		// if (!isValid) {
+		// 	return;
+		// }
+		//
+		// alert(`Заказ оформлен! Сумма: ${totalCost} руб.`);
+		// dispatch(resetOrderState());
+		// dispatch(closeCheckout());
+	};
 
 	const handleCloseCheckout = () => {
 		dispatch(closeCheckout())
@@ -166,7 +180,7 @@ const CheckoutForm = () => {
 								formErrors.paymentMethod && <p className={style.errorText}>{formErrors.paymentMethod}</p>
 							}
 							<h3>
-								Итого к оплате: {totalCost}
+								Итого к оплате: {total}
 							</h3>
 						</div>
 					</div>

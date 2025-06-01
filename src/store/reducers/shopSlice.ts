@@ -1,7 +1,7 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {ICartItem, ICheckoutFormItem, IGoodsItemProp} from "../../types/Types.ts";
 import {IOrderItem} from "../../components/Shop/Shop.tsx";
-import {fetchGoods} from "./thunk.ts";
+import {fetchGoods, submitOrder} from "./thunk.ts";
 
 export interface IShopState {
   goods: IGoodsItemProp[];
@@ -187,6 +187,10 @@ const shopSlice = createSlice({
     setFormErrors(state, action: PayloadAction<IShopState['formErrors']>) {
       state.formErrors = action.payload;
     },
+
+    // clearFormErrors(state) {
+    //   state.formErrors = initialState.formErrors;
+    // }
   },
   extraReducers: (builder) => {
     builder
@@ -205,6 +209,22 @@ const shopSlice = createSlice({
         state.loading =  false;
         state.goods = [];
         state.error = action.payload as string;
+      })
+
+    builder
+      .addCase(submitOrder.pending, (state) => {
+        state.loading = true;
+      })
+
+      .addCase(submitOrder.fulfilled, (state, action) => {
+        state.loading = false;
+        state.order = [];
+        state.customerData = initialState.customerData;
+        console.log(action.payload);
+      })
+
+      .addCase(submitOrder.rejected, (state) => {
+        state.loading = false;
       })
   }
 });
