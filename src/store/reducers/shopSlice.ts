@@ -1,5 +1,5 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
-import {ICartItem, IGoodsItemProp} from "../../types/Types.ts";
+import {ICartItem, ICheckoutFormItem, IGoodsItemProp} from "../../types/Types.ts";
 import {IOrderItem} from "../../components/Shop/Shop.tsx";
 import {fetchGoods} from "./thunk.ts";
 
@@ -22,6 +22,7 @@ export interface IShopState {
     accName: string;
     paymentMethod: 'empty' | 'sbp' | 'card' | 'crypto';
   }
+  formErrors: ICheckoutFormItem;
 }
 
 const initialState : IShopState  = {
@@ -42,6 +43,13 @@ const initialState : IShopState  = {
     phone: '',
     accName: '',
     paymentMethod: 'empty',
+  },
+  formErrors: {
+    name: '',
+    email: '',
+    phone: '',
+    accName: '',
+    paymentMethod: '',
   }
 }
 
@@ -174,7 +182,11 @@ const shopSlice = createSlice({
     resetOrderState(state) {
       state.order = [];
       state.customerData = initialState.customerData;
-    }
+    },
+
+    setFormErrors(state, action: PayloadAction<IShopState['formErrors']>) {
+      state.formErrors = action.payload;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -213,6 +225,7 @@ export const {
   closeCheckout,
   updateCustomersData,
   resetOrderState,
+  setFormErrors,
 } =  shopSlice.actions;
 
 export default shopSlice.reducer;

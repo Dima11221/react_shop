@@ -1,18 +1,20 @@
 import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "../../store/store.ts";
-import {closeCheckout, resetOrderState, updateCustomersData} from "../../store/reducers/shopSlice.ts";
-import {ICheckoutFormItem} from "../../types/Types.ts";
+import {
+	closeCheckout,
+	resetOrderState,
+	setFormErrors,
+	updateCustomersData
+} from "../../store/reducers/shopSlice.ts";
 
 import style from './style.module.scss'
 import closeModalIcon from "../../icons/closeModalIcon.svg";
 import * as React from "react";
-import {useState} from "react";
 
 const CheckoutForm = () => {
 	const dispatch = useDispatch();
-	const { customerData, order } =  useSelector((state: RootState) => state.shop);
+	const { customerData, order, formErrors } =  useSelector((state: RootState) => state.shop);
 	const totalCost = order.reduce((acc, item) => acc + (item.finalPrice * item.quantity), 0);
-	const [error, setError] = useState<ICheckoutFormItem>({});
 
 	const handleSubmit = (event: React.FormEvent) => {
 		event.preventDefault();
@@ -45,7 +47,7 @@ const CheckoutForm = () => {
 			isValid = false;
 		}
 
-		setError(newError);
+		dispatch(setFormErrors(newError))
 		if (!isValid) {
 			return;
 		}
@@ -97,12 +99,12 @@ const CheckoutForm = () => {
 									placeholder={'Иван'}
 									value={customerData.name}
 									onChange={handleChange}
-									className={error.name && style.isError}
+									className={formErrors.name && style.isError}
 									required
 								/>
 							</div>
 							{
-								error.name && <span className={style.errorText}>{error.name}</span>
+								formErrors.name && <p className={style.errorText}>{formErrors.name}</p>
 							}
 							<div>
 								<label>Email: </label>
@@ -112,12 +114,12 @@ const CheckoutForm = () => {
 									placeholder={'example@mail.ru'}
 									value={customerData.email}
 									onChange={handleChange}
-									className={error.email && style.isError}
+									className={formErrors.email && style.isError}
 									required
 								/>
 							</div>
 							{
-								error.email && <span className={style.errorText}>{error.email}</span>
+								formErrors.email && <p className={style.errorText}>{formErrors.email}</p>
 							}
 							<div>
 								<label>Телефон: </label>
@@ -127,12 +129,12 @@ const CheckoutForm = () => {
 									placeholder={'+7...'}
 									value={customerData.phone}
 									onChange={handlePhoneNumber}
-									className={error.phone && style.isError}
+									className={formErrors.phone && style.isError}
 									required
 								/>
 							</div>
 							{
-								error.phone && <span className={style.errorText}>{error.phone}</span>
+								formErrors.phone && <p className={style.errorText}>{formErrors.phone}</p>
 							}
 						</div>
 						<div className={style.wrapperItems}>
@@ -144,16 +146,16 @@ const CheckoutForm = () => {
 									placeholder={'Логин с Epic Games'}
 									value={customerData.accName}
 									onChange={handleChange}
-									className={error.accName && style.isError}
+									className={formErrors.accName && style.isError}
 									required
 								/>
 							</div>
 							{
-								error.accName && <span className={style.errorText}>{error.accName}</span>
+								formErrors.accName && <p className={style.errorText}>{formErrors.accName}</p>
 							}
 							<div>
 								<label>Способ оплаты: </label>
-								<select name='paymentMethod' onChange={handleChange}>
+								<select name='paymentMethod' onChange={handleChange} className={formErrors.paymentMethod && style.isError}>
 									<option value='empty'>...</option>
 									<option value='sbp'>СБП</option>
 									<option value='card'>Картой онлайн</option>
@@ -161,7 +163,7 @@ const CheckoutForm = () => {
 								</select>
 							</div>
 							{
-								error.paymentMethod && <span className={style.errorText}>{error.paymentMethod}</span>
+								formErrors.paymentMethod && <p className={style.errorText}>{formErrors.paymentMethod}</p>
 							}
 							<h3>
 								Итого к оплате: {totalCost}
