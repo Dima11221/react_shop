@@ -1,0 +1,33 @@
+@use "../../../styles/globals";
+@use "../../CartList/style.module";
+
+.checkoutWrapperPos {
+  margin: 0 auto;
+  width: 800px;
+}
+
+.checkoutWrapperStyle {
+  margin: 30px 0;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  background-color: white;
+}
+
+
+
+.WrapperForm {
+  max-width: 100%;
+}
+
+.formItems {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.isError {
+  border: 1px solid var(--red);
+}
+
+.errorText {
+  color: var(--red);
+}

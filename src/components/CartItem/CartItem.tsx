@@ -1,4 +1,4 @@
-import {IOrderItem} from "../Shop/Shop.tsx";
+import {IOrderItem} from "../Pages/Shop/Shop.tsx";
 import style from './style.module.scss'
 import closeIcon from "../../icons/close_icon.svg"
 import plus from "../../icons/plusIcon.svg"

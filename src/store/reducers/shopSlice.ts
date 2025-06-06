@@ -1,6 +1,6 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {ICartItem, ICheckoutFormItem, IGoodsItemProp} from "../../types/Types.ts";
-import {IOrderItem} from "../../components/Shop/Shop.tsx";
+import {IOrderItem} from "../../components/Pages/Shop/Shop.tsx";
 import {fetchGoods, submitOrder} from "./thunk.ts";
 
 export interface IShopState {
@@ -167,13 +167,13 @@ const shopSlice = createSlice({
       // }
     },
 
-    openCheckout(state) {
-      state.isCheckoutOpen = true;
-    },
-
-    closeCheckout(state) {
-      state.isCheckoutOpen = false;
-    },
+    // openCheckout(state) {
+    //   state.isCheckoutOpen = true;
+    // },
+    //
+    // closeCheckout(state) {
+    //   state.isCheckoutOpen = false;
+    // },
 
     updateCustomersData(state, action: PayloadAction<IShopState['customerData']>) {
       state.customerData = {...state.customerData, ...action.payload};
@@ -188,9 +188,10 @@ const shopSlice = createSlice({
       state.formErrors = action.payload;
     },
 
-    // clearFormErrors(state) {
-    //   state.formErrors = initialState.formErrors;
-    // }
+    clearFormErrors(state) {
+      state.formErrors = {};
+    }
+
   },
   extraReducers: (builder) => {
     builder
@@ -241,11 +242,12 @@ export const {
   setOrderLocalStorage,
   setCurrentPage,
   // setPagesCount
-  openCheckout,
-  closeCheckout,
+  // openCheckout,
+  // closeCheckout,
   updateCustomersData,
   resetOrderState,
   setFormErrors,
+  clearFormErrors,
 } =  shopSlice.actions;
 
 export default shopSlice.reducer;

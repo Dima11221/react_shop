@@ -3,7 +3,8 @@ import style from './style.module.scss'
 import closeModalIcon from '../../icons/closeModalIcon.svg'
 import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "../../store/store.ts";
-import {clearCart, handleCartShow, openCheckout} from "../../store/reducers/shopSlice.ts";
+import {clearCart, handleCartShow} from "../../store/reducers/shopSlice.ts";
+import {Link} from "react-router-dom";
 
 
 
@@ -22,12 +23,8 @@ const CartList = () => {
         dispatch(clearCart())
     }
 
-    const handleopenCheckout = () => {
-        if (order.length === 0) {
-            alert('Добавьте товары в корзину!');
-            return
-        }
-        dispatch(openCheckout());
+    const handleEmptyClick = () => {
+        alert('Добавьте товары в корзину!');
     }
 
     return (
@@ -56,7 +53,10 @@ const CartList = () => {
                         <p>Общая стоимость:</p>
                         <span className={style.bold}>{totalCost} руб.</span>
                     </div>
-                    <button onClick={handleopenCheckout}><p>Оформить</p></button>
+                    {/*<button onClick={handleOpenCheckout}><p>Оформить</p></button>*/}
+                    {order.length > 0 && <Link to={'/checkout_form'}>Оформить</Link>}
+                    {order.length <= 0 && <button onClick={handleEmptyClick} className={style.btnReset}>Оформить</button>}
+
                 </li>
             </ul>
         </div>

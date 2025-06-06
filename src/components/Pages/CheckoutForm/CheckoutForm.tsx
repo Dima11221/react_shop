@@ -1,21 +1,26 @@
 import {useDispatch, useSelector} from "react-redux";
-import {AppDispatch, RootState} from "../../store/store.ts";
+import {AppDispatch, RootState} from "../../../store/store.ts";
 import {
-	closeCheckout,
+	clearFormErrors,
 	resetOrderState,
-	// setFormErrors,
 	updateCustomersData
-} from "../../store/reducers/shopSlice.ts";
+} from "../../../store/reducers/shopSlice.ts";
 
 import style from './style.module.scss'
-import closeModalIcon from "../../icons/closeModalIcon.svg";
 import * as React from "react";
-import {submitOrder} from "../../store/reducers/thunk.ts";
+import {submitOrder} from "../../../store/reducers/thunk.ts";
+import {useNavigate} from "react-router-dom";
 
 const CheckoutForm = () => {
 	const dispatch = useDispatch<AppDispatch>();
 	const { customerData, order, formErrors } =  useSelector((state: RootState) => state.shop);
 	const total = order.reduce((acc, item) => acc + (item.finalPrice * item.quantity), 0);
+	const navigate =  useNavigate();
+
+	const goBack = () => {
+		navigate(-1);
+		dispatch(clearFormErrors())
+	}
 
 	const handleSubmit = (event: React.FormEvent) => {
 		event.preventDefault();
@@ -23,64 +28,21 @@ const CheckoutForm = () => {
 		dispatch(submitOrder())
 			.unwrap()
 			.then(({totalCost}) => {
-				// console.log(totalCost)
 				alert(`Заказ #${Date.now()} оформлен! Сумма: ${totalCost} руб.`)
 		})
 			.then(() => {
 			dispatch(resetOrderState());
-			dispatch(closeCheckout());
 		})
 			.catch(() => {})
 
-
-		// let isValid = true;
-		// const newError = {name: '', email: '', phone: '', accName: '', paymentMethod: ''};
-		// const validNumber = /^(\+7|7|8)?\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/.test(customerData.phone);
-		//
-		// if (!customerData.name.trim()) {
-		// 	newError.name = 'Введите имя!'
-		// 	isValid = false;
-		// }
-		//
-		// if (!customerData.email.includes('@')) {
-		// 	newError.email = 'Некорректная почта!';
-		// 	isValid = false;
-		// }
-		//
-		// if (!validNumber) {
-		// 	newError.phone = 'Некорректный номер телефона!';
-		// 	isValid = false;
-		// }
-		//
-		// if (!customerData.accName.trim()) {
-		// 	newError.accName = 'Введите ваш логин!';
-		// 	isValid = false;
-		// }
-		// if (customerData.paymentMethod === 'empty') {
-		// 	newError.paymentMethod = 'Не выбран способ оплаты!';
-		// 	isValid = false;
-		// }
-		//
-		// dispatch(setFormErrors(newError))
-		// if (!isValid) {
-		// 	return;
-		// }
-		//
-		// alert(`Заказ оформлен! Сумма: ${totalCost} руб.`);
-		// dispatch(resetOrderState());
-		// dispatch(closeCheckout());
 	};
 
-	const handleCloseCheckout = () => {
-		dispatch(closeCheckout())
-	}
 
 	const handleChange = (event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
 		const { value, name } = event.target;
 		dispatch(updateCustomersData({
 			...customerData,
 			[name]: value}))
-		// console.log(name, value)
 	}
 
 	const handlePhoneNumber = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -93,18 +55,16 @@ const CheckoutForm = () => {
 	}
 
 	return (
-		<div className={style.cartModalBack} onClick={handleCloseCheckout}>
-			<div className={style.checkoutModal} onClick={(e) => e.stopPropagation()}>
+		<div className={style.checkoutWrapperPos}>
+			<button onClick={goBack} className={`${style.btnReset} ${style.btn} ${style.btnPos}`}>Назад</button>
+			<div className={style.checkoutWrapperStyle}>
 				<div className={`${style.cartWrapper} ${style.cartWrapperStyle} ${style.flex}`}>
 					<h2>Оформление заказа</h2>
-					<button className={style.btnReset} onClick={handleCloseCheckout}>
-						<img src={closeModalIcon} className={style.closeModalIcon} alt='closeModalIcon'></img>
-					</button>
 				</div>
 
 				<form id="checkoutForm" >
-					<div className={`${style.flex} ${style.listStyle} ${style.checkoutFormWrapper}`}>
-						<div className={style.wrapperItems}>
+					<div className={`${style.flex} ${style.listStyle} ${style.WrapperForm}`}>
+						<div className={style.formItems}>
 							<div>
 								<label>Имя: </label>
 								<input
@@ -151,7 +111,7 @@ const CheckoutForm = () => {
 								formErrors.phone && <p className={style.errorText}>{formErrors.phone}</p>
 							}
 						</div>
-						<div className={style.wrapperItems}>
+						<div className={style.formItems}>
 							<div>
 								<label>Логин аккаунта: </label>
 								<input
@@ -186,7 +146,6 @@ const CheckoutForm = () => {
 					</div>
 					<div className={`${style.cartWrapper} ${style.cartWrapperStyle} ${style.flex}`}>
 						<button type='submit' onClick={handleSubmit}>Подтвердить заказ</button>
-						<button type='button' onClick={handleCloseCheckout}>Отмена</button>
 					</div>
 				</form>
 			</div>

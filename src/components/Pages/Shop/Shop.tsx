@@ -1,17 +1,16 @@
-import style from './style.module.scss'
 import {useEffect} from "react";
-import {Preloader} from "../Preloader/Preloader.tsx";
-import {GoodsList} from "../GoodsList/GoodsList.tsx";
-import {ICartItem} from "../../types/Types.ts";
-import {Cart} from "../Cart/Cart.tsx";
-import {CartList} from "../CartList/CartList.tsx";
-import {Alert} from "../Alert/Alert.tsx";
+import {Preloader} from "../../Preloader/Preloader.tsx";
+import {GoodsList} from "../../GoodsList/GoodsList.tsx";
+import {ICartItem} from "../../../types/Types.ts";
+import {Cart} from "../../Cart/Cart.tsx";
+import {CartList} from "../../CartList/CartList.tsx";
+import {Alert} from "../../Alert/Alert.tsx";
 
-import {Pages} from "../Pages/Pages.tsx";
+import {Pages} from "../../Pagination/Pages.tsx";
 import {useDispatch, useSelector} from "react-redux";
-import {AppDispatch, RootState} from "../../store/store.ts";
-import {closeCheckout, handleCartShow, setOrderLocalStorage} from "../../store/reducers/shopSlice.ts";
-import {fetchGoods} from "../../store/reducers/thunk.ts";
+import {AppDispatch, RootState} from "../../../store/store.ts";
+import {handleCartShow, setOrderLocalStorage} from "../../../store/reducers/shopSlice.ts";
+import {fetchGoods} from "../../../store/reducers/thunk.ts";
 import {CheckoutForm} from "../CheckoutForm/CheckoutForm.tsx";
 // import {AnyAction, ThunkDispatch} from "@reduxjs/toolkit";
 
@@ -64,11 +63,7 @@ const Shop = () => {
 
         const handleCartClose = (e: KeyboardEvent): void => {
             if (e.key === 'Escape') {
-                if (isCheckoutOpen) {
-                    dispatch(closeCheckout())
-                } else if (isCartShow) {
-                    dispatch(handleCartShow())
-                }
+                dispatch(handleCartShow())
             }
         }
 
@@ -82,7 +77,7 @@ const Shop = () => {
     }, [isCheckoutOpen, isCartShow, dispatch])
 
     return (
-      <main className={style.mainWrapper}>
+      <div>
           <Cart quantity={CartOrder}/>
           {loading && (<Preloader />)}
 
@@ -97,7 +92,7 @@ const Shop = () => {
           }
           {alertName && <Alert/>}
           {isCheckoutOpen && <CheckoutForm />}
-      </main>
+      </div>
     )
 }
 
