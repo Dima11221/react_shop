@@ -1,7 +1,7 @@
 import {Header} from "./layout/Header/Header.tsx";
 import {Footer} from "./layout/Footer/Footer.tsx";
 import {Shop} from "./components/Pages/Shop/Shop.tsx";
-import {BrowserRouter as Router, Route, Routes} from "react-router-dom";
+import {HashRouter as Router, Route, Routes} from "react-router-dom";
 import {CheckoutForm} from "./components/Pages/CheckoutForm/CheckoutForm.tsx";
 import './styles/main.scss'
 
@@ -19,6 +19,7 @@ function App() {
                 </div>
             <Footer />
         </Router>
+      //  "hommepage": "https://github.com/Dima11221/react_shop",
     )
 }
 

@@ -54,7 +54,7 @@ const CartList = () => {
                         <span className={style.bold}>{totalCost} руб.</span>
                     </div>
                     {/*<button onClick={handleOpenCheckout}><p>Оформить</p></button>*/}
-                    {order.length > 0 && <Link to={'/checkout_form'}>Оформить</Link>}
+                    {order.length > 0 && <Link to='/checkout_form'>Оформить</Link>}
                     {order.length <= 0 && <button onClick={handleEmptyClick} className={style.btnReset}>Оформить</button>}
 
                 </li>
