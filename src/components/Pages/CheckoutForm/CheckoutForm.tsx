@@ -147,20 +147,20 @@ const CheckoutForm = () => {
 									formErrors.paymentMethod && <p className={style.errorText}>{formErrors.paymentMethod}</p>
 								}
 							</div>
-							<h2 className={style.formTitle}>3. Список покупок</h2>
-							<button onClick={handleSetBurger}>СПИСОК</button>
-							{!burger && (
+							<div className={style.flex}>
+								<h2 className={style.formTitle}>3. Список покупок</h2>
+								<button type='button' onClick={handleSetBurger} className={`${style.btnReset} ${style.btn} ${style.styleBtn}`}>{burger ? 'Закрыть' : 'Открыть'}</button>
+							</div>
+							{burger && (
 								<div className={style.checkoutList}>
 									{order.map((item, index) => (
 											<div>
 												<h3>№ {index + 1}</h3>
-												<div className={style.flexColumn}>
-													<h4>Товар: {item.name}</h4>
-													<h4>Цена: {item.finalPrice} руб.</h4>
-													<h4>Сколько: {item.quantity}</h4>
+												<div className={style.flex}>
+													<h4>{item.name} ({item.quantity}шт.)</h4>
+													<h4>{item.finalPrice} руб.</h4>
 												</div>
 											</div>
-
 										)
 									)}
 								</div>

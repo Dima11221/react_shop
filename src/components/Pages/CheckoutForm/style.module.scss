@@ -51,7 +51,11 @@
 .checkoutList {
   display: flex;
   justify-content: flex-start;
-  align-items: center;
+  flex-direction: column;
   flex-wrap: wrap;
   gap: 20px;
 }
+
+//.styleBtn {
+//  max-width: 200px;
+//}
