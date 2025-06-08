@@ -7,7 +7,7 @@
 }
 
 .checkoutWrapperStyle {
-  margin: 30px 0;
+  margin: 60px 0;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   background-color: white;
 }
@@ -18,7 +18,15 @@
   max-width: 100%;
 }
 
-.formItems {
+.formTitle {
+  margin: 30px 0;
+}
+
+.formItem {
+
+}
+
+.userInfo {
   display: flex;
   flex-direction: column;
   gap: 20px;
@@ -30,4 +38,20 @@
 
 .errorText {
   color: var(--red);
+}
+
+.finalCost {
+  margin-top: 40px;
+}
+
+.submitButton {
+  padding: 10px;
+}
+
+.checkoutList {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 20px;
 }

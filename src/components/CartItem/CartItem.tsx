@@ -31,16 +31,18 @@ const CartItem = (props: IOrderItem) => {
 
     return (
         <li className={`${style.cartItem} ${style.flex}`}>
-            <span className={style.cartInfo}>{name} x {quantity} = {finalPrice * quantity} руб. </span>
+            <h3 className={style.cartInfo}>{name}</h3>
             <div className={`${style.flex} ${style.plusMinusContent}`}>
 
                 <button className={style.btnReset} onClick={incrementQuantity}>
                     <img src={plus} alt={plus} className={style.iconButton}></img>
                 </button>
+                <span>{quantity}</span>
                 <button className={style.btnReset} onClick={decrementQuantity}>
                     <img src={minus} alt={minus} className={style.iconButton}></img>
                 </button>
             </div>
+            <h3>{finalPrice * quantity} руб.</h3>
 
             <button className={style.btnReset} onClick={removeCart}>
                 <img src={closeIcon} className={style.iconCloseButton}></img>

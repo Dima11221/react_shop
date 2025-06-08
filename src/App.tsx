@@ -13,7 +13,7 @@ function App() {
             <Header />
                 <div className='mainWrapper'>
                   <Routes>
-                    <Route path="/react_shop" element={<Shop />} />
+                    <Route path="/" element={<Shop />} />
                     <Route path='/checkout_form' element={<CheckoutForm />} />
                   </Routes>
                 </div>

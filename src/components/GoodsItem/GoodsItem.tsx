@@ -41,7 +41,7 @@ const GoodsItem = (props: IGoodsItemProp) => {
             <div className={`${style.flex} ${style.deal}`}>
                 <button className={`${style.btn} ${style.infoBtn}`} onClick={handleAddToCart}>В корзину</button>
                 {/*<button className={`${style.btn} ${style.infoBtn}`} onClick={handleOpenCheckout}>Купить сейчас</button>*/}
-              <Link to={'/checkout_form'}>Купить сейчас</Link>
+              <Link to={'/checkout_form'} onClick={handleAddToCart}>Купить сейчас</Link>
             </div>
         </div>
     )

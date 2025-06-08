@@ -23,6 +23,7 @@ export interface IShopState {
     paymentMethod: 'empty' | 'sbp' | 'card' | 'crypto';
   }
   formErrors: ICheckoutFormItem;
+  checkoutItems: ICartItem[];
 }
 
 const initialState : IShopState  = {
@@ -50,7 +51,8 @@ const initialState : IShopState  = {
     phone: '',
     accName: '',
     paymentMethod: '',
-  }
+  },
+  checkoutItems: [],
 }
 
 const shopSlice = createSlice({
@@ -97,16 +99,16 @@ const shopSlice = createSlice({
       //   isCartShow: !state.isCartShow,
       // }
     },
-    setGoods(state,  action: PayloadAction<IGoodsItemProp[]>) {
-      state.goods = action.payload || [];
-      state.loading = false;
+    // setGoods(state, action: PayloadAction<IGoodsItemProp[]>) {
+    //   state.goods = action.payload || [];
+    //   state.loading = false;
 
       // return {
       //   ...state,
       //   goods: action.payload || [],
       //   loading: false,
       // }
-    },
+    // },
     incQuantity(state, action: PayloadAction<{id: string}>) {
       // const item = state.order.find(el => el.id === action.payload.id);
       // if (item) {
@@ -157,15 +159,15 @@ const shopSlice = createSlice({
       //   currentPage: action.payload,
       // }
     },
-    setPagesCount(state) {
-      state.pagesCount = Math.ceil(state.goods.length / state.itemsPerPage);
+    // setPagesCount(state) {
+    //   state.pagesCount = Math.ceil(state.goods.length / state.itemsPerPage);
 
       //   return {
       //     ...state,
       //     pagesCount: Math.ceil(state.goods.length / state.itemsPerPage),
       //   }
       // }
-    },
+    // },
 
     // openCheckout(state) {
     //   state.isCheckoutOpen = true;
