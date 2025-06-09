@@ -1,0 +1,132 @@
+@use "../../styles/globals";
+
+.row {
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 20px;
+}
+
+.inputField {
+  position: relative;
+  margin-top: 24px;
+  margin-bottom: 24px;
+}
+
+.searchBtn {
+  position: absolute;
+  top: 0;
+  right: 4px;
+}
+
+.inputStyle {
+  background-color: transparent;
+  color: var(--grey);
+  font-size: 18px;
+  border: none;
+  border-bottom: 1px solid var(--light-grey);
+  border-radius: 0;
+  outline: none;
+  height: 48px;
+  width: 100%;
+  line-height: 25px;
+  margin: 0 0 8px 0;
+  padding: 0;
+  box-sizing: content-box;
+  cursor: text;
+}
+
+.inputStyle::placeholder {
+  opacity: 60%;
+}
+
+
+.btnsBox {
+  width: 45%;
+}
+
+.withGap {
+  display: flex;
+  gap: 4px;
+}
+
+//.radioButtonsStandart {
+//  position: relative;
+//  padding-left: 30px;
+//  cursor: pointer;
+//}
+
+.radioButtonsStandart input {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.span {
+  position: relative;
+  padding-left: 35px;
+  cursor: pointer;
+  display: inline-block;
+  height: 25px;
+  line-height: 25px;
+  font-size: 1rem;
+  transition: .3s ease;
+  user-select: none;
+  color: var(--light-grey);
+}
+
+.span:hover {
+  color: var(--blue-color);
+}
+
+//.radioButtonsStandart input:checked + .span {
+//  border-color: #33c7b9;
+//}
+
+.radioButtonsStandart input:not(:checked) + .span::before {
+  border: 2px solid var(--blue-color);
+  border-radius: 50%;
+
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  margin: 4px;
+  width: 16px;
+  height: 16px;
+  z-index: 0;
+  transition: .3s ease;
+}
+
+.radioButtonsStandart input:checked + .span::before {
+  border: 2px solid var(--blue-color);
+  border-radius: 50%;
+
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  margin: 4px;
+  width: 16px;
+  height: 16px;
+  z-index: 0;
+  transition: .3s ease;
+}
+
+.radioButtonsStandart input:checked + .span::after {
+  background-color: var(--blue-color);
+  border: 2px solid var(--blue-color);
+  border-radius: 50%;
+
+
+  transform: scale(0.5);
+
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  margin: 4px;
+  width: 16px;
+  height: 16px;
+  z-index: 0;
+  transition: .3s ease;
+}

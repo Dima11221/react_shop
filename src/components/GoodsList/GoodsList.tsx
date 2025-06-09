@@ -3,14 +3,18 @@ import style from './style.module.scss'
 
 import {useSelector} from "react-redux";
 import {RootState} from "../../store/store.ts";
+import {IGoodsItemProp} from "../../types/Types.ts";
 
+interface IFiteredGoods {
+    goods: IGoodsItemProp[];
+}
 
-const GoodsList = () => {
+const GoodsList = ({goods}: IFiteredGoods) => {
     // const dispatch = useDispatch();
-    const goods = useSelector((state: RootState) => state.shop.goods);
+    // const goods = useSelector((state: RootState) => state.shop.goods);
     const currentPage = useSelector((state: RootState) => state.shop.currentPage);
     const itemsPerPage = useSelector((state: RootState) => state.shop.itemsPerPage);
-    // console.log(goods, "goods");
+    console.log(goods, "goods");
 
     const getCurrentPageGoods = () => {
         const startIndexInPage = (currentPage - 1) * itemsPerPage;
@@ -19,7 +23,7 @@ const GoodsList = () => {
     }
 
     const goodsPerPage = getCurrentPageGoods();
-    // console.log(goodsPerPage, "goodsPerPage");
+    console.log(goodsPerPage, "goodsPerPage");
 
     return (
       <div className={style.goodsList}>
