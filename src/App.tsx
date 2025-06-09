@@ -19,7 +19,6 @@ function App() {
                 </div>
             <Footer />
         </Router>
-      //  "hommepage": "https://github.com/Dima11221/react_shop",
     )
 }
 
