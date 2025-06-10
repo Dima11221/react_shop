@@ -1,7 +1,7 @@
 import {useEffect, useState} from "react";
 import {Preloader} from "../../Preloader/Preloader.tsx";
 import {GoodsList} from "../../GoodsList/GoodsList.tsx";
-import {ICartItem} from "../../../types/Types.ts";
+import {ICartItem, IGoodsItemProp} from "../../../types/Types.ts";
 import {Cart} from "../../Cart/Cart.tsx";
 import {CartList} from "../../CartList/CartList.tsx";
 import {Alert} from "../../Alert/Alert.tsx";
@@ -29,23 +29,32 @@ const Shop = () => {
     const goods = useSelector((state: RootState) => state.shop.goods);
     // console.log(goods, 'goods')
     const CartOrder = order.reduce((acc, item) => acc + item.quantity, 0)
+    const itemsPerPage = useSelector((state: RootState) => state.shop.itemsPerPage);
 
-    const [searchQuery, setSearchQuery] = useState("");
-    const [filteredGoods, setFilteredGoods] = useState(goods);
+    // const [searchQuery, setSearchQuery] = useState("");
+    const [filteredGoods, setFilteredGoods] = useState<IGoodsItemProp[]>(goods);
+    const [pagesCount, setPagesCount] = useState<number>(0);
 
     useEffect(() => {
-        const filtered = goods.filter((item) =>
-            item.displayName.toLowerCase().includes(str.toLowerCase()));
-    }, []);
+        // dispatch(setCurrentPage(1));
+        setFilteredGoods(goods);
+        setPagesCount(Math.ceil(goods.length / itemsPerPage));
+    }, [goods, itemsPerPage]);
 
     const handleSearch = (str: string) => {
+        // console.log(str);
         dispatch(setCurrentPage(1));
-        setFilteredGoods(
-            goods.filter(good =>
-                good.displayName.toLowerCase().includes(str.toLowerCase())
-            )
+        const filtered = goods.filter(good =>
+          good.displayName.toLowerCase().includes(str.toLowerCase())
         );
+        setFilteredGoods(filtered);
+        const currentPagesCount = Math.ceil(filtered.length / itemsPerPage);
+        setPagesCount(currentPagesCount);
+        // console.log(filtered)
+        // console.log(currentPagesCount)
     }
+
+
 
     useEffect(() => {
         const savedOrder = localStorage.getItem("cart");
@@ -100,8 +109,8 @@ const Shop = () => {
 
           {!loading && (
             <>
-                <GoodsList goods={filteredGoods} />
-                <Pages />
+                <GoodsList filteredGoods={filteredGoods}/>
+                <Pages pagesCount={pagesCount}/>
             </>
           )}
           {
