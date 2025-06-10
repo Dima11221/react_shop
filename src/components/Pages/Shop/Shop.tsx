@@ -9,7 +9,12 @@ import {Alert} from "../../Alert/Alert.tsx";
 import {Pages} from "../../Pagination/Pages.tsx";
 import {useDispatch, useSelector} from "react-redux";
 import {AppDispatch, RootState} from "../../../store/store.ts";
-import {handleCartShow, setCurrentPage, setOrderLocalStorage} from "../../../store/reducers/shopSlice.ts";
+import {
+    handleCartShow,
+    setCurrentPage,
+    setOrderLocalStorage,
+    setPagesCount
+} from "../../../store/reducers/shopSlice.ts";
 import {fetchGoods} from "../../../store/reducers/thunk.ts";
 import {CheckoutForm} from "../CheckoutForm/CheckoutForm.tsx";
 import {Search} from "../../Search/Search.tsx";
@@ -31,15 +36,12 @@ const Shop = () => {
     const CartOrder = order.reduce((acc, item) => acc + item.quantity, 0)
     const itemsPerPage = useSelector((state: RootState) => state.shop.itemsPerPage);
 
-    // const [searchQuery, setSearchQuery] = useState("");
     const [filteredGoods, setFilteredGoods] = useState<IGoodsItemProp[]>(goods);
-    const [pagesCount, setPagesCount] = useState<number>(0);
 
     useEffect(() => {
-        // dispatch(setCurrentPage(1));
         setFilteredGoods(goods);
-        setPagesCount(Math.ceil(goods.length / itemsPerPage));
-    }, [goods, itemsPerPage]);
+        dispatch(setPagesCount(Math.ceil(goods.length/itemsPerPage)));
+    }, [goods, dispatch, setPagesCount]);
 
     const handleSearch = (str: string) => {
         // console.log(str);
@@ -49,11 +51,11 @@ const Shop = () => {
         );
         setFilteredGoods(filtered);
         const currentPagesCount = Math.ceil(filtered.length / itemsPerPage);
-        setPagesCount(currentPagesCount);
-        // console.log(filtered)
-        // console.log(currentPagesCount)
-    }
 
+        dispatch(setPagesCount(currentPagesCount));
+        console.log(filtered)
+        console.log(currentPagesCount)
+    }
 
 
     useEffect(() => {
@@ -110,7 +112,8 @@ const Shop = () => {
           {!loading && (
             <>
                 <GoodsList filteredGoods={filteredGoods}/>
-                <Pages pagesCount={pagesCount}/>
+                {/*<Pages pagesCount={pagesCount}/>*/}
+                <Pages />
             </>
           )}
           {

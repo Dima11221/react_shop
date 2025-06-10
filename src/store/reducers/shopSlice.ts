@@ -159,15 +159,15 @@ const shopSlice = createSlice({
       //   currentPage: action.payload,
       // }
     },
-    // setPagesCount(state) {
-    //   state.pagesCount = Math.ceil(state.goods.length / state.itemsPerPage);
+    setPagesCount(state, action: PayloadAction<number>) {
+      state.pagesCount = action.payload;
 
-      //   return {
-      //     ...state,
-      //     pagesCount: Math.ceil(state.goods.length / state.itemsPerPage),
-      //   }
+        // return {
+        //   ...state,
+        //   pagesCount: Math.ceil(state.goods.length / state.itemsPerPage),
+        // }
       // }
-    // },
+    },
 
     // openCheckout(state) {
     //   state.isCheckoutOpen = true;
@@ -243,7 +243,7 @@ export const {
   clearCart,
   setOrderLocalStorage,
   setCurrentPage,
-  // setPagesCount
+  setPagesCount,
   // openCheckout,
   // closeCheckout,
   updateCustomersData,

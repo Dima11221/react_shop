@@ -3,15 +3,15 @@ import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "../../store/store.ts";
 import {setCurrentPage} from "../../store/reducers/shopSlice.ts";
 
-interface IPagesCountProp {
-  pagesCount: number;
-}
+// interface IPagesCountProp {
+//   pagesCount: number;
+// }
 
-const Pages = ({pagesCount}: IPagesCountProp) => {
+const Pages = () => {
   const dispatch = useDispatch();
 
   const currentPage = useSelector((state: RootState) => state.shop.currentPage);
-  // const pagesCount = useSelector((state: RootState) => state.shop.pagesCount);
+  const pagesCount = useSelector((state: RootState) => state.shop.pagesCount);
   const handleNextPage = () => {
     if (currentPage < pagesCount) {
       dispatch(setCurrentPage(currentPage + 1));
