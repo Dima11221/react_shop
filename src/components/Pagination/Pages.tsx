@@ -3,9 +3,6 @@ import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "../../store/store.ts";
 import {setCurrentPage} from "../../store/reducers/shopSlice.ts";
 
-// interface IPagesCountProp {
-//   pagesCount: number;
-// }
 
 const Pages = () => {
   const dispatch = useDispatch();

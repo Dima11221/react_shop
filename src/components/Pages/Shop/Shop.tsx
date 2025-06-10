@@ -18,6 +18,7 @@ import {
 import {fetchGoods} from "../../../store/reducers/thunk.ts";
 import {CheckoutForm} from "../CheckoutForm/CheckoutForm.tsx";
 import {Search} from "../../Search/Search.tsx";
+import {PriceFilter} from "../../PriceFilter/PriceFilter.tsx";
 // import {AnyAction, ThunkDispatch} from "@reduxjs/toolkit";
 
 export interface IOrderItem extends ICartItem{
@@ -37,26 +38,61 @@ const Shop = () => {
     const itemsPerPage = useSelector((state: RootState) => state.shop.itemsPerPage);
 
     const [filteredGoods, setFilteredGoods] = useState<IGoodsItemProp[]>(goods);
+    const [priceFilter, setPriceFilter] = useState({min: 0, max: 0});
+
+    const filters = (searchStr: string = '', priceRange: {min: number, max: number}) => {
+        let result = goods;
+        // console.log(goods);
+
+        if (searchStr) {
+            result = result.filter(good =>
+              good.displayName.toLowerCase().includes(searchStr.toLowerCase())
+            );
+
+        }
+
+        if (priceRange.min > 0 || priceRange.max > 0) {
+            result = result.filter(good => {
+                const price = good.price.finalPrice;
+                return (
+                  (priceRange.min === 0 || priceRange.min <= price) &&
+                  (priceRange.max === 0 || priceRange.max >= price)
+                )
+            });
+        }
+
+        setFilteredGoods(result);
+        dispatch(setPagesCount(Math.ceil(result.length / itemsPerPage)));
+    }
 
     useEffect(() => {
+        setPriceFilter({min: 0, max: 0});
         setFilteredGoods(goods);
         dispatch(setPagesCount(Math.ceil(goods.length/itemsPerPage)));
+        // console.log(goods);
     }, [goods, dispatch, setPagesCount]);
 
     const handleSearch = (str: string) => {
         // console.log(str);
         dispatch(setCurrentPage(1));
-        const filtered = goods.filter(good =>
-          good.displayName.toLowerCase().includes(str.toLowerCase())
-        );
-        setFilteredGoods(filtered);
-        const currentPagesCount = Math.ceil(filtered.length / itemsPerPage);
+        filters(str, priceFilter)
 
-        dispatch(setPagesCount(currentPagesCount));
-        console.log(filtered)
-        console.log(currentPagesCount)
+        // const filtered = goods.filter(good =>
+        //   good.displayName.toLowerCase().includes(str.toLowerCase())
+        // );
+        // setFilteredGoods(filtered);
+        // const currentPagesCount = Math.ceil(filtered.length / itemsPerPage);
+        //
+        // dispatch(setPagesCount(currentPagesCount));
+        // console.log(filtered)
+        // console.log(currentPagesCount)
     }
 
+    const handlePriceFilter = (min: number, max: number) => {
+        setPriceFilter({min, max});
+        dispatch(setCurrentPage(1));
+        filters('', {min, max});
+    }
 
     useEffect(() => {
         const savedOrder = localStorage.getItem("cart");
@@ -105,14 +141,18 @@ const Shop = () => {
 
     return (
       <div>
-          <Search handleSearch={handleSearch}></Search>
+          <Search handleSearch={handleSearch} />
+          <PriceFilter
+            handlePriceFilter={handlePriceFilter}
+            currentMinPrice={priceFilter.min}
+            currentMaxPrice={priceFilter.max}
+          />
           <Cart quantity={CartOrder}/>
           {loading && (<Preloader />)}
 
           {!loading && (
             <>
                 <GoodsList filteredGoods={filteredGoods}/>
-                {/*<Pages pagesCount={pagesCount}/>*/}
                 <Pages />
             </>
           )}
