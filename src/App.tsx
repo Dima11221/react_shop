@@ -10,7 +10,7 @@ function App() {
 
     return (
         <Router>
-            <Header />
+            <Header title={'Fortnite shop'} />
                 <div className='mainWrapper'>
                   <Routes>
                     <Route path="/" element={<Shop />} />

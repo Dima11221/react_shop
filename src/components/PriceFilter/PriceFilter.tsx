@@ -5,13 +5,13 @@ import {setCurrentPage} from "../../store/reducers/shopSlice.ts";
 
 interface IPriceFilter {
   handlePriceFilter: (min: number, max: number) => void;
-  currentMinPrice: number;
-  currentMaxPrice: number;
+  // currentMinPrice: number;
+  // currentMaxPrice: number;
 }
 
-const PriceFilter = ({handlePriceFilter, currentMinPrice, currentMaxPrice}: IPriceFilter) => {
-  const [minPrice, setMinPrice] = useState<number>(currentMinPrice);
-  const [maxPrice, setMaxPrice] = useState<number>(currentMaxPrice);
+const PriceFilter = ({handlePriceFilter}: IPriceFilter) => {
+  const [minPrice, setMinPrice] = useState<number>(0);
+  const [maxPrice, setMaxPrice] = useState<number>(0);
   const dispatch = useDispatch<AppDispatch>();
 
   const handleSubmit = (e: React.FormEvent) => {

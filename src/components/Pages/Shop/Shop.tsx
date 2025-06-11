@@ -38,9 +38,10 @@ const Shop = () => {
     const itemsPerPage = useSelector((state: RootState) => state.shop.itemsPerPage);
 
     const [filteredGoods, setFilteredGoods] = useState<IGoodsItemProp[]>(goods);
-    const [priceFilter, setPriceFilter] = useState({min: 0, max: 0});
+    const [priceFilter, setPriceFilter] = useState<{min: number, max: number}>({min: 0, max: 0});
+    const [searchStr, setSearchStr] = useState<string>('');
 
-    const filters = (searchStr: string = '', priceRange: {min: number, max: number}) => {
+    const filters = () => {
         let result = goods;
         // console.log(goods);
 
@@ -51,12 +52,12 @@ const Shop = () => {
 
         }
 
-        if (priceRange.min > 0 || priceRange.max > 0) {
+        if (priceFilter.min > 0 || priceFilter.max > 0) {
             result = result.filter(good => {
                 const price = good.price.finalPrice;
                 return (
-                  (priceRange.min === 0 || priceRange.min <= price) &&
-                  (priceRange.max === 0 || priceRange.max >= price)
+                  (priceFilter.min === 0 || priceFilter.min <= price) &&
+                  (priceFilter.max === 0 || priceFilter.max >= price)
                 )
             });
         }
@@ -66,16 +67,21 @@ const Shop = () => {
     }
 
     useEffect(() => {
-        setPriceFilter({min: 0, max: 0});
-        setFilteredGoods(goods);
-        dispatch(setPagesCount(Math.ceil(goods.length/itemsPerPage)));
-        // console.log(goods);
-    }, [goods, dispatch, setPagesCount]);
+        filters();
+    }, [goods, filters]);
+
+    // useEffect(() => {
+    //     setPriceFilter({min: 0, max: 0});
+    //     setFilteredGoods(goods);
+    //     dispatch(setPagesCount(Math.ceil(goods.length/itemsPerPage)));
+    //     // console.log(goods);
+    // }, [goods, dispatch, setPagesCount]);
 
     const handleSearch = (str: string) => {
+        setSearchStr(str);
         // console.log(str);
         dispatch(setCurrentPage(1));
-        filters(str, priceFilter)
+        filters()
 
         // const filtered = goods.filter(good =>
         //   good.displayName.toLowerCase().includes(str.toLowerCase())
@@ -91,7 +97,7 @@ const Shop = () => {
     const handlePriceFilter = (min: number, max: number) => {
         setPriceFilter({min, max});
         dispatch(setCurrentPage(1));
-        filters('', {min, max});
+        filters();
     }
 
     useEffect(() => {
@@ -144,8 +150,6 @@ const Shop = () => {
           <Search handleSearch={handleSearch} />
           <PriceFilter
             handlePriceFilter={handlePriceFilter}
-            currentMinPrice={priceFilter.min}
-            currentMaxPrice={priceFilter.max}
           />
           <Cart quantity={CartOrder}/>
           {loading && (<Preloader />)}

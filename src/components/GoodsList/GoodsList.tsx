@@ -25,6 +25,12 @@ const GoodsList = ({filteredGoods}:IFiteredGoods) => {
     const goodsPerPage = getCurrentPageGoods();
     // console.log(goodsPerPage, "goodsPerPage");
 
+    if (filteredGoods.length === 0) {
+        return <div>
+            <h3>Товары не найдено. Попробуйте изменить параметр фильтрации.</h3>
+        </div>
+    }
+
     return (
       <div className={style.goodsList}>
           {goodsPerPage.length > 0 && (
