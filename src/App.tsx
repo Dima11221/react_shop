@@ -10,14 +10,16 @@ function App() {
 
     return (
         <Router>
+          <div className='body'>
             <Header title={'Fortnite shop'} />
-                <div className='mainWrapper'>
-                  <Routes>
-                    <Route path="/" element={<Shop />} />
-                    <Route path='/checkout_form' element={<CheckoutForm />} />
-                  </Routes>
-                </div>
+            <div className='mainWrapper'>
+              <Routes>
+                <Route path="/" element={<Shop />} />
+                <Route path='/checkout_form' element={<CheckoutForm />} />
+              </Routes>
+            </div>
             <Footer />
+          </div>
         </Router>
     )
 }
