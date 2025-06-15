@@ -26,3 +26,22 @@ export interface ICheckoutFormItem {
     accName?: string;
     paymentMethod?: string;
 }
+
+export interface IUser {
+    id: string;
+    userName: string;
+    password: string;
+    email: string;
+    isAuth: boolean;
+    lastLogin: number;
+}
+
+export interface IAuthForm {
+    email: string;
+    password: string;
+}
+
+export interface IRegisterUser extends IAuthForm{
+    userName: string;
+    confirmPassword: string;
+}

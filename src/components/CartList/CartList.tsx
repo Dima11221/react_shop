@@ -5,6 +5,8 @@ import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "../../store/store.ts";
 import {clearCart, handleCartShow} from "../../store/reducers/shopSlice.ts";
 import {Link} from "react-router-dom";
+import {useState} from "react";
+import {AuthModal} from "../AuthModal/AuthModal.tsx";
 
 
 
@@ -12,16 +14,30 @@ const CartList = () => {
     const dispatch = useDispatch();
     const order =  useSelector((state: RootState) => state.shop.order);
     // const quantity = useSelector((state: RootState) => state.shop.quantity);
-
     const totalCost = order.reduce((acc, el) => (acc + (+el.finalPrice * el.quantity)), 0);
+    const {isAuth} = useSelector((state: RootState) => state.auth)
+    const [showAuthModal, setShowAuthModal] = useState(false);
+
+    const handleShowAuthModal = () => {
+        if (!isAuth) {
+            setShowAuthModal(true);
+            alert('Сначала авторизируйтесь!');
+            // console.log(showAuthModal);
+            return;
+        }
+    }
+
+    const closeModalAuth = () => {
+        setShowAuthModal(false);
+    };
 
     const cartShow = () => {
         dispatch(handleCartShow());
-    }
+    };
 
     const handleClear = () => {
         dispatch(clearCart())
-    }
+    };
 
     const handleEmptyClick = () => {
         alert('Добавьте товары в корзину!');
@@ -54,7 +70,20 @@ const CartList = () => {
                         <span className={style.bold}>{totalCost} руб.</span>
                     </div>
                     {/*<button onClick={handleOpenCheckout}><p>Оформить</p></button>*/}
-                    {order.length > 0 && <Link to='/checkout_form'>Оформить</Link>}
+                    {order.length > 0 &&
+                        <Link
+                          to={isAuth ? '/checkout_form' : '#'}
+                          onClick={isAuth ? undefined : handleShowAuthModal}
+                        >
+                          Оформить
+                        </Link>}
+                    {showAuthModal && (
+                        <AuthModal
+                          onClose={closeModalAuth}
+
+                        />
+                    )}
+
                     {order.length <= 0 && <button onClick={handleEmptyClick} className={style.btnReset}>Оформить</button>}
 
                 </li>

@@ -147,10 +147,10 @@ const Shop = () => {
 
     return (
       <div>
-          <Search handleSearch={handleSearch} />
-          <PriceFilter
-            handlePriceFilter={handlePriceFilter}
-          />
+          <div>
+              <Search handleSearch={handleSearch} />
+              <PriceFilter handlePriceFilter={handlePriceFilter}/>
+          </div>
           <Cart quantity={CartOrder}/>
           {loading && (<Preloader />)}
 
