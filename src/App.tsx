@@ -40,7 +40,8 @@ function App() {
 
   return (
     <Router>
-      <Header title={'Fortnite shop'} />
+      <div className='body'>
+        <Header title={'Fortnite shop'} />
         <div className='mainWrapper'>
           <Routes>
             <Route path="/" element={<Shop />} />
@@ -51,7 +52,8 @@ function App() {
             />
           </Routes>
         </div>
-      <Footer />
+        <Footer />
+      </div>
     </Router>
   )
 }
