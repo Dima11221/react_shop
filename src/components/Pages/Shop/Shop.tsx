@@ -19,6 +19,7 @@ import {fetchGoods} from "../../../store/reducers/thunk.ts";
 import {CheckoutForm} from "../CheckoutForm/CheckoutForm.tsx";
 import {Search} from "../../Search/Search.tsx";
 import {PriceFilter} from "../../PriceFilter/PriceFilter.tsx";
+import style from "./style.module.scss"
 // import {AnyAction, ThunkDispatch} from "@reduxjs/toolkit";
 
 export interface IOrderItem extends ICartItem{
@@ -147,11 +148,18 @@ const Shop = () => {
 
     return (
       <div>
-          <div>
-              <Search handleSearch={handleSearch} />
-              <PriceFilter handlePriceFilter={handlePriceFilter}/>
+          <div className={style.filtersContainer}>
+              <div className={style.SFWrapper}>
+                  <div className={style.searchWrapper}>
+                      <h3 className={style.title}>Найди свой стиль!</h3>
+                      <Search handleSearch={handleSearch} />
+                  </div>
+                  <div className={style.priceFilterWrapper}>
+                      <PriceFilter handlePriceFilter={handlePriceFilter}/>
+                  </div>
+              </div>
+              <Cart quantity={CartOrder}/>
           </div>
-          <Cart quantity={CartOrder}/>
           {loading && (<Preloader />)}
 
           {!loading && (

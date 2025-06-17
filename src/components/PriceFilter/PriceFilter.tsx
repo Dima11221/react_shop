@@ -2,6 +2,7 @@ import {useState} from "react";
 import {useDispatch} from "react-redux";
 import {AppDispatch} from "../../store/store.ts";
 import {setCurrentPage} from "../../store/reducers/shopSlice.ts";
+import style from "./style.module.scss"
 
 interface IPriceFilter {
   handlePriceFilter: (min: number, max: number) => void;
@@ -29,12 +30,12 @@ const PriceFilter = ({handlePriceFilter}: IPriceFilter) => {
   }
 
   return (
-    <div>
-      <h3>Фильтр по цене</h3>
-      <form>
-        <div>
-          <label>От: </label>
+    <div className={style.filterContainer}>
+      <form className={style.form}>
+        <div className={style.inputGroup}>
+          <label className={style.label}>От: </label>
           <input
+            className={style.input}
             type="number"
             placeholder='Минимальная цена'
             value={minPrice || ''}
@@ -44,9 +45,10 @@ const PriceFilter = ({handlePriceFilter}: IPriceFilter) => {
             }}
           />
         </div>
-        <div>
-          <label>До: </label>
+        <div className={style.inputGroup}>
+          <label className={style.label}>До: </label>
           <input
+            className={style.input}
             type="number"
             placeholder='Максимальная цена'
             value={maxPrice || ''}
@@ -56,14 +58,16 @@ const PriceFilter = ({handlePriceFilter}: IPriceFilter) => {
             }}
           />
         </div>
-        <div>
+        <div className={style.buttons}>
           <button
+            className={style.button}
             type='submit'
             onClick={handleSubmit}
           >
             Применить
           </button>
           <button
+            className={`${style.button} ${style.buttonReset}`}
             type='button'
             onClick={handleReset}
           >

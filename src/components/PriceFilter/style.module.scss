@@ -1,0 +1,76 @@
+@use "../../styles/globals";
+
+.filterContainer {
+  background: rgba(43, 11, 69, 0.7);
+  border: 2px solid var(--fortnite-blue);
+  border-radius: 8px;
+  padding: 15px;
+  box-shadow: 0 0 15px rgba(123, 44, 191, 0.5);
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.inputGroup {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.label {
+  //color: var(--fortnite-cyan);
+  color: var(--white);
+  min-width: 30px;
+  font-size: 0.9rem;
+}
+
+.input {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid var(--fortnite-blue);
+  color: white;
+  padding: 8px 12px;
+  border-radius: 4px;
+  flex: 1;
+  transition: all 0.3s;
+
+  &:focus {
+    outline: none;
+    border-color: var(--fortnite-pink);
+    box-shadow: 0 0 8px var(--fortnite-pink);
+  }
+}
+
+.buttons {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.button {
+  background: linear-gradient(45deg, var(--fortnite-purple), var(--fortnite-blue));
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.3s;
+  flex: 1;
+
+  &:hover {
+    background: linear-gradient(45deg, var(--fortnite-blue), var(--fortnite-purple));
+    box-shadow: 0 0 10px var(--fortnite-pink);
+  }
+
+  &Reset {
+    @extend .button;
+    background: transparent;
+    border: 1px solid var(--fortnite-blue);
+
+    &:hover {
+      background: rgba(123, 44, 191, 0.3);
+    }
+  }
+}

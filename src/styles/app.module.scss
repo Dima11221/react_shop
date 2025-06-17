@@ -1,0 +1,42 @@
+@use "../styles/globals";
+
+.fullBackground {
+  position: relative;
+  min-height: 100vh;
+  background:
+          radial-gradient(ellipse at top left, rgba(123, 44, 191, 0.2) 0%, transparent 50%),
+          radial-gradient(ellipse at bottom right, rgba(0, 178, 255, 0.2) 0%, transparent 50%),
+          linear-gradient(to bottom, #0E1C36 0%, #1A0933 100%);
+  overflow: hidden;
+
+}
+
+.body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  //isolation: isolate;
+  z-index: 1;
+}
+
+.main {
+  flex: 1;
+  //background: linear-gradient(45deg, var(--fortnite-purple), var(--fortnite-blue));
+  //background:
+  //        radial-gradient(ellipse at top left, rgba(123, 44, 191, 0.2) 0%, transparent 50%),
+  //        radial-gradient(ellipse at bottom right, rgba(0, 178, 255, 0.2) 0%, transparent 50%),
+  //        linear-gradient(to bottom, #0E1C36 0%, #1A0933 100%);
+  overflow: hidden;
+}
+
+.mainWrapper {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 0 50px;
+
+
+
+  @media (max-width: 420px) {
+    padding: 0 10px;
+  }
+}

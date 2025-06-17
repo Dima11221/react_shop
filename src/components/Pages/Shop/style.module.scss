@@ -7,3 +7,40 @@
   margin: 0 auto;
 }
 
+.title {
+  //color: var(--fortnite-cyan);
+  color: var(--white);
+  margin-bottom: 15px;
+  font-family: 'Burbank Big Condensed', sans-serif;
+  font-size: 19.6px;
+  text-transform: uppercase;
+}
+
+.filtersContainer {
+  background: rgba(43, 11, 69, 0.7);
+  border: 2px solid var(--fortnite-blue);
+  border-radius: 8px;
+  box-shadow: 0 0 15px rgba(123, 44, 191, 0.5);
+}
+
+.SFWrapper {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  align-items: flex-end;
+  margin-bottom: 30px;
+  padding: 20px;
+}
+
+.searchWrapper {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-width: 250px;
+}
+
+.priceFilterWrapper {
+  flex: 1;
+  min-width: 250px;
+}
+

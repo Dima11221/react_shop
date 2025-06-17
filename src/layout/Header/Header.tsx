@@ -6,6 +6,7 @@ import {useSelector} from "react-redux";
 import {RootState} from "../../store/store.ts";
 import {AuthModal} from "../../components/AuthModal/AuthModal.tsx";
 import {RegisterModal} from "../../components/RegisterModal/RegisterModal.tsx";
+import LogoFortnite from "../../icons/LogoFortnite.svg?react"
 
 interface IProps {
   title: string;
@@ -47,17 +48,18 @@ const Header = ({title}: IProps) => {
 
   return (
     <header className={`${style.headFoot} ${style.flex}`}>
-      <div className={`${style.container} ${style.headFootWrapper}`}>
-        <h2 className={style.headLink}>
-          <Link to='/'>{title}</Link>
-          {/*<a href="/">React Shop</a>*/}
-        </h2>
-        <h3>
-          <a href="#">Огромный выбор товаров, скинов по любимой игре на ваш вкус!</a>
-        </h3>
-        <h3 className={style.headLink}>
-          <Link to='/'>Главная страница</Link>
-        </h3>
+      <div className={`${style.container} ${style.headFootWrapper} ${style.headFlex}`}>
+        <Link to='/'>
+          <LogoFortnite />
+        </Link>
+        <div >
+          <h2 className={style.headLink}>
+            <Link to='/'>{title}</Link>
+          </h2>
+          <h3 className={style.headLink}>
+            <Link to='/'>Главная страница</Link>
+          </h3>
+        </div>
       </div>
 
       <div className={`${style.flexColumn} ${style.headFootWrapper}`}>

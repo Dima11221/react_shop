@@ -1,70 +1,117 @@
 @use "../../styles/globals";
 
-//.cartClick {
-//  width: 60px;
-//  height: 60px;
-//  border-radius: 50%;
-//  background-color: var(--white-color);
-//  transition: 0.6s;
-//  cursor: pointer;
-//  position: fixed;
-//  top: 18px;
-//  right: 50px;
-//  display: flex;
-//  align-items: center;
-//  object-fit: contain;
-//  padding: 8px;
-//  z-index: 3;
-//}
-
-.cartClick {
+.cart {
   position: fixed;
   bottom: 32px;
   right: 32px;
   cursor: pointer;
   border-radius: 50%;
-  transition: 0.6s;
-  z-index: 3;
+  transition: all 0.3s;
+  z-index: 10;
   padding: 16px;
-  background-color: #2e6cc7;
-  color: white;
+  background: linear-gradient(45deg, var(--fortnite-purple), var(--fortnite-blue));
+  box-shadow: 0 0 15px rgba(123, 44, 191, 0.7);
 
   @media (min-width: 768px) {
-    top: 80px;
+    top: 20px;
     bottom: unset;
+    right: 20px;
+  }
+
+  &:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 20px var(--fortnite-pink);
   }
 }
 
-.cartClick:hover {
-  transform: scale(1.1);
-}
-
-//.cartClick::after {
-//  content: attr(data-backet);
-//  position: absolute;
-//  background-color: #d62240;
-//  width: 25px;
-//  height: 25px;
-//  border-radius: 50%;
-//  display: flex;
-//  justify-content: center;
-//  align-items: center;
-//  color: var(--white-color);
-//  font-size: 18px;
-//  font-weight: 500;
-//  top: -5px;
-//  right: -5px;
-//}
-
-.cartClick:hover {
-  border: 2px solid var(--blue-color);
-}
-
-.cartClick::after:empty {
-  display: none;
-}
-
 .cartImage {
-  width: 45px;
-  height: 45px;
+  width: 40px;
+  height: 40px;
+  filter: drop-shadow(0 0 2px rgba(0, 0, 0, 0.5));
 }
+
+.quantity {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  background: var(--fortnite-pink);
+  color: white;
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Burbank Big Condensed', sans-serif;
+  font-size: 0.9rem;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+}
+
+////.cartClick {
+////  width: 60px;
+////  height: 60px;
+////  border-radius: 50%;
+////  background-color: var(--white-color);
+////  transition: 0.6s;
+////  cursor: pointer;
+////  position: fixed;
+////  top: 18px;
+////  right: 50px;
+////  display: flex;
+////  align-items: center;
+////  object-fit: contain;
+////  padding: 8px;
+////  z-index: 3;
+////}
+//
+//.cartClick {
+//  position: fixed;
+//  bottom: 32px;
+//  right: 32px;
+//  cursor: pointer;
+//  border-radius: 50%;
+//  transition: 0.6s;
+//  z-index: 3;
+//  padding: 16px;
+//  background-color: #2e6cc7;
+//  color: white;
+//
+//  @media (min-width: 768px) {
+//    top: 80px;
+//    bottom: unset;
+//  }
+//}
+//
+//.cartClick:hover {
+//  transform: scale(1.1);
+//}
+//
+////.cartClick::after {
+////  content: attr(data-backet);
+////  position: absolute;
+////  background-color: #d62240;
+////  width: 25px;
+////  height: 25px;
+////  border-radius: 50%;
+////  display: flex;
+////  justify-content: center;
+////  align-items: center;
+////  color: var(--white-color);
+////  font-size: 18px;
+////  font-weight: 500;
+////  top: -5px;
+////  right: -5px;
+////}
+//
+//.cartClick:hover {
+//  border: 2px solid var(--blue-color);
+//}
+//
+//.cartClick::after:empty {
+//  display: none;
+//}
+//
+//.cartImage {
+//  width: 45px;
+//  height: 45px;
+//}

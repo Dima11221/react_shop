@@ -3,7 +3,7 @@ import {Footer} from "./layout/Footer/Footer.tsx";
 import {Shop} from "./components/Pages/Shop/Shop.tsx";
 import {HashRouter as Router, Navigate, Route, Routes} from "react-router-dom";
 import {CheckoutForm} from "./components/Pages/CheckoutForm/CheckoutForm.tsx";
-import './styles/main.scss'
+import style from './styles/app.module.scss'
 import {useDispatch, useSelector} from "react-redux";
 import {AppDispatch, RootState} from "./store/store.ts";
 import {useEffect} from "react";
@@ -40,20 +40,26 @@ function App() {
 
   return (
     <Router>
-      <div className='body'>
-        <Header title={'Fortnite shop'} />
-        <div className='mainWrapper'>
-          <Routes>
-            <Route path="/" element={<Shop />} />
-            <Route
-              path='/checkout_form'
-              // element={<CheckoutForm />}
-              element={isAuth ? <CheckoutForm /> : <Navigate to='/' />}
-            />
-          </Routes>
+      <div className={style.fullBackground}>
+        <div className={style.particleEffect}></div>
+        <div className={style.body}>
+          <Header title={'Fortnite shop'} />
+          <div className={style.main}>
+            <div className={style.mainWrapper}>
+              <Routes>
+                <Route path="/" element={<Shop />} />
+                <Route
+                  path='/checkout_form'
+                  // element={<CheckoutForm />}
+                  element={isAuth ? <CheckoutForm /> : <Navigate to='/' />}
+                />
+              </Routes>
+            </div>
+          </div>
+          <Footer />
         </div>
-        <Footer />
       </div>
+
     </Router>
   )
 }

@@ -8,10 +8,10 @@ import style from './style.module.scss'
 // const Footer = ({text}:IProps) => {
 const Footer = () => {
 
-    return <footer className={`${style.headFoot} ${style.footer}`}>
+    return <footer className={` ${style.footer}`}>
         <div className={style.footerWrapper}>
             <div className={`${style.container} ${style.flex} ${style.footerItems}`}>
-                <span>© {new Date().getFullYear()}</span>
+                <span className={style.date}>© {new Date().getFullYear()}</span>
                 <a className={style.GHLink} href="https://github.com/Dima11221/react_shop/tree/main" target='_blank'>{/*{text}*/}
                     <svg className={style.GHIcon} enable-background="new -1163 1657.697 56.693 56.693" height="40px"
                          id="Layer_1" version="1.1"

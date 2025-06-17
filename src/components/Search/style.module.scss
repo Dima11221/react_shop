@@ -1,10 +1,10 @@
 @use "../../styles/globals";
 
 .row {
-  margin-left: auto;
-  margin-right: auto;
+  //margin-left: auto;
+  //margin-right: auto;
   margin-bottom: 20px;
-  max-width: 100%;
+  //max-width: 100%;
 }
 
 .inputField {
@@ -15,29 +15,54 @@
 
 .searchBtn {
   position: absolute;
-  top: 0;
-  right: 4px;
+  top: 12px;
+  right: 10px;
+  transition: all 0.3s;
+  color: var(--white);
+  opacity: 60%;
+
+  :hover {
+    outline: none;
+    color: var(--fortnite-pink);
+    transition: all 0.3s;
+}
 }
 
 .inputStyle {
-  background-color: transparent;
-  color: var(--grey);
-  font-size: 18px;
-  border: none;
-  border-bottom: 1px solid var(--light-grey);
-  border-radius: 0;
-  outline: none;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid var(--fortnite-blue);
+  color: white;
+  padding: 8px 12px;
+  border-radius: 4px;
+  //flex: 1;
+  transition: all 0.3s;
   height: 48px;
   width: 100%;
-  line-height: 25px;
-  margin: 0 0 8px 0;
-  padding: 0;
-  box-sizing: content-box;
-  cursor: text;
+  //background-color: transparent;
+  //color: var(--white);
+  //font-size: 18px;
+  //border: 1px solid var(--fortnite-blue);
+  //border-radius: 4px;
+  //outline: none;
+  //height: 48px;
+  //width: 100%;
+  //line-height: 25px;
+  //margin: 0 0 8px 0;
+  //padding: 0;
+  //box-sizing: content-box;
+  //cursor: text;
+  //transition: all 0.3s;
+
+  &:focus {
+    outline: none;
+    border-color: var(--fortnite-pink);
+    box-shadow: 0 0 8px var(--fortnite-pink);
+  }
 }
 
 .inputStyle::placeholder {
   opacity: 60%;
+  color: var(--white);
 }
 
 

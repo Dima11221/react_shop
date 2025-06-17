@@ -1,12 +1,16 @@
 @use "./../../layout/Header/style.module.scss";
 
 .footer {
-  padding: 16px 0 0 0
+  padding: 20px 0 ;
+  background-color: var(--fortnite-dark);
+  border-top: 3pxx solid var(--fortnite-purple);
+  font-family: 'Burbank Big Condensed', sans-serif;
 }
 
 .footerWrapper {
-  background-color: #C8E6C9;
-  height: 60px;
+  //background-color: var(--dark-blue-color);
+  height: auto;
+  padding: 10px 0;
 }
 
 .footerItems {
@@ -15,19 +19,23 @@
 }
 
 .GHLink {
-  position: relative;
   transition: 0.3s;
 }
 
 .GHLink:hover {
-  color: var(--blue-color);
+  transform: scale(1.1);
 }
 
 
 svg path {
   transition: 0.3s;
+  fill: var(--fortnite-cyan);
 }
 
 svg:hover path {
-  fill: var(--blue-color);
+  fill: var(--fortnite-pink);
+}
+
+.date {
+  color: var(--white);
 }
