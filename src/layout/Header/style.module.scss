@@ -2,16 +2,27 @@
 
 .headFoot {
   background-color: var(--dark-blue-color);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 
   font-family: 'Burbank Big Condensed', 'Arial Narrow', sans-serif;
   width: 100%;
   padding: 16px 0;
   box-shadow: 0 4px 20px rgba(123, 44, 191, 0.5);
+
+  @media (max-width: 480px) {
+    flex-direction: column;
+  }
 }
 
 .headFootWrapper {
   color: var(--fortnite-cyan);
   margin: 0 60px;
+
+  @media (max-width: 660px) {
+    margin: 0 auto;
+  }
 }
 
 .headLink {

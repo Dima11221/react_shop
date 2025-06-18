@@ -43,7 +43,7 @@ function App() {
       <div className={style.fullBackground}>
         <div className={style.particleEffect}></div>
         <div className={style.body}>
-          <Header title={'Fortnite shop'} />
+          <Header />
           <div className={style.main}>
             <div className={style.mainWrapper}>
               <Routes>

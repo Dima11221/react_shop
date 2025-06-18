@@ -136,7 +136,6 @@ body {
     background: var(--fortnite-purple);
     border-color: var(--fortnite-pink);
     box-shadow: 0 0 15px var(--fortnite-pink);
-    transform: translateY(-2px);
 }
 
 .btn:disabled {
@@ -145,3 +144,41 @@ body {
     cursor: not-allowed;
 }
 
+.inputForm {
+    box-sizing: border-box;
+    width: 100%;
+    padding: 10px 12px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid var(--fortnite-blue);
+    border-radius: 4px;
+    color: white;
+    font-size: 15px;
+    transition: all 0.2s;
+
+    &:focus {
+        outline: none;
+        border-color: var(--fortnite-pink);
+        box-shadow: 0 0 8px var(--fortnite-pink);
+    }
+
+    &::placeholder {
+        color: rgba(255, 255, 255, 0.5);
+    }
+
+    @media (max-width: 480px) {
+        padding: 8px 10px;
+        font-size: 14px;
+    }
+}
+
+.labelForm {
+    display: block;
+    color: var(--white);
+    font-size: 16px;
+    margin-bottom: 6px;
+    font-family: 'Burbank Big Condensed', sans-serif;
+
+    @media (max-width: 480px) {
+        font-size: 15px;
+    }
+}

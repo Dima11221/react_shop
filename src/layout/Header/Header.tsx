@@ -8,11 +8,8 @@ import {AuthModal} from "../../components/AuthModal/AuthModal.tsx";
 import {RegisterModal} from "../../components/RegisterModal/RegisterModal.tsx";
 import LogoFortnite from "../../icons/LogoFortnite.svg?react"
 
-interface IProps {
-  title: string;
-}
 
-const Header = ({title}: IProps) => {
+const Header = () => {
   const [openUserModal, setOpenUserModal] = useState(false);
   const [showAuthModal, setShowAuthModal] = useState(false);
   const [showRegModal, setShowRegModal] = useState(false);
@@ -47,24 +44,24 @@ const Header = ({title}: IProps) => {
 
 
   return (
-    <header className={`${style.headFoot} ${style.flex}`}>
+    <header className={`${style.headFoot}`}>
       <div className={`${style.container} ${style.headFootWrapper} ${style.headFlex}`}>
         <Link to='/'>
           <LogoFortnite />
         </Link>
-        <div >
-          <h2 className={style.headLink}>
-            <Link to='/'>{title}</Link>
-          </h2>
-          <h3 className={style.headLink}>
-            <Link to='/'>Главная страница</Link>
-          </h3>
-        </div>
+        {/*<div >*/}
+        {/*  <h2 className={style.headLink}>*/}
+        {/*    <Link to='/'>{title}</Link>*/}
+        {/*  </h2>*/}
+        {/*  <h3 className={style.headLink}>*/}
+        {/*    <Link to='/'>Главная страница</Link>*/}
+        {/*  </h3>*/}
+        {/*</div>*/}
       </div>
 
       <div className={`${style.flexColumn} ${style.headFootWrapper}`}>
         <button onClick={handleUserToggleModal} className={style.btn}>Мой профиль</button>
-        <div className={`${style.headFootWrapper}`}>
+        <div className=''>
           {openUserModal &&
 						<div>
 							<div>
@@ -72,7 +69,7 @@ const Header = ({title}: IProps) => {
                   <UserProfile />
                 )}
                 {!isAuth && (
-                  <div>
+                  <div className={style.headFlex}>
                     <button onClick={toggleAuthModal} className={style.btn}>
                       Войти
                     </button>
@@ -84,12 +81,12 @@ const Header = ({title}: IProps) => {
 							</div>
 							<div>
                 {showAuthModal && (
-                  <AuthModal onClose={closeModalAuth} />
+                  <AuthModal onClose={closeModalAuth} showAuthModal={showAuthModal} />
                 )}
 							</div>
 							<div>
                 {showRegModal && (
-                  <RegisterModal onClose={closeModalReg} />
+                  <RegisterModal onClose={closeModalReg} showRegModal={showRegModal} />
                 )}
 							</div>
 						</div>

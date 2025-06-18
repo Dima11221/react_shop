@@ -16,27 +16,17 @@ const Cart= (prop: ICartProp) => {
         dispatch(handleCartShow())
     }
 
-    // const quantity = order.length;
+// const quantity = order.length;
 
     return (
 
-          <div
+        <div
             className={style.cart}
             onClick={handleClick}
-          >
-              <img src={backetIcon} className={style.cartImage} alt={backetIcon} ></img>
-              {quantity && (<span className={style.quantity}>{quantity}</span>)}
-              {!quantity && null}
-          </div>
-
-        // <div
-        //     className={`${style.cartClick} ${style.flexRow}`}
-        //     onClick={handleClick}
-        // >
-        //     <img src={backetIcon} className={style.cartImage} alt={backetIcon} ></img>
-        //     {quantity && (<span className=''>{quantity}</span>)}
-        //     {!quantity && null}
-        // </div>
+        >
+            <img src={backetIcon} className={style.cartImage} alt={backetIcon} ></img>
+            {quantity > 0 && (<p className={style.quantity}>{quantity}</p>)}
+        </div>
     )
 }
 

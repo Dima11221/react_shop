@@ -39,7 +39,8 @@
   &:focus {
     outline: none;
     border-color: var(--fortnite-pink);
-    box-shadow: 0 0 8px var(--fortnite-pink);
+    box-shadow: 0 0 10px rgba(255, 62, 236, 0.5);
+    background: rgba(123, 44, 191, 0.3);
   }
 }
 
@@ -50,27 +51,19 @@
 }
 
 .button {
-  background: linear-gradient(45deg, var(--fortnite-purple), var(--fortnite-blue));
+  background: rgba(255, 255, 255, 0.1);
   color: white;
-  border: none;
+  border: 1px solid var(--fortnite-blue);
   padding: 8px 16px;
   border-radius: 4px;
   cursor: pointer;
   transition: all 0.3s;
   flex: 1;
 
+
   &:hover {
-    background: linear-gradient(45deg, var(--fortnite-blue), var(--fortnite-purple));
-    box-shadow: 0 0 10px var(--fortnite-pink);
-  }
-
-  &Reset {
-    @extend .button;
-    background: transparent;
-    border: 1px solid var(--fortnite-blue);
-
-    &:hover {
-      background: rgba(123, 44, 191, 0.3);
-    }
+    background: rgba(123, 44, 191, 0.3);
+    border-color: var(--fortnite-pink);
+    box-shadow: 0 0 10px rgba(255, 62, 236, 0.5);
   }
 }

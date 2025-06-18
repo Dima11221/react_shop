@@ -46,33 +46,42 @@ const CartList = () => {
     return (
         <div className={style.cartModalBack} onClick={cartShow}>
             <ul className={`${style.cartModal} ${style.listReset}`} onClick={(e) => e.stopPropagation()}>
-                <li className={`${style.cartWrapper} ${style.cartWrapperStyle} ${style.flex}`}>
-                    <h2>Корзина</h2>
-                    <button className={style.btnReset} onClick={cartShow}>
-                        <img src={closeModalIcon} className={style.closeModalIcon} alt='closeModalIcon'></img>
+                <li className={`${style.cartHeader} ${style.flex}`}>
+                    <h2 className={style.cartTitle}>Корзина</h2>
+                    <button className={style.closeButton} onClick={cartShow}>
+                        <img src={closeModalIcon} className={style.closeIcon} alt='closeModalIcon'></img>
                     </button>
                 </li>
-                <div className={`${style.flexColumn} ${style.listStyle}`}>
-                    {order.length > 0 && order.map((item) => (
-                        <CartItem
-                            key={item.id} {...item}
-
-                        />
-                    ))}
-                    {!order.length && (<p className={`${style.cartEmpty} ${style.bold}`}>Корзина пуста</p>)}
-                    <div className={style.clearBtn}>
-                        <button className={style.btn} onClick={handleClear}>Очистить корзину</button>
-                    </div>
+                <div className={style.itemsContainer}>
+                    {order.length > 0 && (
+                      <>
+                        <div className={style.itemsList}>
+                            {order.map((item) => (
+                              <CartItem key={item.id} {...item}/>
+                            ))}
+                        </div>
+                        <div className={style.clearContainer}>
+                            <button
+                              className={style.button}
+                              onClick={handleClear}
+                            >
+                                Очистить корзину
+                            </button>
+                        </div>
+                      </>
+                    )}
+                    {!order.length && (<p className={style.emptyCart}>Корзина пуста</p>)}
                 </div>
-                <li className={`${style.cartWrapper} ${style.cartWrapperStyle} ${style.flex}`}>
-                    <div className={style.flex}>
-                        <p>Общая стоимость:</p>
-                        <span className={style.bold}>{totalCost} руб.</span>
+                <li className={style.cartFooter}>
+                    <div className={style.totalContainer}>
+                        <p className={style.totalText}>Общая стоимость:</p>
+                        <span className={style.totalPrice}>{totalCost} V-Bucks</span>
                     </div>
                     {/*<button onClick={handleOpenCheckout}><p>Оформить</p></button>*/}
                     {order.length > 0 &&
                         <Link
                           to={isAuth ? '/checkout_form' : '#'}
+                          className={style.checkoutButton}
                           onClick={isAuth ? undefined : handleShowAuthModal}
                         >
                           Оформить
@@ -84,7 +93,13 @@ const CartList = () => {
                         />
                     )}
 
-                    {order.length <= 0 && <button onClick={handleEmptyClick} className={style.btnReset}>Оформить</button>}
+                    {order.length <= 0 &&
+                      <button
+                        onClick={handleEmptyClick}
+                        className={`${style.checkoutButton} ${style.disabledButton}`}
+                      >Оформить
+                      </button>
+                    }
 
                 </li>
             </ul>

@@ -29,26 +29,42 @@ const CartItem = (props: IOrderItem) => {
       dispatch(removeFromCart({id}))
     }
 
-    return (
-        <li className={`${style.cartItem} ${style.flex}`}>
-            <h3 className={style.cartInfo}>{name}</h3>
-            <div className={`${style.flex} ${style.plusMinusContent}`}>
+  return (
+    <div className={style.cartItem}>
+      <div className={style.itemInfo}>
+        <h3 className={style.itemName}>{name}</h3>
+        <span className={style.itemPrice}>{finalPrice * quantity} V-Bucks</span>
+      </div>
 
-                <button className={style.btnReset} onClick={incrementQuantity}>
-                    <img src={plus} alt={plus} className={style.iconButton}></img>
-                </button>
-                <span>{quantity}</span>
-                <button className={style.btnReset} onClick={decrementQuantity}>
-                    <img src={minus} alt={minus} className={style.iconButton}></img>
-                </button>
-            </div>
-            <h3>{finalPrice * quantity} руб.</h3>
+      <div className={style.quantityControls}>
+        <button
+          className={style.controlButton}
+          onClick={decrementQuantity}
+          aria-label="Уменьшить количество"
+        >
+          <img src={minus} alt="Уменьшить" className={style.controlIcon}/>
+        </button>
 
-            <button className={style.btnReset} onClick={removeCart}>
-                <img src={closeIcon} className={style.iconCloseButton}></img>
-            </button>
-        </li>
-    )
+        <span className={style.quantity}>{quantity}</span>
+
+        <button
+          className={style.controlButton}
+          onClick={incrementQuantity}
+          aria-label="Увеличить количество"
+        >
+          <img src={plus} alt="Увеличить" className={style.controlIcon}/>
+        </button>
+      </div>
+
+      <button
+        className={style.removeButton}
+        onClick={removeCart}
+        aria-label="Удалить из корзины"
+      >
+        <img src={closeIcon} alt="Удалить" className={style.removeIcon}/>
+      </button>
+    </div>
+  )
 }
 
 export {CartItem}

@@ -1,4 +1,4 @@
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {AppDispatch} from "../../store/store.ts";
 import {useDispatch} from "react-redux";
 import {IUser} from "../../types/Types.ts";
@@ -7,9 +7,10 @@ import style from "./style.module.scss"
 
 interface IRegisterModalProps {
   onClose: () => void;
+  showRegModal: boolean;
 }
 
-const RegisterModal= ({onClose}: IRegisterModalProps) => {
+const RegisterModal= ({onClose, showRegModal}: IRegisterModalProps) => {
   const [registerData, setRegisterData] = useState({
     username: "",
     email: "",
@@ -49,49 +50,73 @@ const RegisterModal= ({onClose}: IRegisterModalProps) => {
     onClose()
   }
 
+
+  useEffect(() => {
+    const handleModalClose = ((e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        onClose()
+      }
+    })
+    if (showRegModal) {
+      window.addEventListener('keydown', handleModalClose)
+    }
+
+    return () => {
+      window.removeEventListener('keydown', handleModalClose)
+    }
+  }, [showRegModal]);
+
   return (
-    <div onClick={onClose}>
-      <div onClick={(e) => e.stopPropagation()}>
-        <h2>Регистрация</h2>
-        {error && (<span>{error}</span>)}
+    <div className={style.modalOverlay} onClick={onClose}>
+      <div className={style.modalContent} onClick={(e) => e.stopPropagation()}>
+        <h2 className={style.modalHeader}>Регистрация</h2>
+        {error && <div className={style.errorMessage}>{error}</div>}
+
         <form onSubmit={handleSubmit}>
-          <div>
-            <label>Логин</label>
+          <div className={style.formGroup}>
+            <label className={style.labelForm}>Логин</label>
             <input
-              type="username"
+              className={style.inputForm}
+              type="text"
               name="username"
-              placeholder="Ваш логин"
+              placeholder="Логин"
               value={registerData.username}
               onChange={handleChange}
               required
             />
           </div>
-          <div>
-            <label>Email</label>
+
+          <div className={style.formGroup}>
+            <label className={style.labelForm}>Email</label>
             <input
+              className={style.inputForm}
               type="email"
               name="email"
-              placeholder="Ваш email"
+              placeholder="example@mail.com"
               value={registerData.email}
               onChange={handleChange}
               required
             />
           </div>
-          <div>
-            <label>Password</label>
+
+          <div className={style.formGroup}>
+            <label className={style.labelForm}>Пароль</label>
             <input
+              className={style.inputForm}
               type="password"
               name="password"
-              placeholder="Ваш пароль"
+              placeholder="Не менее 6 символов"
               value={registerData.password}
               onChange={handleChange}
               required
             />
           </div>
-          <div>
-            <label>Password</label>
+
+          <div className={style.formGroup}>
+            <label className={style.labelForm}>Подтвердите пароль</label>
             <input
-              type="password_confirmation"
+              className={style.inputForm}
+              type="password"
               name="password_confirmation"
               placeholder="Повторите пароль"
               value={registerData.password_confirmation}
@@ -99,13 +124,14 @@ const RegisterModal= ({onClose}: IRegisterModalProps) => {
               required
             />
           </div>
-          <button type="submit" className={style.btn}>
-            Зарегистрироваться
+
+          <button type="submit" className={style.submitButton}>
+            Создать аккаунт
           </button>
         </form>
       </div>
     </div>
-  )
+  );
 }
 
 export { RegisterModal }

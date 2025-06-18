@@ -67,7 +67,7 @@ const PriceFilter = ({handlePriceFilter}: IPriceFilter) => {
             Применить
           </button>
           <button
-            className={`${style.button} ${style.buttonReset}`}
+            className={`${style.button}`}
             type='button'
             onClick={handleReset}
           >

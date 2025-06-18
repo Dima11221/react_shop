@@ -151,7 +151,7 @@ const Shop = () => {
           <div className={style.filtersContainer}>
               <div className={style.SFWrapper}>
                   <div className={style.searchWrapper}>
-                      <h3 className={style.title}>Найди свой стиль!</h3>
+                      <h3 className={style.title}>Магазин предметов</h3>
                       <Search handleSearch={handleSearch} />
                   </div>
                   <div className={style.priceFilterWrapper}>

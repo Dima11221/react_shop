@@ -1,7 +1,7 @@
 import {useDispatch, useSelector} from "react-redux";
 import {AppDispatch, RootState} from "../../store/store.ts";
 import {logout} from "../../store/reducers/authSlice.ts";
-import style from "../../layout/Header/style.module.scss";
+import style from "./style.module.scss";
 
 
 const UserProfile = () => {
@@ -15,12 +15,15 @@ const UserProfile = () => {
   if (!user) return null
 
   return (
-    <div>
-      <div>
-        <h2>{user.userName}</h2>
-        <h2>{user.email}</h2>
+    <div className={style.profileContainer}>
+      <div className={style.userInfo}>
+        <h2>Логин: {user.userName}</h2>
+        <h2>Почта: {user.email}</h2>
       </div>
-      <button onClick={handleLogout} className={style.btn}>
+      <button
+        onClick={handleLogout}
+        className={`${style.btn} ${style.logoutButton}`}
+      >
         Выйти
       </button>
     </div>

@@ -9,7 +9,7 @@ export interface IGoodsItemProp {
         floorPrice: number;
     },
     displayAssets:
-        { full_background: string }[]
+        { background: string }[]
     ,
 }
 

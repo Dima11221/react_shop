@@ -8,43 +8,59 @@ import {Link} from "react-router-dom";
 
 
 const GoodsItem = (props: IGoodsItemProp) => {
-    const {
-        mainId: id,
-        displayName: name,
-        displayDescription: description,
-        price: {finalPrice},
-        displayAssets,
-    } = props;
+  const {
+      mainId: id,
+      displayName: name,
+      displayDescription: description,
+      price: {finalPrice},
+      displayAssets,
+  } = props;
 
-    const dispatch = useDispatch<AppDispatch>();
-    const fullBackground = displayAssets.length > 0 ? displayAssets[0].full_background : "https://via.placeholder.com/300";
-    // const finalPrice = price.finalPrice ?? "Не указано";
+  const dispatch = useDispatch<AppDispatch>();
+  const iconBackground = displayAssets.length > 0 ? displayAssets[0].background : "https://via.placeholder.com/300";
+  // const finalPrice = price.finalPrice ?? "Не указано";
 
-    const handleAddToCart = () => {
-      dispatch(addToCart({
-        id,
-        name,
-        finalPrice
-      }))
-    }
+  const handleAddToCart = () => {
+    dispatch(addToCart({
+      id,
+      name,
+      finalPrice
+    }))
+  }
 
-    return (
-        <div className={style.GoodItemCard} id={id}>
-            <div className="">
-                <img className={style.poster} src={fullBackground} alt={name}/>
-            </div>
-            <div className={`${style.cardContent} ${style.left}`}>
-                <h3 className={style.title}>{name}</h3>
-                <p>{description ? description : 'Описание скоро добавим...'}</p>
-                <span>Цена: {finalPrice}</span>
-            </div>
-            <div className={`${style.flex} ${style.deal}`}>
-                <button className={`${style.btn} ${style.infoBtn}`} onClick={handleAddToCart}>В корзину</button>
-                {/*<button className={`${style.btn} ${style.infoBtn}`} onClick={handleOpenCheckout}>Купить сейчас</button>*/}
-              <Link to={'/checkout_form'} onClick={handleAddToCart}>Купить сейчас</Link>
-            </div>
+  return (
+    <div className={style.card}>
+      <div className={style.imageContainer}>
+        <img className={style.image} src={iconBackground} alt={name}/>
+        <div className={style.priceBadge}>
+          {finalPrice} V-Bucks
         </div>
-    )
+      </div>
+
+      <div className={style.content}>
+        <h3 className={style.title}>{name}</h3>
+        <p className={style.description}>
+          {description || 'Описание скоро добавим...'}
+        </p>
+
+        <div className={style.buttons}>
+          <button
+            className={style.cartButton}
+            onClick={handleAddToCart}
+          >
+            В корзину
+          </button>
+          <Link
+            to="/checkout_form"
+            className={style.buyButton}
+            onClick={handleAddToCart}
+          >
+            Купить сейчас
+          </Link>
+        </div>
+      </div>
+    </div>
+  )
 }
 
 

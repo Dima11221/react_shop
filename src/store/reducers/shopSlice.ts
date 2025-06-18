@@ -34,7 +34,7 @@ const initialState : IShopState  = {
   alertName: '',
   currentPage: 1,
   pagesCount: 0,
-  itemsPerPage: 10,
+  itemsPerPage: 12,
   error: null,
 
   isCheckoutOpen: false,
