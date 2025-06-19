@@ -46,7 +46,7 @@ const AuthModal = ({onClose, showAuthModal}: AuthModalProps) => {
     return () => {
       window.removeEventListener('keydown', handleModalClose)
     }
-  }, [showAuthModal]);
+  }, [showAuthModal, onClose]);
 
   return (
     <div className={style.modalOverlay} onClick={onClose}>

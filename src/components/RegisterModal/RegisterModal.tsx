@@ -64,7 +64,7 @@ const RegisterModal= ({onClose, showRegModal}: IRegisterModalProps) => {
     return () => {
       window.removeEventListener('keydown', handleModalClose)
     }
-  }, [showRegModal]);
+  }, [showRegModal, onClose]);
 
   return (
     <div className={style.modalOverlay} onClick={onClose}>

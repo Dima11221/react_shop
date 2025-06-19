@@ -89,7 +89,7 @@ const CartList = () => {
                     {showAuthModal && (
                         <AuthModal
                           onClose={closeModalAuth}
-
+                          showAuthModal={showAuthModal}
                         />
                     )}
 
