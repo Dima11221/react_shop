@@ -45,14 +45,14 @@ const GoodsItem = (props: IGoodsItemProp) => {
 
         <div className={style.buttons}>
           <button
-            className={style.cartButton}
+            className={`${style.buttonsPos} ${style.cartButton}`}
             onClick={handleAddToCart}
           >
             В корзину
           </button>
           <Link
             to="/checkout_form"
-            className={style.buyButton}
+            className={`${style.buttonsPos} ${style.buyButton}`}
             onClick={handleAddToCart}
           >
             Купить сейчас

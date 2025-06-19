@@ -54,15 +54,15 @@ const CartItem = (props: IOrderItem) => {
         >
           <img src={plus} alt="Увеличить" className={style.controlIcon}/>
         </button>
-      </div>
 
-      <button
-        className={style.removeButton}
-        onClick={removeCart}
-        aria-label="Удалить из корзины"
-      >
-        <img src={closeIcon} alt="Удалить" className={style.removeIcon}/>
-      </button>
+        <button
+          className={style.removeButton}
+          onClick={removeCart}
+          aria-label="Удалить из корзины"
+        >
+          <img src={closeIcon} alt="Удалить" className={style.removeIcon}/>
+        </button>
+      </div>
     </div>
   )
 }

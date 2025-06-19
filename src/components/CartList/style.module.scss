@@ -114,7 +114,6 @@
 
   &:hover {
     background: rgba(255, 62, 236, 0.2);
-    box-shadow: 0 0 10px rgba(255, 62, 236, 0.5);
   }
 }
 
@@ -125,6 +124,11 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+
+  @media (max-width: 480px) {
+    flex-direction: column;
+    gap: 30px;
+  }
 }
 
 .totalContainer {
@@ -137,6 +141,10 @@
   font-family: 'Burbank Big Condensed', sans-serif;
   font-size: 1.3rem;
   color: var(--fortnite-cyan);
+
+  @media (max-width: 480px) {
+    font-size: 1rem;
+  }
 }
 
 .totalPrice {
@@ -144,6 +152,10 @@
   font-size: 1.5rem;
   color: white;
   font-weight: bold;
+
+  @media (max-width: 480px) {
+    font-size: 1rem;
+  }
 }
 
 .checkoutButton {
@@ -160,8 +172,6 @@
 
   &:hover {
     background: linear-gradient(45deg, var(--fortnite-blue), var(--fortnite-pink));
-    box-shadow: 0 0 15px rgba(255, 62, 236, 0.7);
-    transform: translateY(-2px);
   }
 }
 
@@ -173,24 +183,5 @@
     background: var(--light-grey);
     box-shadow: none;
     transform: none;
-  }
-}
-
-.button {
-  background: rgba(43, 11, 69, 0.9);
-  //background: rgba(255, 255, 255, 0.1);
-  color: white;
-  border: 1px solid var(--fortnite-blue);
-  padding: 8px 16px;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: all 0.3s;
-  flex: 1;
-
-
-  &:hover {
-    //background: rgba(123, 44, 191, 0.3);
-    border-color: var(--fortnite-pink);
-    box-shadow: 0 0 10px rgba(255, 62, 236, 0.3);
   }
 }

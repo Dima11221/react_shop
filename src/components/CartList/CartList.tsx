@@ -77,7 +77,6 @@ const CartList = () => {
                         <p className={style.totalText}>Общая стоимость:</p>
                         <span className={style.totalPrice}>{totalCost} V-Bucks</span>
                     </div>
-                    {/*<button onClick={handleOpenCheckout}><p>Оформить</p></button>*/}
                     {order.length > 0 &&
                         <Link
                           to={isAuth ? '/checkout_form' : '#'}
@@ -97,7 +96,8 @@ const CartList = () => {
                       <button
                         onClick={handleEmptyClick}
                         className={`${style.checkoutButton} ${style.disabledButton}`}
-                      >Оформить
+                      >
+                          Оформить
                       </button>
                     }
 

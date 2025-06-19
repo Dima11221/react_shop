@@ -139,9 +139,12 @@ body {
 }
 
 .btn:disabled {
-    color: var(--grey);
+    color: var(--white);
     background-color: var(--light-grey);
+    border: none;
     cursor: not-allowed;
+    box-shadow: none;
+
 }
 
 .inputForm {
@@ -158,7 +161,6 @@ body {
     &:focus {
         outline: none;
         border-color: var(--fortnite-pink);
-        box-shadow: 0 0 8px var(--fortnite-pink);
     }
 
     &::placeholder {
@@ -180,5 +182,61 @@ body {
 
     @media (max-width: 480px) {
         font-size: 15px;
+    }
+}
+
+.button {
+    background: rgba(43, 11, 69, 0.9);
+    //background: rgba(255, 255, 255, 0.1);
+    color: white;
+    border: 1px solid var(--fortnite-blue);
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.3s;
+    flex: 1;
+
+
+    &:hover {
+        //background: rgba(123, 44, 191, 0.3);
+        border-color: var(--fortnite-pink);
+    }
+}
+
+.cartButton {
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    border: 1px solid var(--fortnite-blue);
+
+    &:hover {
+        background: rgba(123, 44, 191, 0.3);
+        border-color: var(--fortnite-pink);
+    }
+}
+
+.buyButton {
+    background: linear-gradient(45deg, var(--fortnite-purple), var(--fortnite-blue));
+    color: white;
+    text-decoration: none;
+
+    &:hover {
+        background: linear-gradient(45deg, var(--fortnite-blue), var(--fortnite-pink));
+    }
+}
+
+
+.input {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid var(--fortnite-blue);
+    color: white;
+    padding: 8px 12px;
+    border-radius: 4px;
+    flex: 1;
+    transition: all 0.3s;
+
+    &:focus {
+        outline: none;
+        border-color: var(--fortnite-pink);
+        background: rgba(123, 44, 191, 0.3);
     }
 }

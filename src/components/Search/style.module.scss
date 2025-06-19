@@ -42,7 +42,6 @@
   &:focus {
     outline: none;
     border-color: var(--fortnite-pink);
-    box-shadow: 0 0 10px rgba(255, 62, 236, 0.5);
     background: rgba(123, 44, 191, 0.3);
   }
 }
@@ -62,11 +61,6 @@
   gap: 4px;
 }
 
-//.radioButtonsStandart {
-//  position: relative;
-//  padding-left: 30px;
-//  cursor: pointer;
-//}
 
 .radioButtonsStandart input {
   position: absolute;
@@ -91,9 +85,6 @@
   color: var(--blue-color);
 }
 
-//.radioButtonsStandart input:checked + .span {
-//  border-color: #33c7b9;
-//}
 
 .radioButtonsStandart input:not(:checked) + .span::before {
   border: 2px solid var(--blue-color);

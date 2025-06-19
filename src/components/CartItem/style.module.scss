@@ -12,9 +12,9 @@
   margin-bottom: 12px;
   transition: all 0.3s ease;
 
-  &:hover {
-    border-color: var(--fortnite-pink);
-    box-shadow: 0 0 10px rgba(255, 62, 236, 0.3);
+  @media (max-width: 480px) {
+    flex-direction: column;
+    gap: 20px;
   }
 }
 
@@ -32,6 +32,10 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+
+  @media (max-width: 480px) {
+    font-size: 1rem;
+  }
 }
 
 .itemPrice {
@@ -41,13 +45,17 @@
   font-weight: bold;
   display: block;
   margin-top: 5px;
+
+  @media (max-width: 480px) {
+    font-size: 1rem;
+  }
 }
 
 .quantityControls {
   display: flex;
   align-items: center;
   gap: 10px;
-  margin: 0 15px;
+  //margin: 0 15px;
 }
 
 .controlButton {
@@ -93,6 +101,7 @@
   justify-content: center;
   cursor: pointer;
   transition: all 0.3s ease;
+  margin-left: 20px;
 
   &:hover {
     background: rgba(255, 62, 236, 0.3);
@@ -105,30 +114,3 @@
   height: 14px;
   filter: brightness(0) invert(1);
 }
-
-
-
-//.cartItem {
-//  //width: 60%;
-//  margin: 20px;
-//}
-//
-//.cartInfo {
-//  width: 300px;
-//}
-//
-//.iconCloseButton {
-//  width: 18px;
-//  height: 18px;
-//  color: var(--blue-color);
-//}
-//
-//.iconButton {
-//  width: 20px;
-//  height: 20px;
-//}
-//
-//
-//.plusMinusContent {
-//  width: 100px;
-//}

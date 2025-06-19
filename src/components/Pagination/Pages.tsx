@@ -43,7 +43,7 @@ const Pages = () => {
           Следующая страница
         </button>
       </div>
-      <span>{currentPage} из {pagesCount}</span>
+      <span className={style.pages}>{currentPage} из {pagesCount}</span>
     </div>
   )
 }

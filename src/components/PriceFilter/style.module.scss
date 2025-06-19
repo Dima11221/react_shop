@@ -27,23 +27,6 @@
   font-size: 0.9rem;
 }
 
-.input {
-  background: rgba(255, 255, 255, 0.1);
-  border: 1px solid var(--fortnite-blue);
-  color: white;
-  padding: 8px 12px;
-  border-radius: 4px;
-  flex: 1;
-  transition: all 0.3s;
-
-  &:focus {
-    outline: none;
-    border-color: var(--fortnite-pink);
-    box-shadow: 0 0 10px rgba(255, 62, 236, 0.5);
-    background: rgba(123, 44, 191, 0.3);
-  }
-}
-
 .buttons {
   display: flex;
   gap: 10px;
@@ -64,6 +47,5 @@
   &:hover {
     background: rgba(123, 44, 191, 0.3);
     border-color: var(--fortnite-pink);
-    box-shadow: 0 0 10px rgba(255, 62, 236, 0.5);
   }
 }
