@@ -4,6 +4,7 @@ import {loginSuccess} from "../../store/reducers/authSlice.ts";
 import {useEffect, useState} from "react";
 import * as React from "react";
 import style from "./style.module.scss";
+import {RegisterModal} from "../RegisterModal/RegisterModal.tsx";
 
 interface AuthModalProps {
   onClose: () => void;
@@ -14,6 +15,7 @@ const AuthModal = ({onClose, showAuthModal}: AuthModalProps) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+  const [showRegModal, setShowRegModal] = useState(false);
   const {users} = useSelector((state: RootState) => state.auth);
   const dispatch = useDispatch<AppDispatch>();
 
@@ -32,6 +34,19 @@ const AuthModal = ({onClose, showAuthModal}: AuthModalProps) => {
     onClose()
   }
 
+  const  handleShowRegModal = () => {
+    setShowRegModal(true);
+  }
+
+  const closeModalReg = () => {
+    setShowRegModal(false);
+  }
+
+  const openAuthModal = () => {
+    setShowRegModal(false);
+    // setShowAuthModal(true);
+
+  }
 
   useEffect(() => {
     const handleModalClose = ((e: KeyboardEvent) => {
@@ -85,6 +100,12 @@ const AuthModal = ({onClose, showAuthModal}: AuthModalProps) => {
             Войти в аккаунт
           </button>
         </form>
+        <button onClick={handleShowRegModal} className={`${style.askBtn} ${style.btnReset}`}>
+          Нет аккаунта? Зарегистрируйтесь!
+        </button>
+        {showRegModal && (
+          <RegisterModal showRegModal={showRegModal} onClose={closeModalReg} openAuthModal={openAuthModal} />
+        )}
       </div>
     </div>
   );

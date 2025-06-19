@@ -240,3 +240,17 @@ body {
         background: rgba(123, 44, 191, 0.3);
     }
 }
+
+.askBtn {
+    color: var(--white);
+    font-size: 12px;
+    margin-top: 15px;
+    opacity: 70%;
+    transition: all 0.3s;
+
+    &:hover {
+        opacity: 1;
+        color: var(--fortnite-cyan);
+        text-decoration: underline;
+    }
+}

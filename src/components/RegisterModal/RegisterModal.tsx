@@ -4,13 +4,15 @@ import {useDispatch} from "react-redux";
 import {IUser} from "../../types/Types.ts";
 import {registerSuccess} from "../../store/reducers/authSlice.ts";
 import style from "./style.module.scss"
+import * as React from "react";
 
 interface IRegisterModalProps {
   onClose: () => void;
   showRegModal: boolean;
+  openAuthModal: () => void;
 }
 
-const RegisterModal= ({onClose, showRegModal}: IRegisterModalProps) => {
+const RegisterModal= ({onClose, showRegModal, openAuthModal}: IRegisterModalProps) => {
   const [registerData, setRegisterData] = useState({
     username: "",
     email: "",
@@ -19,6 +21,10 @@ const RegisterModal= ({onClose, showRegModal}: IRegisterModalProps) => {
   });
   const [error, setError] = useState('');
   const dispatch = useDispatch<AppDispatch>();
+
+  const handleShowAuthModal = () => {
+    openAuthModal()
+  }
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
@@ -129,7 +135,13 @@ const RegisterModal= ({onClose, showRegModal}: IRegisterModalProps) => {
             Создать аккаунт
           </button>
         </form>
+        <button onClick={handleShowAuthModal} className={`${style.askBtn} ${style.btnReset}`}>
+          Есть аккаунт? Войдите!
+        </button>
       </div>
+      {/*{showAuthModal && (*/}
+      {/*  <AuthModal showAuthModal={showAuthModal} onClose={closeModalAuth} />*/}
+      {/*)}*/}
     </div>
   );
 }

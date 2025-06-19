@@ -19,9 +19,6 @@ const Header = () => {
     setOpenUserModal(!openUserModal);
   }
 
-  // const openModalAuth = () => {
-  //   setShowAuthModal(true);
-  // }
   const closeModalAuth = () => {
     setShowAuthModal(false);
   }
@@ -35,6 +32,11 @@ const Header = () => {
   const toggleRegModal = () => {
     setShowRegModal(!showRegModal);
     setShowAuthModal(false);
+  }
+
+  const openAuthModal = () => {
+    setShowRegModal(false);
+    setShowAuthModal(true);
   }
 
   useEffect(() => {
@@ -86,7 +88,7 @@ const Header = () => {
 							</div>
 							<div>
                 {showRegModal && (
-                  <RegisterModal onClose={closeModalReg} showRegModal={showRegModal} />
+                  <RegisterModal onClose={closeModalReg} showRegModal={showRegModal} openAuthModal={openAuthModal} />
                 )}
 							</div>
 						</div>
