@@ -68,7 +68,7 @@ const CheckoutForm = () => {
 		dispatch(submitOrder())
 			.unwrap()
 			.then(({totalCost}) => {
-				alert(`Заказ #${Date.now()} оформлен! Сумма: ${totalCost} руб.`)
+				alert(`Заказ #${Date.now()} оформлен! Сумма: ${totalCost} V-Bucks.`)
 		})
 			.then(() => {
 			dispatch(resetOrderState());

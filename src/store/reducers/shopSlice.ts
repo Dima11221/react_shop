@@ -84,36 +84,12 @@ const shopSlice = createSlice({
     removeFromCart(state, action: PayloadAction<{id: string}>) {
       state.order = state.order.filter(el => el.id !== action.payload.id);
 
-      // return {
-      //   ...state,
-      //   order: state.order.filter(
-      //     (el) => {return el.id !== action.payload.id}
-      //   )
-      // }
     },
     handleCartShow(state){
       state.isCartShow = !state.isCartShow;
 
-      // return {
-      //   ...state,
-      //   isCartShow: !state.isCartShow,
-      // }
     },
-    // setGoods(state, action: PayloadAction<IGoodsItemProp[]>) {
-    //   state.goods = action.payload || [];
-    //   state.loading = false;
-
-      // return {
-      //   ...state,
-      //   goods: action.payload || [],
-      //   loading: false,
-      // }
-    // },
     incQuantity(state, action: PayloadAction<{id: string}>) {
-      // const item = state.order.find(el => el.id === action.payload.id);
-      // if (item) {
-      //   item.quantity += 1;
-      // }
 
       state.order = state.order.map((item) => {
         if (item.id ===  action.payload.id) {
@@ -146,36 +122,15 @@ const shopSlice = createSlice({
     setOrderLocalStorage(state, action: PayloadAction<IOrderItem[]>) {
       state.order = action.payload;
 
-      // return {
-      //   ...state,
-      //   order: action.payload,
-      // }
     },
     setCurrentPage(state, action: PayloadAction<number>) {
       state.currentPage = action.payload;
 
-      // return {
-      //   ...state,
-      //   currentPage: action.payload,
-      // }
     },
     setPagesCount(state, action: PayloadAction<number>) {
       state.pagesCount = action.payload;
 
-        // return {
-        //   ...state,
-        //   pagesCount: Math.ceil(state.goods.length / state.itemsPerPage),
-        // }
-      // }
     },
-
-    // openCheckout(state) {
-    //   state.isCheckoutOpen = true;
-    // },
-    //
-    // closeCheckout(state) {
-    //   state.isCheckoutOpen = false;
-    // },
 
     updateCustomersData(state, action: PayloadAction<IShopState['customerData']>) {
       state.customerData = {...state.customerData, ...action.payload};
@@ -237,15 +192,12 @@ export const {
   addToCart,
   removeFromCart,
   handleCartShow,
-  // setGoods,
   incQuantity,
   decQuantity,
   clearCart,
   setOrderLocalStorage,
   setCurrentPage,
   setPagesCount,
-  // openCheckout,
-  // closeCheckout,
   updateCustomersData,
   resetOrderState,
   setFormErrors,

@@ -22,9 +22,6 @@ const RegisterModal= ({onClose, showRegModal, openAuthModal}: IRegisterModalProp
   const [error, setError] = useState('');
   const dispatch = useDispatch<AppDispatch>();
 
-  const handleShowAuthModal = () => {
-    openAuthModal()
-  }
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
@@ -135,7 +132,7 @@ const RegisterModal= ({onClose, showRegModal, openAuthModal}: IRegisterModalProp
             Создать аккаунт
           </button>
         </form>
-        <button onClick={handleShowAuthModal} className={`${style.askBtn} ${style.btnReset}`}>
+        <button onClick={openAuthModal} className={`${style.askBtn} ${style.btnReset}`}>
           Есть аккаунт? Войдите!
         </button>
       </div>
