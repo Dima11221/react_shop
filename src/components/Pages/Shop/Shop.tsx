@@ -165,7 +165,7 @@ const Shop = () => {
           </div>
           <div className={`${style.filtersContainer} ${!isMobileMenuOpen && isMobileView ? '' : style.visible}`}>
 
-              <div className={`${style.SFWrapper} ${!isMobileMenuOpen && isMobileView ? '' : style.visible}`}>
+              <div className={`${style.SFWrapper}`}>
                   <div className={style.searchWrapper}>
                       <Search handleSearch={handleSearch} />
                   </div>
@@ -173,8 +173,8 @@ const Shop = () => {
                       <PriceFilter handlePriceFilter={handlePriceFilter}/>
                   </div>
               </div>
-              <Cart quantity={CartOrder}/>
           </div>
+          <Cart quantity={CartOrder}/>
           {loading && (<Preloader />)}
 
           {!loading && (
