@@ -18,7 +18,6 @@ const GoodsItem = (props: IGoodsItemProp) => {
 
   const dispatch = useDispatch<AppDispatch>();
   const iconBackground = displayAssets.length > 0 ? displayAssets[0].background : "https://via.placeholder.com/300";
-  // const finalPrice = price.finalPrice ?? "Не указано";
 
   const handleAddToCart = () => {
     dispatch(addToCart({

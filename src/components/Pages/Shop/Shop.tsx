@@ -20,7 +20,6 @@ import {CheckoutForm} from "../CheckoutForm/CheckoutForm.tsx";
 import {Search} from "../../Search/Search.tsx";
 import {PriceFilter} from "../../PriceFilter/PriceFilter.tsx";
 import style from "./style.module.scss"
-// import {AnyAction, ThunkDispatch} from "@reduxjs/toolkit";
 
 export interface IOrderItem extends ICartItem{
     quantity: number;
@@ -34,17 +33,17 @@ const Shop = () => {
     const isCartShow = useSelector((state: RootState) => state.shop.isCartShow);
     const alertName = useSelector((state: RootState) => state.shop.alertName);
     const goods = useSelector((state: RootState) => state.shop.goods);
-    // console.log(goods, 'goods')
     const CartOrder = order.reduce((acc, item) => acc + item.quantity, 0)
     const itemsPerPage = useSelector((state: RootState) => state.shop.itemsPerPage);
 
     const [filteredGoods, setFilteredGoods] = useState<IGoodsItemProp[]>(goods);
     const [priceFilter, setPriceFilter] = useState<{min: number, max: number}>({min: 0, max: 0});
     const [searchStr, setSearchStr] = useState<string>('');
+    const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+    const [isMobileView, setIsMobileView] = useState(window.innerWidth < 768);
 
     const filters = () => {
         let result = goods;
-        // console.log(goods);
 
         if (searchStr) {
             result = result.filter(good =>
@@ -83,16 +82,6 @@ const Shop = () => {
         // console.log(str);
         dispatch(setCurrentPage(1));
         filters()
-
-        // const filtered = goods.filter(good =>
-        //   good.displayName.toLowerCase().includes(str.toLowerCase())
-        // );
-        // setFilteredGoods(filtered);
-        // const currentPagesCount = Math.ceil(filtered.length / itemsPerPage);
-        //
-        // dispatch(setPagesCount(currentPagesCount));
-        // console.log(filtered)
-        // console.log(currentPagesCount)
     }
 
     const handlePriceFilter = (min: number, max: number) => {
@@ -103,7 +92,6 @@ const Shop = () => {
 
     useEffect(() => {
         const savedOrder = localStorage.getItem("cart");
-        // console.log(savedOrder);
 
         if (savedOrder) {
             try {
@@ -146,12 +134,39 @@ const Shop = () => {
         }
     }, [isCheckoutOpen, isCartShow, dispatch])
 
+    useEffect(() => {
+        const handleResize = () => {
+            setIsMobileView(window.innerWidth < 768);
+            if (window.innerWidth >= 768) {
+                setIsMobileMenuOpen(false);
+            }
+        }
+
+        window.addEventListener('resize', handleResize);
+
+        return () => {
+            window.removeEventListener('keydown', handleResize);
+        }
+    }, []);
+
+    const toggleMobileMenu = () => {
+        setIsMobileMenuOpen(!isMobileMenuOpen);
+    }
+
     return (
       <div>
-          <div className={style.filtersContainer}>
-              <div className={style.SFWrapper}>
+          <div className={style.wrapperMenu}>
+              <h2 className={style.title}>Магазин предметов</h2>
+              {isMobileView && (
+                <button className={style.btn} onClick={toggleMobileMenu}>
+                    {isMobileMenuOpen ? 'Закрыть' : 'Фильтры'}
+                </button>
+              )}
+          </div>
+          <div className={`${style.filtersContainer} ${!isMobileMenuOpen && isMobileView ? '' : style.visible}`}>
+
+              <div className={`${style.SFWrapper} ${!isMobileMenuOpen && isMobileView ? '' : style.visible}`}>
                   <div className={style.searchWrapper}>
-                      <h3 className={style.title}>Магазин предметов</h3>
                       <Search handleSearch={handleSearch} />
                   </div>
                   <div className={style.priceFilterWrapper}>

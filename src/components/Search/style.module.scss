@@ -1,10 +1,7 @@
 @use "../../styles/globals";
 
 .row {
-  //margin-left: auto;
-  //margin-right: auto;
   margin-bottom: 20px;
-  //max-width: 100%;
 }
 
 .inputField {
@@ -34,7 +31,6 @@
   color: white;
   padding: 8px 12px;
   border-radius: 4px;
-  //flex: 1;
   transition: all 0.3s;
   height: 48px;
   width: 100%;
@@ -51,6 +47,10 @@
   color: var(--white);
 }
 
+.inputStyle::-webkit-search-cancel-button {
+  margin-right: 40px;
+  cursor: pointer;
+}
 
 .btnsBox {
   width: 45%;

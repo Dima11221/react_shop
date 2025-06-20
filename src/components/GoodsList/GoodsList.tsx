@@ -5,16 +5,13 @@ import {useSelector} from "react-redux";
 import {RootState} from "../../store/store.ts";
 import {IGoodsItemProp} from "../../types/Types.ts";
 
-interface IFiteredGoods {
+interface IFilteredGoods {
     filteredGoods: IGoodsItemProp[];
 }
 
-const GoodsList = ({filteredGoods}:IFiteredGoods) => {
-    // const dispatch = useDispatch();
-    // const goods = useSelector((state: RootState) => state.shop.goods);
+const GoodsList = ({filteredGoods}:IFilteredGoods) => {
     const currentPage = useSelector((state: RootState) => state.shop.currentPage);
     const itemsPerPage = useSelector((state: RootState) => state.shop.itemsPerPage);
-    // console.log(goods, "goods");
 
     const getCurrentPageGoods = () => {
         const startIndexInPage = (currentPage - 1) * itemsPerPage;
@@ -23,11 +20,10 @@ const GoodsList = ({filteredGoods}:IFiteredGoods) => {
     }
 
     const goodsPerPage = getCurrentPageGoods();
-    // console.log(goodsPerPage, "goodsPerPage");
 
     if (filteredGoods.length === 0) {
         return <div>
-            <h3>Товары не найдено. Попробуйте изменить параметр фильтрации.</h3>
+            <h3 className={style.text}>Товары не найдены. Попробуйте изменить параметр фильтрации.</h3>
         </div>
     }
 
@@ -39,7 +35,7 @@ const GoodsList = ({filteredGoods}:IFiteredGoods) => {
             ))
           )}
           {!goodsPerPage.length && (
-            <h4>Couldn't find anything, or you entered the name incorrectly.</h4>
+            <h3 className={style.text}>Товары не найдены.</h3>
           )}
       </div>
     )

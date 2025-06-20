@@ -13,7 +13,6 @@ import {handleAuthShow} from "../../store/reducers/authSlice.ts";
 const CartList = () => {
     const dispatch = useDispatch<AppDispatch>();
     const order =  useSelector((state: RootState) => state.shop.order);
-    // const quantity = useSelector((state: RootState) => state.shop.quantity);
     const totalCost = order.reduce((acc, el) => (acc + (+el.finalPrice * el.quantity)), 0);
     const {isAuth, isAuthUserOpen} = useSelector((state: RootState) => state.auth);
 

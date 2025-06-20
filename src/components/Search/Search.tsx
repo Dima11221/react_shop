@@ -2,11 +2,11 @@ import {useState} from "react";
 import SearchIcon from "../../icons/search_icon.svg?react"
 import style from "./style.module.scss"
 
-interface ISeacrhProps {
+interface ISearchProps {
     handleSearch: (str: string) => void;
 }
 
-const Search = ({handleSearch}: ISeacrhProps) => {
+const Search = ({handleSearch}: ISearchProps) => {
     const [value, setValue] = useState<string>('')
     const HandleKey = (e: { key: string; }) => {
         if (e.key === "Enter") {

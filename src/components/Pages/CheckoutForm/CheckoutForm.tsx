@@ -61,7 +61,6 @@ const CheckoutForm = () => {
 		setShowPaymentOptions(false);
 	}
 
-	// console.log(order[0])
 	const handleSubmit = (event: React.FormEvent) => {
 		event.preventDefault();
 

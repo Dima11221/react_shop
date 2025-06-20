@@ -1,22 +1,21 @@
 import style from './style.module.scss'
 import {Link} from "react-router-dom";
-import {useEffect, useState} from "react";
+import {useEffect} from "react";
 import {UserProfile} from "../../components/UserProfile/UserProfile.tsx";
 import {useDispatch, useSelector} from "react-redux";
 import {AppDispatch, RootState} from "../../store/store.ts";
 import {AuthModal} from "../../components/AuthModal/AuthModal.tsx";
 import {RegisterModal} from "../../components/RegisterModal/RegisterModal.tsx";
 import LogoFortnite from "../../icons/LogoFortnite.svg?react"
-import {handleAuthShow, handleRegShow} from "../../store/reducers/authSlice.ts";
+import {handleAuthShow, handleRegShow, toggleUserModal} from "../../store/reducers/authSlice.ts";
 
 
 const Header = () => {
-  const [openUserModal, setOpenUserModal] = useState(false);
-  const {isAuth, isAuthUserOpen, isRegUserOpen} = useSelector((state: RootState) => state.auth);
+  const {isAuth, isAuthUserOpen, isRegUserOpen, isUserModalOpen} = useSelector((state: RootState) => state.auth);
   const dispatch = useDispatch<AppDispatch>();
 
   const handleUserToggleModal = () => {
-    setOpenUserModal(!openUserModal);
+    dispatch(toggleUserModal());
   }
 
   const toggleAuthModal = () => {
@@ -54,7 +53,7 @@ const Header = () => {
       <div className={`${style.flexColumn} ${style.headFootWrapper}`}>
         <button onClick={handleUserToggleModal} className={style.btn}>Мой профиль</button>
         <div className=''>
-          {openUserModal &&
+          {isUserModalOpen &&
 						<div>
 							<div>
                 {isAuth && (

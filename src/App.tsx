@@ -14,19 +14,11 @@ function App() {
   const {isAuth} = useSelector((state: RootState) => state.auth);
   const dispatch = useDispatch<AppDispatch>();
 
-  // useEffect(() => {
-  //   const interval = setInterval(() =>{
-  //     dispatch(checkSession())
-  //   }, 10000);
-  //
-  //   return () => clearInterval(interval)
-  // }, [dispatch]);
 
   useEffect(() => {
     const user = localStorage.getItem("currentUser");
     if (user) {
       const parsedUser = JSON.parse(user);
-      // const sessionDuration = 10000;
 
       const sessionDuration = 1*24*60*60*1000;
       const userSession = Date.now() - parsedUser.lastLogin;
@@ -50,7 +42,6 @@ function App() {
                 <Route path="/" element={<Shop />} />
                 <Route
                   path='/checkout_form'
-                  // element={<CheckoutForm />}
                   element={isAuth ? <CheckoutForm /> : <Navigate to='/' />}
                 />
               </Routes>

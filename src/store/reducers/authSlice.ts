@@ -36,6 +36,7 @@ interface IAuthState {
   error: string | null;
   isAuthUserOpen: boolean;
   isRegUserOpen: boolean;
+  isUserModalOpen: boolean;
 }
 
 const initialState: IAuthState = {
@@ -46,6 +47,7 @@ const initialState: IAuthState = {
   error: null,
   isAuthUserOpen: false,
   isRegUserOpen: false,
+  isUserModalOpen: false,
 }
 
 const authSlice = createSlice({
@@ -94,6 +96,9 @@ const authSlice = createSlice({
     },
     handleRegShow: (state, action: PayloadAction<boolean>) => {
       state.isRegUserOpen = action.payload;
+    },
+    toggleUserModal: (state) => {
+      state.isUserModalOpen = !state.isUserModalOpen;
     }
   },
   extraReducers: () => {
@@ -111,6 +116,7 @@ export const {
   registerFail,
   handleAuthShow,
   handleRegShow,
+  toggleUserModal
 } = authSlice.actions;
 
 export default authSlice.reducer;
