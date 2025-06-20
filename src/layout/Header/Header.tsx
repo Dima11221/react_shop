@@ -2,47 +2,37 @@ import style from './style.module.scss'
 import {Link} from "react-router-dom";
 import {useEffect, useState} from "react";
 import {UserProfile} from "../../components/UserProfile/UserProfile.tsx";
-import {useSelector} from "react-redux";
-import {RootState} from "../../store/store.ts";
+import {useDispatch, useSelector} from "react-redux";
+import {AppDispatch, RootState} from "../../store/store.ts";
 import {AuthModal} from "../../components/AuthModal/AuthModal.tsx";
 import {RegisterModal} from "../../components/RegisterModal/RegisterModal.tsx";
 import LogoFortnite from "../../icons/LogoFortnite.svg?react"
+import {handleAuthShow, handleRegShow} from "../../store/reducers/authSlice.ts";
 
 
 const Header = () => {
   const [openUserModal, setOpenUserModal] = useState(false);
-  const [showAuthModal, setShowAuthModal] = useState(false);
-  const [showRegModal, setShowRegModal] = useState(false);
-  const {isAuth} = useSelector((state: RootState) => state.auth);
+  const {isAuth, isAuthUserOpen, isRegUserOpen} = useSelector((state: RootState) => state.auth);
+  const dispatch = useDispatch<AppDispatch>();
 
   const handleUserToggleModal = () => {
     setOpenUserModal(!openUserModal);
   }
 
-  const closeModalAuth = () => {
-    setShowAuthModal(false);
-  }
   const toggleAuthModal = () => {
-    setShowAuthModal(!showAuthModal);
-    setShowRegModal(false);
-  }
-  const closeModalReg = () => {
-    setShowRegModal(false);
+    dispatch(handleAuthShow(!isAuthUserOpen))
+    dispatch(handleRegShow(false));
   }
   const toggleRegModal = () => {
-    setShowRegModal(!showRegModal);
-    setShowAuthModal(false);
-  }
-
-  const openAuthModal = () => {
-    setShowRegModal(false);
-    setShowAuthModal(true);
+    dispatch(handleRegShow(!isRegUserOpen));
+    dispatch(handleAuthShow(false));
   }
 
   useEffect(() => {
-    setShowAuthModal(false);
-    setShowRegModal(false);
-  }, [setShowAuthModal, setShowRegModal])
+    dispatch(handleAuthShow(false));
+    dispatch(handleRegShow(false));
+
+  }, [dispatch])
 
 
   return (
@@ -82,13 +72,13 @@ const Header = () => {
                 )}
 							</div>
 							<div>
-                {showAuthModal && (
-                  <AuthModal onClose={closeModalAuth} showAuthModal={showAuthModal} />
+                {isAuthUserOpen && (
+                  <AuthModal />
                 )}
 							</div>
 							<div>
-                {showRegModal && (
-                  <RegisterModal onClose={closeModalReg} showRegModal={showRegModal} openAuthModal={openAuthModal} />
+                {isRegUserOpen && (
+                  <RegisterModal />
                 )}
 							</div>
 						</div>

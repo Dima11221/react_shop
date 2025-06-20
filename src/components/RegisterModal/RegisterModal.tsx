@@ -1,18 +1,13 @@
 import {useEffect, useState} from "react";
-import {AppDispatch} from "../../store/store.ts";
-import {useDispatch} from "react-redux";
+import {AppDispatch, RootState} from "../../store/store.ts";
+import {useDispatch, useSelector} from "react-redux";
 import {IUser} from "../../types/Types.ts";
-import {registerSuccess} from "../../store/reducers/authSlice.ts";
+import {handleAuthShow, handleRegShow, registerSuccess} from "../../store/reducers/authSlice.ts";
 import style from "./style.module.scss"
 import * as React from "react";
 
-interface IRegisterModalProps {
-  onClose: () => void;
-  showRegModal: boolean;
-  openAuthModal: () => void;
-}
 
-const RegisterModal= ({onClose, showRegModal, openAuthModal}: IRegisterModalProps) => {
+const RegisterModal= () => {
   const [registerData, setRegisterData] = useState({
     username: "",
     email: "",
@@ -20,8 +15,16 @@ const RegisterModal= ({onClose, showRegModal, openAuthModal}: IRegisterModalProp
     password_confirmation: "",
   });
   const [error, setError] = useState('');
+  const {isRegUserOpen} =  useSelector((state: RootState) => state.auth);
   const dispatch = useDispatch<AppDispatch>();
 
+  const handleRegClose = () => {
+    dispatch(handleRegShow(false));
+  }
+  const handleAuthOpen = () => {
+    dispatch(handleRegShow(false));
+    dispatch(handleAuthShow(true));
+  }
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
@@ -50,27 +53,27 @@ const RegisterModal= ({onClose, showRegModal, openAuthModal}: IRegisterModalProp
     }
     console.log(newUser);
     dispatch(registerSuccess(newUser));
-    onClose()
+    handleRegClose();
   }
 
 
   useEffect(() => {
     const handleModalClose = ((e: KeyboardEvent) => {
       if (e.key === "Escape") {
-        onClose()
+        dispatch(handleRegShow(false));
       }
     })
-    if (showRegModal) {
+    if (isRegUserOpen) {
       window.addEventListener('keydown', handleModalClose)
     }
 
     return () => {
       window.removeEventListener('keydown', handleModalClose)
     }
-  }, [showRegModal, onClose]);
+  }, [isRegUserOpen, dispatch]);
 
   return (
-    <div className={style.modalOverlay} onClick={onClose}>
+    <div className={style.modalOverlay} onClick={handleRegClose}>
       <div className={style.modalContent} onClick={(e) => e.stopPropagation()}>
         <h2 className={style.modalHeader}>Регистрация</h2>
         {error && <div className={style.errorMessage}>{error}</div>}
@@ -132,13 +135,10 @@ const RegisterModal= ({onClose, showRegModal, openAuthModal}: IRegisterModalProp
             Создать аккаунт
           </button>
         </form>
-        <button onClick={openAuthModal} className={`${style.askBtn} ${style.btnReset}`}>
+        <button onClick={handleAuthOpen} className={`${style.askBtn} ${style.btnReset}`}>
           Есть аккаунт? Войдите!
         </button>
       </div>
-      {/*{showAuthModal && (*/}
-      {/*  <AuthModal showAuthModal={showAuthModal} onClose={closeModalAuth} />*/}
-      {/*)}*/}
     </div>
   );
 }

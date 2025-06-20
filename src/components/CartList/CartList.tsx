@@ -2,34 +2,30 @@ import {CartItem} from "../CartItem/CartItem.tsx";
 import style from './style.module.scss'
 import closeModalIcon from '../../icons/closeModalIcon.svg'
 import {useDispatch, useSelector} from "react-redux";
-import {RootState} from "../../store/store.ts";
+import {AppDispatch, RootState} from "../../store/store.ts";
 import {clearCart, handleCartShow} from "../../store/reducers/shopSlice.ts";
 import {Link} from "react-router-dom";
-import {useState} from "react";
 import {AuthModal} from "../AuthModal/AuthModal.tsx";
+import {handleAuthShow} from "../../store/reducers/authSlice.ts";
 
 
 
 const CartList = () => {
-    const dispatch = useDispatch();
+    const dispatch = useDispatch<AppDispatch>();
     const order =  useSelector((state: RootState) => state.shop.order);
     // const quantity = useSelector((state: RootState) => state.shop.quantity);
     const totalCost = order.reduce((acc, el) => (acc + (+el.finalPrice * el.quantity)), 0);
-    const {isAuth} = useSelector((state: RootState) => state.auth)
-    const [showAuthModal, setShowAuthModal] = useState(false);
+    const {isAuth, isAuthUserOpen} = useSelector((state: RootState) => state.auth);
 
     const handleShowAuthModal = () => {
         if (!isAuth) {
-            setShowAuthModal(true);
+            dispatch(handleAuthShow(true));
             alert('Сначала авторизируйтесь!');
             // console.log(showAuthModal);
             return;
         }
     }
 
-    const closeModalAuth = () => {
-        setShowAuthModal(false);
-    };
 
     const cartShow = () => {
         dispatch(handleCartShow());
@@ -85,11 +81,8 @@ const CartList = () => {
                         >
                           Оформить
                         </Link>}
-                    {showAuthModal && (
-                        <AuthModal
-                          onClose={closeModalAuth}
-                          showAuthModal={showAuthModal}
-                        />
+                    {isAuthUserOpen && (
+                        <AuthModal />
                     )}
 
                     {order.length <= 0 &&
