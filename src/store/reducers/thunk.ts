@@ -77,7 +77,28 @@ export const submitOrder = createAsyncThunk<
 		}
 
 
-		return {totalCost};
+		const orderData = {
+			items: order.map((item) => {
+				return {
+					id: item.id,
+					name: item.name,
+					price: item.finalPrice,
+					quantity: item.quantity,
+				}
+			}),
+			customer: customerData,
+			total: totalCost, //Проверить!!!!!!!
+			date: new Date().toLocaleDateString(),
+		}
+
+		console.log("Данные для отправки:", orderData );
+
+		return {
+			success: true,
+			orderID: `mock-${Date.now()}`,
+			total: orderData.total,
+			totalCost
+		};
 	}
 
 )
