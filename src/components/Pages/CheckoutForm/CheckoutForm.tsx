@@ -162,7 +162,6 @@ const CheckoutForm = () => {
 						<div className={style.inputGroup}>
 							<label className={style.inputLabel}>Способ оплаты:</label>
 
-
 							<div className={style.customSelect} onClick={(e) => e.stopPropagation()}>
 								<div
 									className={`${style.selectHeader} ${formErrors.paymentMethod ? style.inputError : ''}`}
@@ -217,6 +216,54 @@ const CheckoutForm = () => {
 							{/*</select>*/}
 							{formErrors.paymentMethod && <span className={style.errorMessage}>{formErrors.paymentMethod}</span>}
 						</div>
+						{
+							customerData.paymentMethod === 'card' && (
+								<div className={style.inputGroup}>
+									<label className={style.inputLabel}>Номер карты:</label>
+									<input
+										type="text"
+										name="paymentInput"
+										placeholder="1234 5678 9012 3456"
+										value={customerData.paymentInput}
+										onChange={handleChange}
+										className={`${style.formInput} ${formErrors.paymentInput ? style.inputError : ''}`}
+									/>
+									{formErrors.paymentInput && <span className={style.errorMessage}>{formErrors.paymentInput}</span>}
+								</div>
+							)
+						}
+						{
+							customerData.paymentMethod === 'sbp' && (
+							<div className={style.inputGroup}>
+								<label className={style.inputLabel}>Номер телефона:</label>
+								<input
+									type="text"
+									name="paymentInput"
+									placeholder="+7..."
+									value={customerData.paymentInput}
+									onChange={handleChange}
+									className={`${style.formInput} ${formErrors.paymentInput ? style.inputError : ''}`}
+								/>
+								{formErrors.paymentInput && <span className={style.errorMessage}>{formErrors.paymentInput}</span>}
+							</div>
+							)
+						}
+						{
+							customerData.paymentMethod === 'crypto' && (
+								<div className={style.inputGroup}>
+									<label className={style.inputLabel}>Адрес криптокошелька:</label>
+									<input
+										type="text"
+										name="paymentInput"
+										placeholder="Ваш адрес криптокошелька"
+										value={customerData.paymentInput}
+										onChange={handleChange}
+										className={`${style.formInput} ${formErrors.paymentInput ? style.inputError : ''}`}
+									/>
+									{formErrors.paymentInput && <span className={style.errorMessage}>{formErrors.paymentInput}</span>}
+								</div>
+							)
+						}
 					</div>
 
 					<div className={style.formSection}>

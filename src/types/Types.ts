@@ -25,6 +25,7 @@ export interface ICheckoutFormItem {
     phone?: string;
     accName?: string;
     paymentMethod?: string;
+    paymentInput?: string;
 }
 
 export interface IUser {

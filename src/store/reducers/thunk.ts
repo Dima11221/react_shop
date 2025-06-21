@@ -43,6 +43,7 @@ export const submitOrder = createAsyncThunk<
 		let isValid = true;
 		// const newError = {name: '', email: '', phone: '', accName: '', paymentMethod: ''};
 		const validNumber = /^(\+7|7|8)?\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/.test(customerData.phone);
+		// const validCardNumber = /^[0-9]{4}[- ]?[0-9]{4}[- ]?[0-9]{4}[- ]?[0-9]{4}$/.test(customerData.cardNumber);
 		const totalCost = order.reduce((acc, item) => acc + (item.finalPrice * item.quantity), 0);
 
 		if (!customerData.name.trim()) {
@@ -67,6 +68,9 @@ export const submitOrder = createAsyncThunk<
 		if (customerData.paymentMethod === 'empty') {
 			errors.paymentMethod = 'Не выбран способ оплаты!';
 			isValid = false;
+		}
+		if (!customerData.paymentInput) {
+			errors.paymentInput = 'Введите данные способа оплаты!'
 		}
 
 		dispatch(setFormErrors(errors))

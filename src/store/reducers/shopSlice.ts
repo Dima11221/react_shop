@@ -21,6 +21,7 @@ export interface IShopState {
     phone: string;
     accName: string;
     paymentMethod: 'empty' | 'sbp' | 'card' | 'crypto';
+    paymentInput: string;
   }
   formErrors: ICheckoutFormItem;
   checkoutItems: ICartItem[];
@@ -44,6 +45,7 @@ const initialState : IShopState  = {
     phone: '',
     accName: '',
     paymentMethod: 'empty',
+    paymentInput: '',
   },
   formErrors: {
     name: '',
@@ -51,6 +53,7 @@ const initialState : IShopState  = {
     phone: '',
     accName: '',
     paymentMethod: '',
+    paymentInput: '',
   },
   checkoutItems: [],
 }
