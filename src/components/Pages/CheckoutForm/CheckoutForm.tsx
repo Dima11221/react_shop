@@ -61,18 +61,32 @@ const CheckoutForm = () => {
 		setShowPaymentOptions(false);
 	}
 
-	const handleSubmit = (event: React.FormEvent) => {
+	const handleSubmit = async (event: React.FormEvent) => {
 		event.preventDefault();
 
-		dispatch(submitOrder())
-			.unwrap()
-			.then(({totalCost}) => {
-				alert(`Заказ #${Date.now()} оформлен! Сумма: ${totalCost} V-Bucks.`)
-		})
-			.then(() => {
-			dispatch(resetOrderState());
-		})
-			.catch(() => {})
+		try {
+			const result = await dispatch(submitOrder()).unwrap();
+
+			if (result.success) {
+				alert(`Заказ ${result.orderId} оформлен!`)
+				dispatch(resetOrderState());
+				navigate('/success');
+			}
+		} catch (error) {
+			const err = error as Error;
+			alert(`Ошибка ${err.message}`);
+		}
+
+
+		// dispatch(submitOrder())
+		// 	.unwrap()
+		// 	.then(({totalCost}) => {
+		// 		alert(`Заказ #${Date.now()} оформлен! Сумма: ${totalCost} V-Bucks.`)
+		// })
+		// 	.then(() => {
+		// 	dispatch(resetOrderState());
+		// })
+		// 	.catch(() => {})
 
 	};
 

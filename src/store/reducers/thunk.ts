@@ -27,7 +27,8 @@ export const fetchGoods =  createAsyncThunk<IGoodsItemProp[], void>(
 );
 
 export const submitOrder = createAsyncThunk<
-	{ totalCost: number },
+	// { totalCost: number },
+	{ success: boolean; orderId: string },
 	void,
 	{
 		state: {shop: IShopState };
@@ -81,7 +82,16 @@ export const submitOrder = createAsyncThunk<
 		}
 
 
+
 		const orderData = {
+			customer: {
+				name: customerData.name,
+				email: customerData.email,
+				phone: customerData.phone,
+				account: customerData.accName,
+			},
+			payment: customerData.paymentMethod,
+			paymentInfo: customerData.paymentInput,
 			items: order.map((item) => {
 				return {
 					id: item.id,
@@ -90,19 +100,32 @@ export const submitOrder = createAsyncThunk<
 					quantity: item.quantity,
 				}
 			}),
-			customer: customerData,
 			total: totalCost, //Проверить!!!!!!!
 			date: new Date().toLocaleDateString(),
 		}
 
 		console.log("Данные для отправки:", orderData );
 
-		return {
-			success: true,
-			orderID: `mock-${Date.now()}`,
-			total: orderData.total,
-			totalCost
-		};
+
+		try {
+			const response = await fetch('http://localhost:3001/api/orders', {
+				method: "POST",
+				headers: {
+					'Content-Type': 'application/json',
+				},
+				body: JSON.stringify(orderData)
+			});
+			if (!response.ok) {
+				throw new Error('Ошибка сервера');
+			}
+			return await response.json();
+
+		}  catch (error) {
+			return rejectWithValue({
+				message: error instanceof Error ? error.message : 'Не удалось отправить заказ',
+			});
+		}
+
 	}
 
 )

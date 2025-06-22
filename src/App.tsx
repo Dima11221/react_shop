@@ -8,6 +8,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {AppDispatch, RootState} from "./store/store.ts";
 import {useEffect} from "react";
 import {loginSuccess} from "./store/reducers/authSlice.ts";
+import {SuccessPage} from "./components/Pages/SuccessPage/SuccessPage.tsx";
 
 
 function App() {
@@ -39,10 +40,17 @@ function App() {
           <div className={style.main}>
             <div className={style.mainWrapper}>
               <Routes>
-                <Route path="/" element={<Shop />} />
+                <Route
+                  path="/"
+                  element={<Shop />}
+                />
                 <Route
                   path='/checkout_form'
                   element={isAuth ? <CheckoutForm /> : <Navigate to='/' />}
+                />
+                <Route
+                  path={'/success'}
+                  element={<SuccessPage />}
                 />
               </Routes>
             </div>
