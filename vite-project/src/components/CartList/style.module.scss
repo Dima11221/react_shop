@@ -1,0 +1,187 @@
+@use "../../styles/globals";
+
+.cartModalBack {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  backdrop-filter: blur(5px);
+}
+
+.cartModal {
+  background: rgba(43, 11, 69, 0.9);
+  border: 2px solid var(--fortnite-blue);
+  border-radius: 8px;
+  padding: 25px;
+  width: 800px;
+  max-width: 95%;
+  box-sizing: border-box;
+  box-shadow: 0 0 30px rgba(123, 44, 191, 0.8);
+  animation: modalAppear 0.3s ease-out;
+
+  display: flex;
+  flex-direction: column;
+  max-height: 90vh;
+}
+
+@keyframes modalAppear {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.cartHeader {
+  padding: 15px 20px;
+  background: linear-gradient(45deg, var(--fortnite-purple), var(--fortnite-blue));
+  border-radius: 8px 8px 0 0;
+  border-bottom: 2px solid var(--fortnite-pink);
+}
+
+.cartTitle {
+  font-family: 'Burbank Big Condensed', sans-serif;
+  font-size: 2rem;
+  color: white;
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.closeButton {
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.3s;
+
+  &:hover {
+    transform: rotate(90deg);
+  }
+}
+
+.closeIcon {
+  width: 30px;
+  height: 30px;
+  filter: drop-shadow(0 0 2px rgba(0,0,0,0.5));
+}
+
+.itemsContainer {
+  flex: 1;
+  overflow-y: auto;
+  padding: 15px;
+  background: rgba(26, 9, 51, 0.7);
+}
+
+.itemsList {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.emptyCart {
+  text-align: center;
+  color: var(--fortnite-cyan);
+  font-size: 1.5rem;
+  padding: 40px 0;
+  font-family: 'Burbank Big Condensed', sans-serif;
+}
+
+.clearContainer {
+  padding: 15px 0;
+  border-top: 1px solid rgba(0, 178, 255, 0.3);
+  margin-top: 15px;
+}
+
+.clearButton {
+  background: transparent;
+  border: 1px solid var(--fortnite-pink);
+  color: var(--fortnite-pink);
+  padding: 8px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.3s;
+  font-family: 'Burbank Big Condensed', sans-serif;
+  font-size: 1.1rem;
+
+  &:hover {
+    background: rgba(255, 62, 236, 0.2);
+  }
+}
+
+.cartFooter {
+  padding: 15px 20px;
+  border-top: 2px solid var(--fortnite-blue);
+  border-radius: 0 0 8px 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  @media (max-width: 480px) {
+    flex-direction: column;
+    gap: 30px;
+  }
+}
+
+.totalContainer {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.totalText {
+  font-family: 'Burbank Big Condensed', sans-serif;
+  font-size: 1.3rem;
+  color: var(--fortnite-cyan);
+
+  @media (max-width: 480px) {
+    font-size: 1rem;
+  }
+}
+
+.totalPrice {
+  font-family: 'Burbank Big Condensed', sans-serif;
+  font-size: 1.5rem;
+  color: white;
+  font-weight: bold;
+
+  @media (max-width: 480px) {
+    font-size: 1rem;
+  }
+}
+
+.checkoutButton {
+  background: linear-gradient(45deg, var(--fortnite-purple), var(--fortnite-blue));
+  color: white;
+  border: none;
+  padding: 10px 25px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-family: 'Burbank Big Condensed', sans-serif;
+  font-size: 1.2rem;
+  text-decoration: none;
+  transition: all 0.3s;
+
+  &:hover {
+    background: linear-gradient(45deg, var(--fortnite-blue), var(--fortnite-pink));
+  }
+}
+
+.disabledButton {
+  background: var(--light-grey);
+  cursor: not-allowed;
+
+  &:hover {
+    background: var(--light-grey);
+    box-shadow: none;
+    transform: none;
+  }
+}

@@ -1,0 +1,121 @@
+@use "../../styles/globals";
+
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  backdrop-filter: blur(5px);
+}
+
+.modalContent {
+  background: rgba(43, 11, 69, 0.9);
+  border: 2px solid var(--fortnite-blue);
+  border-radius: 8px;
+  padding: 25px;
+  width: 340px;
+  box-shadow: 0 0 30px rgba(123, 44, 191, 0.8);
+  animation: modalAppear 0.3s ease-out;
+}
+
+@keyframes modalAppear {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.modalHeader {
+  color: var(--fortnite-pink);
+  font-family: 'Burbank Big Condensed', sans-serif;
+  font-size: 24px;
+  text-align: center;
+  margin: 0 0 20px 0;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  text-shadow: 0 0 8px rgba(255, 62, 236, 0.6);
+}
+
+.errorMessage {
+  color: var(--red);
+  font-size: 14px;
+  text-align: center;
+  margin: 0 0 15px 0;
+  min-height: 18px;
+}
+
+.formGroup {
+  margin-bottom: 18px;
+}
+
+.submitButton {
+  background: linear-gradient(45deg, var(--fortnite-purple), var(--fortnite-blue));
+  color: white;
+  border: none;
+  width: 100%;
+  padding: 12px;
+  font-family: 'Burbank Big Condensed', sans-serif;
+  font-size: 18px;
+  text-transform: uppercase;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: all 0.2s;
+  letter-spacing: 1px;
+  position: relative;
+  overflow: hidden;
+
+  &:hover {
+    background: linear-gradient(45deg, var(--fortnite-blue), var(--fortnite-pink));
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -60%;
+    width: 40px;
+    height: 200%;
+    background: rgba(255, 255, 255, 0.2);
+    transform: rotate(30deg);
+    transition: all 0.3s;
+  }
+
+  &:hover::after {
+    left: 120%;
+  }
+}
+
+@media (max-width: 480px) {
+  .modalContent {
+    width: 300px;
+    padding: 20px;
+  }
+
+  .modalHeader {
+    font-size: 22px;
+  }
+
+  .formGroup {
+    margin-bottom: 15px;
+  }
+
+  .submitButton {
+    font-size: 16px;
+    padding: 10px;
+  }
+}

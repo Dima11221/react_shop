@@ -1,0 +1,299 @@
+@use "../../../styles/globals";
+@use "../../CartList/style.module";
+
+.checkoutWrapper {
+  position: relative;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.checkoutContainer {
+  background: rgba(26, 9, 51, 0.9);
+  border: 2px solid var(--fortnite-blue);
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 0 30px rgba(123, 44, 191, 0.6);
+}
+
+.checkoutHeader {
+  background: linear-gradient(45deg, var(--fortnite-purple), var(--fortnite-blue));
+  padding: 15px 20px;
+  border-bottom: 2px solid var(--fortnite-pink);
+}
+
+.headerTitle {
+  font-family: 'Burbank Big Condensed', sans-serif;
+  font-size: 24px;
+  color: white;
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+}
+
+.checkoutForm {
+  padding: 20px;
+}
+
+.formSection {
+  margin-bottom: 25px;
+  border-bottom: 1px solid rgba(0, 178, 255, 0.2);
+  padding-bottom: 20px;
+
+  &:last-child {
+    border-bottom: none;
+  }
+}
+
+.sectionTitle {
+  font-family: 'Burbank Big Condensed', sans-serif;
+  font-size: 20px;
+  color: var(--white);
+  margin: 0 0 15px 0;
+}
+
+.inputGroup {
+  margin-bottom: 15px;
+}
+
+.inputLabel {
+  display: block;
+  font-family: 'Burbank Big Condensed', sans-serif;
+  font-size: 16px;
+  color: var(--white);
+  margin-bottom: 5px;
+}
+
+.formInput, .formSelect {
+  width: 67%;
+  padding: 10px 12px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid var(--fortnite-blue);
+  border-radius: 5px;
+  color: white;
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+  transition: all 0.3s;
+
+  &:focus {
+    outline: none;
+    border-color: var(--fortnite-pink);
+  }
+}
+
+.formSelect {
+  appearance: none;
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%2300B2FF'%3e%3cpath d='M7 10l5 5 5-5z'/%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  background-size: 15px;
+}
+
+.inputError {
+  border-color: var(--red) !important;
+  background: rgba(217, 83, 79, 0.1);
+}
+
+.errorMessage {
+  display: block;
+  color: var(--red);
+  font-size: 12px;
+  margin-top: 5px;
+}
+
+.itemsHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.toggleButton {
+  background: rgba(0, 178, 255, 0.2);
+  border: 1px solid var(--fortnite-blue);
+  color: var(--fortnite-cyan);
+  padding: 5px 15px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-family: 'Burbank Big Condensed', sans-serif;
+  font-size: 14px;
+  transition: all 0.3s;
+
+  &:hover {
+    background: rgba(0, 178, 255, 0.4);
+  }
+}
+
+.itemsList {
+  margin-top: 15px;
+  background: rgba(43, 11, 69, 0.5);
+  border-radius: 5px;
+  padding: 10px;
+}
+
+.itemRow {
+  display: flex;
+  align-items: center;
+  padding: 8px 0;
+  border-bottom: 1px solid rgba(0, 178, 255, 0.1);
+
+  &:last-child {
+    border-bottom: none;
+  }
+}
+
+.itemsFlex {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+
+  @media (max-width: 540px) {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+.itemNumber {
+  font-family: 'Burbank Big Condensed', sans-serif;
+  color: var(--fortnite-cyan);
+  width: 25px;
+}
+
+.itemName {
+  flex: 1;
+  font-family: 'Burbank Big Condensed', sans-serif;
+  color: white;
+  font-size: 16px;
+}
+
+.itemPrice {
+  font-family: 'Burbank Big Condensed', sans-serif;
+  color: white;
+  font-weight: bold;
+  min-width: 100px;
+  text-align: right;
+}
+
+.totalSection {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  margin-top: 25px;
+
+  @media (max-width: 768px) {
+    justify-content: flex-end;
+    gap: 20px;
+  }
+}
+
+.totalAmount {
+  font-family: 'Burbank Big Condensed', sans-serif;
+  font-size: 22px;
+  color: white;
+  background: rgba(123, 44, 191, 0.3);
+  padding: 10px 20px;
+  border-radius: 5px;
+}
+
+.buttonsGroup {
+  display: flex;
+  gap: 15px;
+}
+
+.backButton {
+  padding: 12px 25px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-family: 'Burbank Big Condensed', sans-serif;
+  font-size: 16px;
+}
+
+.submitButton {
+  border: none;
+  padding: 12px 25px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-family: 'Burbank Big Condensed', sans-serif;
+  font-size: 16px;
+
+  @media (max-width: 480px) {
+    padding: 12px;
+  }
+}
+
+
+
+
+
+
+
+.customSelect {
+  position: relative;
+  width: 70%;
+}
+
+.selectHeader {
+  padding: 12px 15px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid var(--fortnite-blue);
+  border-radius: 5px;
+  color: white;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: all 0.3s;
+
+  &:hover {
+    border-color: var(--fortnite-pink);
+  }
+}
+
+.selectOptions {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: rgba(26, 9, 51, 0.95);
+  border: 1px solid var(--fortnite-blue);
+  border-top: none;
+  border-radius: 0 0 5px 5px;
+  z-index: 10;
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.optionItem {
+  padding: 12px 15px;
+  color: white;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  transition: all 0.2s;
+
+  &:hover {
+    background: rgba(123, 44, 191, 0.5);
+    color: var(--fortnite-cyan);
+  }
+}
+
+.paymentIcon {
+  margin-right: 10px;
+  font-size: 18px;
+}
+
+.selectedOption {
+  display: flex;
+  align-items: center;
+}
+
+.arrowIcon {
+  font-size: 12px;
+  transition: transform 0.3s;
+}
+
+.paymentPlaceholder {
+  opacity: 60%;
+}

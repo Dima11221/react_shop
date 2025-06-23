@@ -1,0 +1,17 @@
+@use "../../styles/globals";
+
+
+.goodsList {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  gap: 10px;
+  padding: 30px 0;
+}
+
+.text {
+  color: var(--white);
+  margin: 50px;
+  text-align: center;
+}

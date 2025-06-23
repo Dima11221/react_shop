@@ -1,0 +1,31 @@
+.alertPosition {
+  position: fixed;
+  bottom: 64px;
+  right: 140px;
+  animation: fade-in 250ms ease-in-out;
+
+  @media (min-width: 768px) {
+    top: 80px;
+    right: 200px;
+    bottom: unset;
+  }
+}
+
+.alertContainer {
+  padding: 10px;
+  border-radius: 10px;
+  background-color: var(--light-grey);
+  color: var(--white);
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(32px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0px);
+  }
+}

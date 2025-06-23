@@ -1,0 +1,136 @@
+{
+  "orders": [
+    {
+      "id": "1750625942022",
+      "customer": {
+        "name": "Тест",
+        "email": "test@test.com"
+      },
+      "items": [
+        {
+          "id": "1",
+          "name": "Товар 1",
+          "price": 100
+        }
+      ],
+      "createdAt": "2025-06-22T20:59:02.022Z"
+    },
+    {
+      "id": "1750626196808",
+      "customer": {
+        "name": "1",
+        "email": "1@1",
+        "phone": "+79087544515",
+        "account": "1"
+      },
+      "payment": "sbp",
+      "paymentInfo": "+79087544515",
+      "items": [
+        {
+          "id": "DriftTrail_MagicFire_Bundle",
+          "name": "Шлейф Incantor",
+          "price": 250,
+          "quantity": 2
+        },
+        {
+          "id": "SID_Placeholder_480",
+          "name": "Whine Up",
+          "price": 500,
+          "quantity": 1
+        }
+      ],
+      "total": 1000,
+      "date": "23.06.2025",
+      "createdAt": "2025-06-22T21:03:16.808Z"
+    },
+    {
+      "id": "1750704083900",
+      "customer": {
+        "name": "1",
+        "email": "1@1",
+        "phone": "+79054651232",
+        "account": "1"
+      },
+      "payment": "sbp",
+      "paymentInfo": "+79054651232",
+      "items": [
+        {
+          "id": "EID_AssassinVest",
+          "name": "Пуленепробиваемый",
+          "price": 200,
+          "quantity": 3
+        },
+        {
+          "id": "Character_FastCheetah",
+          "name": "Гигантский цыплёнок",
+          "price": 1500,
+          "quantity": 3
+        }
+      ],
+      "total": 5100,
+      "date": "23.06.2025",
+      "createdAt": "2025-06-23T18:41:23.900Z"
+    },
+    {
+      "id": "1750704303922",
+      "customer": {
+        "name": "123",
+        "email": "123@123",
+        "phone": "+79061321546",
+        "account": "123"
+      },
+      "payment": "sbp",
+      "paymentInfo": "+79061321546",
+      "items": [
+        {
+          "id": "EID_AssassinVest",
+          "name": "Пуленепробиваемый",
+          "price": 200,
+          "quantity": 3
+        },
+        {
+          "id": "Character_FastCheetah",
+          "name": "Гигантский цыплёнок",
+          "price": 1500,
+          "quantity": 3
+        },
+        {
+          "id": "SID_Placeholder_445",
+          "name": "Take On Me",
+          "price": 500,
+          "quantity": 1
+        },
+        {
+          "id": "SID_Placeholder_579",
+          "name": "Seven",
+          "price": 500,
+          "quantity": 1
+        },
+        {
+          "id": "SID_Placeholder_561",
+          "name": "Heavy",
+          "price": 500,
+          "quantity": 1
+        }
+      ],
+      "total": 6600,
+      "date": "23.06.2025",
+      "createdAt": "2025-06-23T18:45:03.922Z"
+    },
+    {
+      "id": "1750704414848",
+      "customer": {
+        "name": "Тест2",
+        "email": "test@test.com"
+      },
+      "items": [
+        {
+          "id": "1",
+          "name": "Товар 1",
+          "price": 100
+        }
+      ],
+      "createdAt": "2025-06-23T18:46:54.848Z"
+    }
+  ]
+}
