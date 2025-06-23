@@ -100,7 +100,7 @@ export const submitOrder = createAsyncThunk<
 					quantity: item.quantity,
 				}
 			}),
-			total: totalCost, //Проверить!!!!!!!
+			total: totalCost,
 			date: new Date().toLocaleDateString(),
 		}
 
