@@ -1,5 +1,5 @@
 import {createAsyncThunk} from "@reduxjs/toolkit";
-import {API_KEY, API_URL} from "../../config.ts";
+import {API_BACKEND_URL, API_KEY, API_URL} from "../../config.ts";
 import {ICheckoutFormItem, IGoodsItemProp} from "../../types/Types.ts";
 import {IShopState, setFormErrors} from "./shopSlice.ts";
 
@@ -108,7 +108,7 @@ export const submitOrder = createAsyncThunk<
 
 
 		try {
-			const response = await fetch('http://localhost:3001/api/orders', {
+			const response = await fetch(`${API_BACKEND_URL}/api/orders`, {
 				method: "POST",
 				headers: {
 					'Content-Type': 'application/json',

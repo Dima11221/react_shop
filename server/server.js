@@ -14,7 +14,8 @@ const app = express();
 
 const allowedOrigins = [
     "http://localhost:3000",
-    "https://dima11221.github.io"
+    "https://dima11221.github.io",
+    "https://react-shop-backend-672m.onrender.com"
 ]
 
 app.use(cors({
