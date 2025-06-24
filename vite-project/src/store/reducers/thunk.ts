@@ -109,6 +109,7 @@ export const submitOrder = createAsyncThunk<
 
 		try {
 			const response = await fetch(`${API_BACKEND_URL}/api/orders`, {
+			// const response = await fetch(`http://localhost:3001/api/orders`, {
 				method: "POST",
 				headers: {
 					'Content-Type': 'application/json',

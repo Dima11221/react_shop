@@ -11,6 +11,7 @@ import * as React from "react";
 import {submitOrder} from "../../../store/reducers/thunk.ts";
 import {useNavigate} from "react-router-dom";
 import {useState} from "react";
+import {LoadingSpinner} from "../../LoadingSpinner/LoadingSpinner.tsx";
 
 type IPayment = 'sbp' | 'card' | 'crypto';
 
@@ -33,7 +34,7 @@ const PaymentMethods: {
 
 const CheckoutForm = () => {
 	const dispatch = useDispatch<AppDispatch>();
-	const { customerData, order, formErrors } =  useSelector((state: RootState) => state.shop);
+	const { customerData, order, formErrors, checkoutStatus } =  useSelector((state: RootState) => state.shop);
 	const total = order.reduce((acc, item) => acc + (item.finalPrice * item.quantity), 0);
 	const [burger, setBurger] = useState(false);
 	const [showPaymentOptions, setShowPaymentOptions] = useState(false);
@@ -78,18 +79,15 @@ const CheckoutForm = () => {
 		}
 
 
-		// dispatch(submitOrder())
-		// 	.unwrap()
-		// 	.then(({totalCost}) => {
-		// 		alert(`Заказ #${Date.now()} оформлен! Сумма: ${totalCost} V-Bucks.`)
-		// })
-		// 	.then(() => {
-		// 	dispatch(resetOrderState());
-		// })
-		// 	.catch(() => {})
-
 	};
 
+	// useEffect(() => {
+	// 	if (checkoutStatus === "success"){
+	// 		alert("Заказ успешно оформлен!")
+	// 		dispatch(resetOrderState());
+	// 		navigate('/success');
+	// 	}
+	// }, [checkoutStatus, dispatch, navigate]);
 
 	const handleChange = (event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
 		const { value, name } = event.target;
@@ -310,11 +308,25 @@ const CheckoutForm = () => {
 					<div className={style.totalSection}>
 						<div className={style.totalAmount}>Итого: {total} V-Bucks</div>
 						<div className={style.buttonsGroup}>
-							<button type="button" onClick={goBack} className={`${style.button} ${style.backButton}`}>
+							<button
+								type="button"
+								onClick={goBack}
+								className={`${style.button} ${style.backButton}`}
+							>
 								Назад
 							</button>
-							<button type="submit" className={`${style.buyButton} ${style.submitButton}`}>
-								Подтвердить заказ
+							<button
+								type="submit"
+								className={`${style.buyButton} ${style.submitButton}`}
+								disabled={checkoutStatus ===  'loading'}
+							>
+								{checkoutStatus === 'loading' ? (
+									<LoadingSpinner/>
+								) : 'Подтвердить заказ'}
+								{/*{checkoutStatus === 'loading' ? (*/}
+								{/*	'Подтвердить заказ'*/}
+								{/*) : <LoadingSpinner/>}*/}
+
 							</button>
 						</div>
 					</div>

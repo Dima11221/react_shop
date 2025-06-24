@@ -6,14 +6,9 @@ import { JSONFile } from "lowdb/node"
 
 const app = express();
 
-// app.use(cors({
-//     origin: 'http://localhost:5173',
-// }));
-//
-// app.use(bodyParser.json());
 
 const allowedOrigins = [
-    "http://localhost:3000",
+    "http://localhost:5173",
     "https://dima11221.github.io",
     "https://react-shop-backend-672m.onrender.com"
 ]
@@ -30,8 +25,12 @@ app.use(cors({
             callback(new Error("Not allowed by CORS!"));
         }
     },
+    methods: ["GET", "POST", "OPTIONS"],
+    allowedHeaders: ["Content-Type"],
     credentials: true
 }));
+
+// app.options('*', cors())
 
 app.use(bodyParser.json());
 
@@ -40,8 +39,6 @@ const adapter = new JSONFile('orders.json');
 const defaultData = { orders: [] };
 const db = new Low(adapter, defaultData);
 
-// await db.read();
-// db.data = db.data || {orders:[]};
 
 async function initDB() {
     try {

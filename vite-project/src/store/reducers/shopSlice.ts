@@ -25,6 +25,8 @@ export interface IShopState {
   }
   formErrors: ICheckoutFormItem;
   checkoutItems: ICartItem[];
+  checkoutStatus: 'idle' | 'loading' | 'success' | 'fail';
+  checkoutError: string | null;
 }
 
 const initialState : IShopState  = {
@@ -56,6 +58,8 @@ const initialState : IShopState  = {
     paymentInput: '',
   },
   checkoutItems: [],
+  checkoutStatus: 'idle',
+  checkoutError: null,
 }
 
 const shopSlice = createSlice({
@@ -174,18 +178,20 @@ const shopSlice = createSlice({
 
     builder
       .addCase(submitOrder.pending, (state) => {
-        state.loading = true;
+        state.checkoutStatus = 'loading';
+        state.checkoutError = null;
       })
 
       .addCase(submitOrder.fulfilled, (state, action) => {
-        state.loading = false;
+        state.checkoutStatus = 'success';
         state.order = [];
         state.customerData = initialState.customerData;
         console.log(action.payload);
       })
 
-      .addCase(submitOrder.rejected, (state) => {
-        state.loading = false;
+      .addCase(submitOrder.rejected, (state, action) => {
+        state.checkoutStatus = 'fail';
+        state.checkoutError = action.payload?.message || 'Ошибка оформления заказа';
       })
   }
 });

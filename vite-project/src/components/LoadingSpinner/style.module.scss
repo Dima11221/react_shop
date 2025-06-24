@@ -1,0 +1,26 @@
+.spinner {
+  display: inline-flex;
+  gap: 4px;
+}
+
+.dotBefore {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--white);
+  animation: bounce 1s infinite alternate;
+}
+
+.dotAfter {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--white);
+  animation: bounce 1s infinite alternate;
+
+  animation-delay: 0.3s;
+}
+
+@keyframes  bounce {
+  to {transform: translateY(-6px)}
+}
