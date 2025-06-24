@@ -191,7 +191,7 @@ const shopSlice = createSlice({
 
       .addCase(submitOrder.rejected, (state, action) => {
         state.checkoutStatus = 'fail';
-        state.checkoutError = action.payload?.message || 'Ошибка оформления заказа';
+        state.checkoutError = (action.payload as {message?: string})?.message || 'Ошибка оформления заказа';
       })
   }
 });

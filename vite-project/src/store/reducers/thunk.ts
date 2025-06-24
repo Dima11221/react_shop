@@ -122,8 +122,9 @@ export const submitOrder = createAsyncThunk<
 			return await response.json();
 
 		}  catch (error) {
+			console.log(`Не удалось отправить заказ. Ошибка ${error}`)
 			return rejectWithValue({
-				message: error instanceof Error ? error.message : 'Не удалось отправить заказ',
+				message: error instanceof Error && error.message,
 			});
 		}
 

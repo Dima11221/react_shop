@@ -297,3 +297,11 @@
 .paymentPlaceholder {
   opacity: 60%;
 }
+
+.errPos {
+  display: block;
+  text-align: end;
+  color: var(--red);
+  font-size: 18px;
+  margin-top: 5px;
+}

@@ -34,7 +34,7 @@ const PaymentMethods: {
 
 const CheckoutForm = () => {
 	const dispatch = useDispatch<AppDispatch>();
-	const { customerData, order, formErrors, checkoutStatus } =  useSelector((state: RootState) => state.shop);
+	const { customerData, order, formErrors, checkoutStatus, checkoutError } =  useSelector((state: RootState) => state.shop);
 	const total = order.reduce((acc, item) => acc + (item.finalPrice * item.quantity), 0);
 	const [burger, setBurger] = useState(false);
 	const [showPaymentOptions, setShowPaymentOptions] = useState(false);
@@ -75,7 +75,7 @@ const CheckoutForm = () => {
 			}
 		} catch (error) {
 			const err = error as Error;
-			alert(`Ошибка ${err.message}`);
+			alert(`Ошибка при отправлении заказа. ${err.message}`);
 		}
 
 
@@ -316,10 +316,12 @@ const CheckoutForm = () => {
 								{checkoutStatus === 'loading' ? (
 									<LoadingSpinner/>
 								) : 'Подтвердить заказ'}
-
 							</button>
 						</div>
 					</div>
+					{checkoutError && (
+						<span className={`${style.errPos}`}>Не удалось отправить заказ.</span>
+					)}
 				</form>
 			</div>
 		</div>

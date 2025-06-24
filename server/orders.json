@@ -219,6 +219,28 @@
       "total": 2200,
       "date": "24.06.2025",
       "createdAt": "2025-06-24T19:35:15.619Z"
+    },
+    {
+      "id": "1750796085700",
+      "customer": {
+        "name": "1",
+        "email": "1@1",
+        "phone": "+79000000000",
+        "account": "1"
+      },
+      "payment": "sbp",
+      "paymentInfo": "+79000000000",
+      "items": [
+        {
+          "id": "AnimeLegends_Bundle",
+          "name": "Набор «Киберугроза»",
+          "price": 2200,
+          "quantity": 1
+        }
+      ],
+      "total": 2200,
+      "date": "24.06.2025",
+      "createdAt": "2025-06-24T20:14:45.700Z"
     }
   ]
 }
