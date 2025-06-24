@@ -81,13 +81,6 @@ const CheckoutForm = () => {
 
 	};
 
-	// useEffect(() => {
-	// 	if (checkoutStatus === "success"){
-	// 		alert("Заказ успешно оформлен!")
-	// 		dispatch(resetOrderState());
-	// 		navigate('/success');
-	// 	}
-	// }, [checkoutStatus, dispatch, navigate]);
 
 	const handleChange = (event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
 		const { value, name } = event.target;
@@ -323,9 +316,6 @@ const CheckoutForm = () => {
 								{checkoutStatus === 'loading' ? (
 									<LoadingSpinner/>
 								) : 'Подтвердить заказ'}
-								{/*{checkoutStatus === 'loading' ? (*/}
-								{/*	'Подтвердить заказ'*/}
-								{/*) : <LoadingSpinner/>}*/}
 
 							</button>
 						</div>
