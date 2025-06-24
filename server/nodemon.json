@@ -1,0 +1,6 @@
+{
+  "ignore": ["orders.json", "*.log"],
+  "watch": ["server.js", "mailer.js"],
+  "verbose": false,
+  "delay": 1000
+}

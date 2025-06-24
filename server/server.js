@@ -3,6 +3,7 @@ import cors from 'cors';
 import bodyParser from 'body-parser';
 import { Low } from "lowdb";
 import { JSONFile } from "lowdb/node"
+import {sendOrderMail} from "./mailer.js";
 
 const app = express();
 
@@ -70,6 +71,33 @@ app.post('/api/orders',  async (req, res) => {
         await db.write();
 
         console.log("Новый заказ:",  order);
+        console.log("Пытаюсь отправить письмо", order.customer.email);
+
+        // try {
+        //     await sendOrderMail(
+        //         order.customer.email,
+        //         order.customer.name,
+        //         order.id,
+        //         order.total,
+        //     ).catch(console.error);
+        //     console.log("Письмо отправлено")
+        // }  catch (error) {
+        //     console.log("Ошибка сервера", error);
+        //     res.status(500).json({
+        //         success: false,
+        //         error: "Ошибка сервера"
+        //     });
+        // }
+
+        sendOrderMail(
+            order.customer.email,
+            order.customer.name,
+            order.id,
+            order.total,
+        ).catch(err => {
+            console.error('Ошибка отправки:', err)
+        });
+        console.log('Письмо отправлено')
 
         res.status(201).json({
             success: true,
