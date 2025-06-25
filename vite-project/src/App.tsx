@@ -3,11 +3,11 @@ import {Footer} from "./widgets/Footer/Footer.tsx";
 import {Shop} from "./pages/Shop/Shop.tsx";
 import {HashRouter as Router, Navigate, Route, Routes} from "react-router-dom";
 import {CheckoutForm} from "./pages/CheckoutForm/CheckoutForm.tsx";
-import style from './styles/app.module.scss'
+import style from './app/styles/app.module.scss'
 import {useDispatch, useSelector} from "react-redux";
-import {AppDispatch, RootState} from "./shared/types/store.ts";
+import {AppDispatch, RootState} from "./app/store/store.ts";
 import {useEffect} from "react";
-import {loginSuccess} from "./features/auth/authSlice.ts";
+import {loginSuccess} from "./app/store/slices/authSlice.ts";
 import {SuccessPage} from "./pages/SuccessPage/SuccessPage.tsx";
 
 

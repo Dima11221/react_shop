@@ -1,7 +1,7 @@
 import style from './style.module.scss'
 import backetIcon from "../../../shared/assets/icons/backet_icon_2.svg"
 import {useDispatch} from "react-redux";
-import {handleCartShow} from "../../shop/shopSlice.ts";
+import {handleCartShow} from "../../../app/store/slices/shopSlice.ts";
 
 
 interface ICartProp {

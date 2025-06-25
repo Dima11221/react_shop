@@ -2,7 +2,7 @@ import {GoodsItem} from "../GoodsItem/GoodsItem.tsx";
 import style from './style.module.scss'
 
 import {useSelector} from "react-redux";
-import {RootState} from "../../../shared/types/store.ts";
+import {RootState} from "../../../app/store/store.ts";
 import {IGoodsItemProp} from "../../../shared/types/Types.ts";
 
 interface IFilteredGoods {

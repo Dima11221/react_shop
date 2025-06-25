@@ -8,14 +8,14 @@ import {Alert} from "../../shared/ui/Alert/Alert.tsx";
 
 import {Pages} from "../../shared/ui/Pagination/Pages.tsx";
 import {useDispatch, useSelector} from "react-redux";
-import {AppDispatch, RootState} from "../../shared/types/store.ts";
+import {AppDispatch, RootState} from "../../app/store/store.ts";
 import {
     handleCartShow,
     setCurrentPage,
     setOrderLocalStorage,
     setPagesCount
-} from "../../features/shop/shopSlice.ts";
-import {fetchGoods} from "../../features/shop/thunk.ts";
+} from "../../app/store/slices/shopSlice.ts";
+import {fetchGoods} from "../../app/store/slices/thunk.ts";
 import {CheckoutForm} from "../CheckoutForm/CheckoutForm.tsx";
 import {Search} from "../../features/search/Search/Search.tsx";
 import {PriceFilter} from "../../features/PriceFilter/PriceFilter.tsx";

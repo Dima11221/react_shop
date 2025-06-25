@@ -4,7 +4,7 @@ import closeIcon from "../../../shared/assets/icons/close_icon.svg"
 import plus from "../../../shared/assets/icons/plus_icon2.svg"
 import minus from "../../../shared/assets/icons/minus_icon.svg"
 import {useDispatch} from "react-redux";
-import {decQuantity, incQuantity, removeFromCart} from "../../shop/shopSlice.ts";
+import {decQuantity, incQuantity, removeFromCart} from "../../../app/store/slices/shopSlice.ts";
 
 
 const CartItem = (props: IOrderItem) => {

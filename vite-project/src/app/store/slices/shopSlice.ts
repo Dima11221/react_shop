@@ -1,6 +1,6 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
-import {ICartItem, ICheckoutFormItem, IGoodsItemProp} from "../../shared/types/Types.ts";
-import {IOrderItem} from "../../pages/Shop/Shop.tsx";
+import {ICartItem, ICheckoutFormItem, IGoodsItemProp} from "../../../shared/types/Types.ts";
+import {IOrderItem} from "../../../pages/Shop/Shop.tsx";
 import {fetchGoods, submitOrder} from "./thunk.ts";
 
 export interface IShopState {
@@ -154,8 +154,12 @@ const shopSlice = createSlice({
 
     clearFormErrors(state) {
       state.formErrors = {};
-    }
+    },
 
+    resetCheckoutStatus(state) {
+      state.checkoutStatus = 'idle';
+      state.checkoutError = null;
+    }
   },
   extraReducers: (builder) => {
     builder
@@ -211,6 +215,7 @@ export const {
   resetOrderState,
   setFormErrors,
   clearFormErrors,
+  resetCheckoutStatus
 } =  shopSlice.actions;
 
 export default shopSlice.reducer;

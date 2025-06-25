@@ -1,7 +1,7 @@
-@use "./normalize";
-@use "./media.scss";
+@use "normalize";
+@use "media";
 //@import "../styles/fonts";
-@use "./fonts";
+@use "fonts";
 
 html {
     box-sizing: border-box;

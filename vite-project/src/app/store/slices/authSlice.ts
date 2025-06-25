@@ -1,5 +1,5 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
-import {IUser} from "../../shared/types/Types.ts";
+import {IUser} from "../../../shared/types/Types.ts";
 
 const loadUsersFromLocalStorage = (): IUser[] => {
   const users = localStorage.getItem('users');

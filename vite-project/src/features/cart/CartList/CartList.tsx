@@ -2,11 +2,11 @@ import {CartItem} from "../CartItem/CartItem.tsx";
 import style from './style.module.scss'
 import closeModalIcon from '../../../shared/assets/icons/closeModalIcon.svg'
 import {useDispatch, useSelector} from "react-redux";
-import {AppDispatch, RootState} from "../../../shared/types/store.ts";
-import {clearCart, handleCartShow} from "../../shop/shopSlice.ts";
+import {AppDispatch, RootState} from "../../../app/store/store.ts";
+import {clearCart, handleCartShow} from "../../../app/store/slices/shopSlice.ts";
 import {Link} from "react-router-dom";
 import {AuthModal} from "../../auth/AuthModal/AuthModal.tsx";
-import {handleAuthShow} from "../../auth/authSlice.ts";
+import {handleAuthShow} from "../../../app/store/slices/authSlice.ts";
 
 
 

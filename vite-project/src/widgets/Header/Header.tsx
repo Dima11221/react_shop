@@ -3,11 +3,11 @@ import {Link} from "react-router-dom";
 import {useEffect} from "react";
 import {UserProfile} from "../../features/user-profile/UserProfile/UserProfile.tsx";
 import {useDispatch, useSelector} from "react-redux";
-import {AppDispatch, RootState} from "../../shared/types/store.ts";
+import {AppDispatch, RootState} from "../../app/store/store.ts";
 import {AuthModal} from "../../features/auth/AuthModal/AuthModal.tsx";
 import {RegisterModal} from "../../features/auth/RegisterModal/RegisterModal.tsx";
 import LogoFortnite from "../../shared/assets/icons/LogoFortnite.svg?react"
-import {handleAuthShow, handleRegShow, toggleUserModal} from "../../features/auth/authSlice.ts";
+import {handleAuthShow, handleRegShow, toggleUserModal} from "../../app/store/slices/authSlice.ts";
 
 
 const Header = () => {

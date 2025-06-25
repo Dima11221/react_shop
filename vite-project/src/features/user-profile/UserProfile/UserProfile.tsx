@@ -1,6 +1,6 @@
 import {useDispatch, useSelector} from "react-redux";
-import {AppDispatch, RootState} from "../../../shared/types/store.ts";
-import {logout} from "../../auth/authSlice.ts";
+import {AppDispatch, RootState} from "../../../app/store/store.ts";
+import {logout} from "../../../app/store/slices/authSlice.ts";
 import style from "./style.module.scss";
 
 

@@ -1,6 +1,6 @@
 import {createAsyncThunk} from "@reduxjs/toolkit";
-import {API_BACKEND_URL, API_KEY, API_URL} from "../../config.ts";
-import {ICheckoutFormItem, IGoodsItemProp} from "../../shared/types/Types.ts";
+import {API_BACKEND_URL, API_KEY, API_URL} from "../../../config.ts";
+import {ICheckoutFormItem, IGoodsItemProp} from "../../../shared/types/Types.ts";
 import {IShopState, setFormErrors} from "./shopSlice.ts";
 
 

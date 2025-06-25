@@ -1,16 +1,16 @@
 import {useDispatch, useSelector} from "react-redux";
-import {AppDispatch, RootState} from "../../shared/types/store.ts";
+import {AppDispatch, RootState} from "../../app/store/store.ts";
 import {
-	clearFormErrors,
+	clearFormErrors, resetCheckoutStatus,
 	resetOrderState,
 	updateCustomersData
-} from "../../features/shop/shopSlice.ts";
+} from "../../app/store/slices/shopSlice.ts";
 
 import style from './style.module.scss'
 import * as React from "react";
-import {submitOrder} from "../../features/shop/thunk.ts";
+import {submitOrder} from "../../app/store/slices/thunk.ts";
 import {useNavigate} from "react-router-dom";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {LoadingSpinner} from "../../shared/ui/LoadingSpinner/LoadingSpinner.tsx";
 
 type IPayment = 'sbp' | 'card' | 'crypto';
@@ -42,7 +42,6 @@ const CheckoutForm = () => {
 
 	const goBack = () => {
 		navigate(-1);
-		dispatch(clearFormErrors())
 	}
 
 	const handleSetBurger = () => {
@@ -97,6 +96,11 @@ const CheckoutForm = () => {
 			phone: phoneValue,
 		}))
 	}
+
+	useEffect(() => {
+		dispatch(clearFormErrors());
+		dispatch(resetCheckoutStatus());
+	}, [dispatch]);
 
 	return (
 		<div className={style.checkoutWrapper} onClick={() => setShowPaymentOptions(false)}>
@@ -206,19 +210,6 @@ const CheckoutForm = () => {
 								)}
 							</div>
 
-
-
-							{/*<select*/}
-							{/*	name="paymentMethod"*/}
-							{/*	onChange={handleChange}*/}
-							{/*	className={`${style.formSelect} ${formErrors.paymentMethod ? style.inputError : ''}`}*/}
-							{/*	value={customerData.paymentMethod}*/}
-							{/*>*/}
-							{/*	<option value="">Выберите способ оплаты</option>*/}
-							{/*	<option value="sbp">СБП</option>*/}
-							{/*	<option value="card">Картой онлайн</option>*/}
-							{/*	<option value="crypto">Криптовалюта (USDT, BTC)</option>*/}
-							{/*</select>*/}
 							{formErrors.paymentMethod && <span className={style.errorMessage}>{formErrors.paymentMethod}</span>}
 						</div>
 						{
@@ -319,9 +310,10 @@ const CheckoutForm = () => {
 							</button>
 						</div>
 					</div>
-					{checkoutError && (
+					{checkoutError ? (
 						<span className={`${style.errPos}`}>Не удалось отправить заказ.</span>
-					)}
+					) : null
+					}
 				</form>
 			</div>
 		</div>
