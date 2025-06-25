@@ -209,10 +209,18 @@ body {
     flex: 1;
     transition: all 0.3s;
 
+    -moz-appearance: textfield;
+
     &:focus {
         outline: none;
         border-color: var(--fortnite-pink);
         background: rgba(123, 44, 191, 0.3);
+    }
+
+    &::-webkit-outer-spin-button,
+    &::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
     }
 }
 
