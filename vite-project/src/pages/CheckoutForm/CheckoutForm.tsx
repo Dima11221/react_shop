@@ -310,10 +310,9 @@ const CheckoutForm = () => {
 							</button>
 						</div>
 					</div>
-					{checkoutError ? (
+					{checkoutError && (
 						<span className={`${style.errPos}`}>Не удалось отправить заказ.</span>
-					) : null
-					}
+					)}
 				</form>
 			</div>
 		</div>
