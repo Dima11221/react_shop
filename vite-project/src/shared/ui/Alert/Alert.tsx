@@ -1,8 +1,8 @@
 import {useEffect} from "react";
 import style from './style.module.scss'
 import {useDispatch, useSelector} from "react-redux";
-import {closeAlert} from "../../../store/reducers/shopSlice.ts";
-import {RootState} from "../../../store/store.ts";
+import {closeAlert} from "../../../features/shop/shopSlice.ts";
+import {RootState} from "../../types/store.ts";
 
 // interface IAlertProps {
 //     closeAlert: () => void;

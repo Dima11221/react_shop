@@ -1,7 +1,7 @@
 import style from "./style.module.scss"
 import {useDispatch, useSelector} from "react-redux";
-import {RootState} from "../../../store/store.ts";
-import {setCurrentPage} from "../../../store/reducers/shopSlice.ts";
+import {RootState} from "../../types/store.ts";
+import {setCurrentPage} from "../../../features/shop/shopSlice.ts";
 
 
 const Pages = () => {

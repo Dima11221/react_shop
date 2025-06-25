@@ -1,8 +1,8 @@
 import {IGoodsItemProp} from "../../../shared/types/Types.ts";
 import style from './style.module.scss'
 import {useDispatch} from "react-redux";
-import {addToCart} from "../../../store/reducers/shopSlice.ts";
-import {AppDispatch} from "../../../store/store.ts";
+import {addToCart} from "../../shop/shopSlice.ts";
+import {AppDispatch} from "../../../shared/types/store.ts";
 import {Link} from "react-router-dom";
 
 

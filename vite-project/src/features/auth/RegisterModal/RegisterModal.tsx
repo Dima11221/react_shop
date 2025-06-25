@@ -1,8 +1,8 @@
 import {useEffect, useState} from "react";
-import {AppDispatch, RootState} from "../../../store/store.ts";
+import {AppDispatch, RootState} from "../../../shared/types/store.ts";
 import {useDispatch, useSelector} from "react-redux";
 import {IUser} from "../../../shared/types/Types.ts";
-import {handleAuthShow, handleRegShow, registerSuccess} from "../../../store/reducers/authSlice.ts";
+import {handleAuthShow, handleRegShow, registerSuccess} from "../authSlice.ts";
 import style from "./style.module.scss"
 import * as React from "react";
 

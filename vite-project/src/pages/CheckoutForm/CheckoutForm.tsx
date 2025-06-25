@@ -1,17 +1,17 @@
 import {useDispatch, useSelector} from "react-redux";
-import {AppDispatch, RootState} from "../../../store/store.ts";
+import {AppDispatch, RootState} from "../../shared/types/store.ts";
 import {
 	clearFormErrors,
 	resetOrderState,
 	updateCustomersData
-} from "../../../store/reducers/shopSlice.ts";
+} from "../../features/shop/shopSlice.ts";
 
 import style from './style.module.scss'
 import * as React from "react";
-import {submitOrder} from "../../../store/reducers/thunk.ts";
+import {submitOrder} from "../../features/shop/thunk.ts";
 import {useNavigate} from "react-router-dom";
 import {useState} from "react";
-import {LoadingSpinner} from "../../../shared/ui/LoadingSpinner/LoadingSpinner.tsx";
+import {LoadingSpinner} from "../../shared/ui/LoadingSpinner/LoadingSpinner.tsx";
 
 type IPayment = 'sbp' | 'card' | 'crypto';
 

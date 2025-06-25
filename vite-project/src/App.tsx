@@ -1,14 +1,14 @@
-import {Header} from "./layout/Header/Header.tsx";
-import {Footer} from "./layout/Footer/Footer.tsx";
-import {Shop} from "./components/Pages/Shop/Shop.tsx";
+import {Header} from "./widgets/Header/Header.tsx";
+import {Footer} from "./widgets/Footer/Footer.tsx";
+import {Shop} from "./pages/Shop/Shop.tsx";
 import {HashRouter as Router, Navigate, Route, Routes} from "react-router-dom";
-import {CheckoutForm} from "./components/Pages/CheckoutForm/CheckoutForm.tsx";
+import {CheckoutForm} from "./pages/CheckoutForm/CheckoutForm.tsx";
 import style from './styles/app.module.scss'
 import {useDispatch, useSelector} from "react-redux";
-import {AppDispatch, RootState} from "./store/store.ts";
+import {AppDispatch, RootState} from "./shared/types/store.ts";
 import {useEffect} from "react";
-import {loginSuccess} from "./store/reducers/authSlice.ts";
-import {SuccessPage} from "./components/Pages/SuccessPage/SuccessPage.tsx";
+import {loginSuccess} from "./features/auth/authSlice.ts";
+import {SuccessPage} from "./pages/SuccessPage/SuccessPage.tsx";
 
 
 function App() {

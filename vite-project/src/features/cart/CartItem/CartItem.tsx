@@ -1,10 +1,10 @@
-import {IOrderItem} from "../../../components/Pages/Shop/Shop.tsx";
+import {IOrderItem} from "../../../pages/Shop/Shop.tsx";
 import style from './style.module.scss'
-import closeIcon from "../../../icons/close_icon.svg"
-import plus from "../../../icons/plus_icon2.svg"
-import minus from "../../../icons/minus_icon.svg"
+import closeIcon from "../../../shared/assets/icons/close_icon.svg"
+import plus from "../../../shared/assets/icons/plus_icon2.svg"
+import minus from "../../../shared/assets/icons/minus_icon.svg"
 import {useDispatch} from "react-redux";
-import {decQuantity, incQuantity, removeFromCart} from "../../../store/reducers/shopSlice.ts";
+import {decQuantity, incQuantity, removeFromCart} from "../../shop/shopSlice.ts";
 
 
 const CartItem = (props: IOrderItem) => {

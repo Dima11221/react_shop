@@ -1,12 +1,12 @@
 import {CartItem} from "../CartItem/CartItem.tsx";
 import style from './style.module.scss'
-import closeModalIcon from '../../../icons/closeModalIcon.svg'
+import closeModalIcon from '../../../shared/assets/icons/closeModalIcon.svg'
 import {useDispatch, useSelector} from "react-redux";
-import {AppDispatch, RootState} from "../../../store/store.ts";
-import {clearCart, handleCartShow} from "../../../store/reducers/shopSlice.ts";
+import {AppDispatch, RootState} from "../../../shared/types/store.ts";
+import {clearCart, handleCartShow} from "../../shop/shopSlice.ts";
 import {Link} from "react-router-dom";
 import {AuthModal} from "../../auth/AuthModal/AuthModal.tsx";
-import {handleAuthShow} from "../../../store/reducers/authSlice.ts";
+import {handleAuthShow} from "../../auth/authSlice.ts";
 
 
 

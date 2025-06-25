@@ -1,5 +1,5 @@
 import {useState} from "react";
-import SearchIcon from "../../../icons/search_icon.svg?react"
+import SearchIcon from "../../../shared/assets/icons/search_icon.svg?react"
 import style from "./style.module.scss"
 
 interface ISearchProps {

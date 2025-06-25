@@ -1,7 +1,7 @@
 import {useState} from "react";
 import {useDispatch} from "react-redux";
-import {AppDispatch} from "../../store/store.ts";
-import {setCurrentPage} from "../../store/reducers/shopSlice.ts";
+import {AppDispatch} from "../../shared/types/store.ts";
+import {setCurrentPage} from "../shop/shopSlice.ts";
 import style from "./style.module.scss"
 
 interface IPriceFilter {
