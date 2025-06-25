@@ -1,5 +1,5 @@
 @use "../../../styles/globals";
-@use "../../CartList/style.module";
+@use "../../../features/cart/CartList/style.module";
 
 .checkoutWrapper {
   position: relative;

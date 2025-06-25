@@ -11,7 +11,7 @@ import * as React from "react";
 import {submitOrder} from "../../../store/reducers/thunk.ts";
 import {useNavigate} from "react-router-dom";
 import {useState} from "react";
-import {LoadingSpinner} from "../../LoadingSpinner/LoadingSpinner.tsx";
+import {LoadingSpinner} from "../../../shared/ui/LoadingSpinner/LoadingSpinner.tsx";
 
 type IPayment = 'sbp' | 'card' | 'crypto';
 

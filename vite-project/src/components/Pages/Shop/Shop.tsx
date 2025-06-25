@@ -1,12 +1,12 @@
 import {useEffect, useState} from "react";
-import {Preloader} from "../../Preloader/Preloader.tsx";
-import {GoodsList} from "../../GoodsList/GoodsList.tsx";
-import {ICartItem, IGoodsItemProp} from "../../../types/Types.ts";
-import {Cart} from "../../Cart/Cart.tsx";
-import {CartList} from "../../CartList/CartList.tsx";
-import {Alert} from "../../Alert/Alert.tsx";
+import {Preloader} from "../../../shared/ui/Preloader/Preloader.tsx";
+import {GoodsList} from "../../../features/goods/GoodsList/GoodsList.tsx";
+import {ICartItem, IGoodsItemProp} from "../../../shared/types/Types.ts";
+import {Cart} from "../../../features/cart/Cart/Cart.tsx";
+import {CartList} from "../../../features/cart/CartList/CartList.tsx";
+import {Alert} from "../../../shared/ui/Alert/Alert.tsx";
 
-import {Pages} from "../../Pagination/Pages.tsx";
+import {Pages} from "../../../shared/ui/Pagination/Pages.tsx";
 import {useDispatch, useSelector} from "react-redux";
 import {AppDispatch, RootState} from "../../../store/store.ts";
 import {
@@ -17,8 +17,8 @@ import {
 } from "../../../store/reducers/shopSlice.ts";
 import {fetchGoods} from "../../../store/reducers/thunk.ts";
 import {CheckoutForm} from "../CheckoutForm/CheckoutForm.tsx";
-import {Search} from "../../Search/Search.tsx";
-import {PriceFilter} from "../../PriceFilter/PriceFilter.tsx";
+import {Search} from "../../../features/search/Search/Search.tsx";
+import {PriceFilter} from "../../../features/PriceFilter/PriceFilter.tsx";
 import style from "./style.module.scss"
 
 export interface IOrderItem extends ICartItem{

@@ -1,0 +1,86 @@
+@use "../../../styles/globals";
+
+.card {
+  width: 280px;
+  background: rgba(43, 11, 69, 0.6);
+  border: 2px solid transparent;
+  border-radius: 12px;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 20px rgba(123, 44, 191, 0.3);
+  margin: 2px;
+
+  &:hover {
+    border: 2px solid var(--fortnite-blue);
+    box-shadow: 0 8px 25px rgba(123, 44, 191, 0.5);
+    border-color: var(--fortnite-pink);
+  }
+}
+
+.imageContainer {
+  position: relative;
+  height: 320px;
+  overflow: hidden;
+}
+
+.image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+
+  .card:hover & {
+    transform: scale(1.02);
+  }
+}
+
+.priceBadge {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: linear-gradient(45deg, var(--fortnite-purple), var(--fortnite-blue));
+  color: white;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-weight: bold;
+  font-family: 'Burbank Big Condensed', sans-serif;
+  font-size: 1.2rem;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+.content {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.title {
+  font-family: 'Burbank Big Condensed', sans-serif;
+  color: var(--white);
+  margin: 0;
+  text-transform: uppercase;
+}
+
+.description {
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 0.9rem;
+  margin: 0;
+  flex-grow: 1;
+}
+
+.buttons {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.buttonsPos {
+  flex: 1;
+  padding: 10px;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-align: center;
+}

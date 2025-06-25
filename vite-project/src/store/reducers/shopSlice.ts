@@ -1,5 +1,5 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
-import {ICartItem, ICheckoutFormItem, IGoodsItemProp} from "../../types/Types.ts";
+import {ICartItem, ICheckoutFormItem, IGoodsItemProp} from "../../shared/types/Types.ts";
 import {IOrderItem} from "../../components/Pages/Shop/Shop.tsx";
 import {fetchGoods, submitOrder} from "./thunk.ts";
 

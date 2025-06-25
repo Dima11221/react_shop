@@ -1,11 +1,11 @@
 import style from './style.module.scss'
 import {Link} from "react-router-dom";
 import {useEffect} from "react";
-import {UserProfile} from "../../components/UserProfile/UserProfile.tsx";
+import {UserProfile} from "../../features/user-profile/UserProfile/UserProfile.tsx";
 import {useDispatch, useSelector} from "react-redux";
 import {AppDispatch, RootState} from "../../store/store.ts";
-import {AuthModal} from "../../components/AuthModal/AuthModal.tsx";
-import {RegisterModal} from "../../components/RegisterModal/RegisterModal.tsx";
+import {AuthModal} from "../../features/auth/AuthModal/AuthModal.tsx";
+import {RegisterModal} from "../../features/auth/RegisterModal/RegisterModal.tsx";
 import LogoFortnite from "../../icons/LogoFortnite.svg?react"
 import {handleAuthShow, handleRegShow, toggleUserModal} from "../../store/reducers/authSlice.ts";
 
