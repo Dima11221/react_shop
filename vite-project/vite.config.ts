@@ -4,7 +4,7 @@ import svgr from 'vite-plugin-svgr'
 
 // https://vite.dev/config/
 export default defineConfig({
-  base: '/react_shop/',
+  base: '/fortnite_shop/',
   plugins: [
     react(),
     svgr(),
