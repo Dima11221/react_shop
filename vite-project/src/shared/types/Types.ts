@@ -46,3 +46,8 @@ export interface IRegisterUser extends IAuthForm{
     userName: string;
     confirmPassword: string;
 }
+
+export interface IWebSocketMessage {
+    type: string;
+    data: IGoodsItemProp[];
+}

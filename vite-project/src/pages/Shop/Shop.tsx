@@ -15,7 +15,7 @@ import {
     setOrderLocalStorage,
     setPagesCount
 } from "../../app/store/slices/shopSlice.ts";
-import {fetchGoods} from "../../app/store/slices/thunk.ts";
+import {setupGoodsListener} from "../../app/store/slices/thunk.ts";
 import {CheckoutForm} from "../CheckoutForm/CheckoutForm.tsx";
 import {Search} from "../../features/search/Search/Search.tsx";
 import {PriceFilter} from "../../features/PriceFilter/PriceFilter.tsx";
@@ -107,9 +107,15 @@ const Shop = () => {
     const isCheckoutOpen = useSelector((state: RootState) => state.shop.isCheckoutOpen)
 
 
+    // useEffect(() => {
+    //     dispatch(fetchGoods());
+    // }, [dispatch]);
+
     useEffect(() => {
-        dispatch(fetchGoods());
-    }, [dispatch]);
+        if (goods.length === 0){
+            dispatch(setupGoodsListener());
+        }
+    }, [dispatch, goods.length]);
 
     useEffect(() => {
         localStorage.setItem("cart", JSON.stringify(order))
@@ -152,6 +158,10 @@ const Shop = () => {
     const toggleMobileMenu = () => {
         setIsMobileMenuOpen(!isMobileMenuOpen);
     }
+
+    useEffect(() => {
+        console.log('Текущие товары в Redux:', goods);
+    }, [goods]);
 
     return (
       <div>

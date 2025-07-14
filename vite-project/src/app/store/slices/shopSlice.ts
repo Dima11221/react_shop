@@ -1,7 +1,7 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {ICartItem, ICheckoutFormItem, IGoodsItemProp} from "../../../shared/types/Types.ts";
 import {IOrderItem} from "../../../pages/Shop/Shop.tsx";
-import {fetchGoods, submitOrder} from "./thunk.ts";
+import {setupGoodsListener, submitOrder} from "./thunk.ts";
 
 export interface IShopState {
   goods: IGoodsItemProp[];
@@ -159,26 +159,30 @@ const shopSlice = createSlice({
     resetCheckoutStatus(state) {
       state.checkoutStatus = 'idle';
       state.checkoutError = null;
-    }
+    },
+    // setGoods(state, action: PayloadAction<IGoodsItemProp[]>) {
+    //   state.goods = action.payload;
+    //   state.pagesCount = Math.ceil(action.payload.length / state.itemsPerPage);
+    // }
   },
   extraReducers: (builder) => {
-    builder
-      .addCase(fetchGoods.pending, (state) => {
-        state.loading = true;
-        state.error =  null;
-      })
-
-      .addCase(fetchGoods.fulfilled, (state, action) => {
-        state.loading =  false;
-        state.goods =  action.payload;
-        state.pagesCount = Math.ceil(action.payload.length / state.itemsPerPage);
-      })
-
-      .addCase(fetchGoods.rejected, (state, action) => {
-        state.loading =  false;
-        state.goods = [];
-        state.error = action.payload as string;
-      })
+    // builder
+    //   .addCase(fetchGoods.pending, (state) => {
+    //     state.loading = true;
+    //     state.error =  null;
+    //   })
+    //
+    //   .addCase(fetchGoods.fulfilled, (state, action) => {
+    //     state.loading =  false;
+    //     state.goods =  action.payload;
+    //     state.pagesCount = Math.ceil(action.payload.length / state.itemsPerPage);
+    //   })
+    //
+    //   .addCase(fetchGoods.rejected, (state, action) => {
+    //     state.loading =  false;
+    //     state.goods = [];
+    //     state.error = action.payload as string;
+    //   })
 
     builder
       .addCase(submitOrder.pending, (state) => {
@@ -196,6 +200,22 @@ const shopSlice = createSlice({
       .addCase(submitOrder.rejected, (state, action) => {
         state.checkoutStatus = 'fail';
         state.checkoutError = (action.payload as {message?: string})?.message || 'Ошибка оформления заказа';
+      })
+
+    builder
+      .addCase(setupGoodsListener.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(setupGoodsListener.fulfilled, (state, action) => {
+        state.loading = false;
+        state.goods = action.payload;
+        state.pagesCount = Math.ceil(action.payload.length / state.itemsPerPage);
+      })
+      .addCase(setupGoodsListener.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload as string;
+        console.error('WebSocket error:', action.payload);
       })
   }
 });
@@ -215,7 +235,8 @@ export const {
   resetOrderState,
   setFormErrors,
   clearFormErrors,
-  resetCheckoutStatus
+  resetCheckoutStatus,
+  // setGoods
 } =  shopSlice.actions;
 
 export default shopSlice.reducer;

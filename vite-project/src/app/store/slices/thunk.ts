@@ -2,6 +2,7 @@ import {createAsyncThunk} from "@reduxjs/toolkit";
 import {API_BACKEND_URL, API_KEY, API_URL} from "../../../config.ts";
 import {ICheckoutFormItem, IGoodsItemProp} from "../../../shared/types/Types.ts";
 import {IShopState, setFormErrors} from "./shopSlice.ts";
+import {goodsWebSocket} from "../../../services/websocket.ts";
 
 
 export const fetchGoods =  createAsyncThunk<IGoodsItemProp[], void>(
@@ -129,5 +130,24 @@ export const submitOrder = createAsyncThunk<
 		}
 
 	}
+);
 
+export const setupGoodsListener = createAsyncThunk<IGoodsItemProp[], void>(
+	"shop/setupGoodsListener",
+	async (_, {rejectWithValue}) => {
+		return new Promise((resolve, reject) => {
+			const timeout = setTimeout(() => {
+				removeListener();
+				reject(rejectWithValue('Connection timeout'));
+			}, 5000);
+
+			const removeListener = goodsWebSocket.addListener((message) => {
+				if (message.type === "GOODS_UPDATE") {
+					clearTimeout(timeout);
+					removeListener();
+					resolve(message.data);
+				}
+			})
+		})
+	}
 )

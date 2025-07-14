@@ -299,6 +299,82 @@
         }
       ],
       "createdAt": "2025-06-24T22:55:30.525Z"
+    },
+    {
+      "id": "1750953986515",
+      "customer": {
+        "name": "1",
+        "email": "1@1",
+        "phone": "+79000000001",
+        "account": "1"
+      },
+      "payment": "sbp",
+      "paymentInfo": "+79000000001",
+      "items": [
+        {
+          "id": "Shoes_TunaCabinSchmaltz",
+          "name": "Nike ACG Lunardome 1",
+          "price": 800,
+          "quantity": 1
+        },
+        {
+          "id": "DoubleDuty_Bundle",
+          "name": "Набор «Аанг»",
+          "price": 2000,
+          "quantity": 1
+        },
+        {
+          "id": "Glider_DoubleDuty",
+          "name": "Аппа",
+          "price": 1200,
+          "quantity": 1
+        },
+        {
+          "id": "EID_DoubleDuty",
+          "name": "Сфера Аанга",
+          "price": 500,
+          "quantity": 1
+        },
+        {
+          "id": "DirectContact_Bundle",
+          "name": "Набор «Катара»",
+          "price": 2000,
+          "quantity": 1
+        },
+        {
+          "id": "DirectTorch_Bundle",
+          "name": "Комплект Зуко и Катары",
+          "price": 3200,
+          "quantity": 1
+        },
+        {
+          "id": "EID_TikiTorch",
+          "name": "Воздушный вихрь",
+          "price": 500,
+          "quantity": 1
+        },
+        {
+          "id": "EID_RemoteControl",
+          "name": "Моя капуста!",
+          "price": 300,
+          "quantity": 1
+        },
+        {
+          "id": "Wheel_Precision_Bundle",
+          "name": "Колёса Jayvyn",
+          "price": 400,
+          "quantity": 1
+        },
+        {
+          "id": "Booster_LightTrail_Bundle",
+          "name": "След «Ионный»",
+          "price": 250,
+          "quantity": 1
+        }
+      ],
+      "total": 11150,
+      "date": "26.06.2025",
+      "createdAt": "2025-06-26T16:06:26.515Z"
     }
   ]
 }
