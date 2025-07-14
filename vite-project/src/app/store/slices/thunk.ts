@@ -9,16 +9,16 @@ export const fetchGoods =  createAsyncThunk<IGoodsItemProp[], void>(
 	"shop/fetchGoods",
 	async (_, { rejectWithValue }) => {
 		try {
-			const responce = await fetch(API_URL, {
+			const response = await fetch(API_URL, {
 				headers: {
 					'Authorization': API_KEY
 				}
 			});
-			if (!responce.ok) {
+			if (!response.ok) {
 				// throw new Error("Server error!");
 				return rejectWithValue('Nothing was found.');
 			}
-			const data = await responce.json();
+			const data = await response.json();
 			return data.shop as IGoodsItemProp[];
 		} catch (error) {
 			console.log(error)

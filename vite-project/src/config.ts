@@ -8,7 +8,7 @@ const API_BACKEND_URL = 'https://react-shop-backend-672m.onrender.com';
 // const GOODS_WS_URL = import.meta.env.WS_URL || 'wss://your-render-app.onrender.com';
 
 const GOODS_WS_URL = import.meta.env.PROD
-  ? 'wss://your-render-app.onrender.com'
+  ? 'wss://fortnite-shop-server-goods.onrender.com'
   : 'ws://localhost:3002';
 
 export {
