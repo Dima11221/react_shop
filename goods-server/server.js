@@ -15,9 +15,9 @@ const API_KEY = process.env.FORTNITE_API_KEY;
 let goods = []
 let clients = new Set();
 
+app.use(express.json());
 app.use(cors());
 
-app.use(express.json());
 
 const fetchGoods = async () => {
     try {
@@ -94,6 +94,10 @@ wsServer.on('connection', (ws) => {
         clients.delete(ws);
     })
 })
+
+app.get('/', (req, res) => {
+    res.send('Fortnite Shop Server is running!');
+});
 
 app.get('/api/goods', (req, res) => {
     res.json({
