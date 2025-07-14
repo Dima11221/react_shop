@@ -23,7 +23,7 @@ const fetchGoods = async () => {
     try {
         console.log('Запрашиваю товары с Fortnite API...');
         const response = await axios.get(FORTNITE_API_URL, {
-            headers: {'Authorization': API_KEY}
+            headers: {'Authorization': API_KEY.trim()}
         });
 
         if (!response.data?.shop) {
