@@ -2,17 +2,20 @@ import express from 'express';
 import { WebSocketServer } from 'ws';
 import axios from "axios";
 import dotenv from 'dotenv';
+import cors from 'cors'
 dotenv.config();
 import { API_URL } from './server-config.js';
 
 const app = express();
-const PORT = 3002;
+const PORT = process.env.PORT || 3002;
 
 const FORTNITE_API_URL = API_URL;
 const API_KEY = process.env.FORTNITE_API_KEY;
 
 let goods = []
 let clients = new Set();
+
+app.use(cors());
 
 app.use(express.json());
 
